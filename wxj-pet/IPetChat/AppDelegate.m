@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "UrlConfig.h"
 #import "CommonToolkit/CommonToolkit.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 
 @interface WBBaseRequest ()
 - (void)debugPrint;
@@ -89,8 +90,25 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    NSLog(@"openurl: %@ ctrl:%@", url, self.loginViewController);
-    return [WeiboSDK handleOpenURL:url delegate:self];
+  
+    NSString *urlStr = [url description];
+    NSLog(@"openurl: %@ ctrl:%@", [url description], self.loginViewController);
+    if ([urlStr hasPrefix:@"wb"]) {
+        return [WeiboSDK handleOpenURL:url delegate:self];     
+    } else if ([urlStr hasPrefix:@"tencent"]){
+        return [TencentOAuth HandleOpenURL:url];
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    NSString *urlStr = [url description];
+    if ([urlStr hasPrefix:@"tencent"]) {
+        return [TencentOAuth HandleOpenURL:url];
+    } else {
+        return NO;
+    }
 }
 
 - (void)didReceiveWeiboRequest:(WBBaseRequest *)request {
@@ -104,6 +122,7 @@
     }
     
 }
+
 
 
 @end

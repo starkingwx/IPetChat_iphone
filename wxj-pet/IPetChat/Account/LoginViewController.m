@@ -12,7 +12,11 @@
 #import "Constant.h"
 #import "MainTabController.h"
 
-@interface LoginViewController ()
+
+@interface LoginViewController () {
+    TencentOAuth* _tencentOAuth;
+    NSMutableArray* _permissions;
+}
 - (void)thirdLogin:(NSString *)identifier;
 - (void)onFinishedThirdLogin:(ASIHTTPRequest*)pRequest;
 @end
@@ -26,6 +30,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _permissions = [NSArray arrayWithObjects:
+                         kOPEN_PERMISSION_GET_USER_INFO,
+                         kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                         nil];
+
+        
+        _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TencentAppId
+                                                andDelegate:self];
+
     }
     return self;
 }
@@ -93,6 +106,65 @@
 
 }
 
+- (void)loginWithQQ:(id)sender {
+    [_tencentOAuth authorize:_permissions inSafari:NO];
+}
+
+- (void)tencentDidLogin {
+    if (_tencentOAuth.accessToken
+        && 0 != [_tencentOAuth.accessToken length])
+    {
+        NSString *openId = _tencentOAuth.openId;
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud setLabelText:NSLocalizedString(@"Processing", @"正在处理中")];
+        [hud showWhileExecuting:@selector(thirdLogin:) onTarget:self withObject:openId animated:YES];
+        
+    }
+    else
+    {
+        // qq login failed
+        NSString *title = NSLocalizedString(@"QQ SSO Result", @"QQ认证结果");
+        NSString *message = NSLocalizedString(@"SSO Login failed", @"SSO 登录失败");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OK", @"确定")
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+    
+}
+
+- (void)tencentDidNotLogin:(BOOL)cancelled {
+    NSString *title = NSLocalizedString(@"QQ SSO Result", @"QQ认证结果");
+    NSString *message = NSLocalizedString(@"SSO Login failed", @"SSO 登录失败");
+    if (cancelled) {
+        message = NSLocalizedString(@"Login Cancelled", @"登录被取消");
+    }
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"确定")
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+
+}
+
+- (void)tencentDidNotNetWork {
+    NSString *title = NSLocalizedString(@"QQ SSO Result", @"QQ认证结果");
+    NSString *message = NSLocalizedString(@"Network Error", @"网络不可用");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                    message:message
+                                                   delegate:nil
+                                          cancelButtonTitle:NSLocalizedString(@"OK", @"确定")
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
 - (void)thirdLogin:(NSString *)identifier {
      NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:identifier, @"identifier", nil];
     [HttpUtils postRequestWithUrl:THIRD_LOGIN_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onFinishedThirdLogin:) andFailedRespSelector:nil];
@@ -106,6 +178,7 @@
     switch (statusCode) {
         case 200: {
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"json data: %@", jsonData);
             if (jsonData) {
                 NSString *result = [jsonData objectForKey:RESULT];
                 NSLog(@"result: %@", result);
