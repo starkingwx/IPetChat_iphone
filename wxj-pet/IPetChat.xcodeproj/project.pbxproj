@@ -99,6 +99,8 @@
 		F8090C3A185C3B580098939B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8090C38185C3B580098939B /* LoginViewController.xib */; };
 		F8090C3E185C53690098939B /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = F8090C3D185C53690098939B /* dog.png */; };
 		F8090C40185C58700098939B /* weibo_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8090C3F185C58700098939B /* weibo_logo.png */; };
+		F842F3421867155D00982B7A /* UserBean+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F3411867155D00982B7A /* UserBean+Device.m */; };
+		F842F345186725F200982B7A /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F344186725F200982B7A /* DeviceManager.m */; };
 		F84352A0185C0821006A7C4A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F843529F185C0821006A7C4A /* AddressBook.framework */; };
 		F84352A2185C082C006A7C4A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84352A1185C082C006A7C4A /* AddressBookUI.framework */; };
 		F84352A7185C094D006A7C4A /* CommonToolkitBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F84352A5185C094D006A7C4A /* CommonToolkitBundle.bundle */; };
@@ -109,8 +111,8 @@
 		F8606D111865C9A9001FF5B0 /* TestApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D0F1865C9A9001FF5B0 /* TestApiViewController.m */; };
 		F8606D121865C9A9001FF5B0 /* TestApiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8606D101865C9A9001FF5B0 /* TestApiViewController.xib */; };
 		F8606D181865CF7D001FF5B0 /* PrintObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D171865CF7D001FF5B0 /* PrintObject.m */; };
-		F8606D1C1865D0FD001FF5B0 /* DatabaseOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1B1865D0FD001FF5B0 /* DatabaseOperation.m */; };
-		F8606D1F1865D2CA001FF5B0 /* WhereClause.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1E1865D2CA001FF5B0 /* WhereClause.m */; };
+		F8606D1C1865D0FD001FF5B0 /* ArchiveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1B1865D0FD001FF5B0 /* ArchiveOperation.m */; };
+		F8606D1F1865D2CA001FF5B0 /* WhereCond.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1E1865D2CA001FF5B0 /* WhereCond.m */; };
 		F8606D221865D979001FF5B0 /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D211865D979001FF5B0 /* Operation.m */; };
 		F8C9D9A0185D5A4400643F06 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */; };
 		F8C9D9A2185D5A6D00643F06 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9A1185D5A6D00643F06 /* CFNetwork.framework */; };
@@ -272,6 +274,10 @@
 		F8090C38185C3B580098939B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Account/LoginViewController.xib; sourceTree = "<group>"; };
 		F8090C3D185C53690098939B /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dog.png; path = Pictures/dog.png; sourceTree = "<group>"; };
 		F8090C3F185C58700098939B /* weibo_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weibo_logo.png; path = Pictures/weibo_logo.png; sourceTree = "<group>"; };
+		F842F3401867155D00982B7A /* UserBean+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+Device.h"; path = "Account/UserBean+Device.h"; sourceTree = "<group>"; };
+		F842F3411867155D00982B7A /* UserBean+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+Device.m"; path = "Account/UserBean+Device.m"; sourceTree = "<group>"; };
+		F842F343186725F200982B7A /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceManager.h; path = Util/DeviceManager.h; sourceTree = "<group>"; };
+		F842F344186725F200982B7A /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceManager.m; path = Util/DeviceManager.m; sourceTree = "<group>"; };
 		F843529F185C0821006A7C4A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		F84352A1185C082C006A7C4A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F84352A5185C094D006A7C4A /* CommonToolkitBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CommonToolkitBundle.bundle; sourceTree = "<group>"; };
@@ -286,10 +292,10 @@
 		F8606D101865C9A9001FF5B0 /* TestApiViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestApiViewController.xib; sourceTree = "<group>"; };
 		F8606D161865CF7D001FF5B0 /* PrintObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintObject.h; path = Util/PrintObject.h; sourceTree = "<group>"; };
 		F8606D171865CF7D001FF5B0 /* PrintObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrintObject.m; path = Util/PrintObject.m; sourceTree = "<group>"; };
-		F8606D1A1865D0FD001FF5B0 /* DatabaseOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseOperation.h; path = Beans/DatabaseOperation.h; sourceTree = "<group>"; };
-		F8606D1B1865D0FD001FF5B0 /* DatabaseOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseOperation.m; path = Beans/DatabaseOperation.m; sourceTree = "<group>"; };
-		F8606D1D1865D2CA001FF5B0 /* WhereClause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WhereClause.h; path = Beans/WhereClause.h; sourceTree = "<group>"; };
-		F8606D1E1865D2CA001FF5B0 /* WhereClause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WhereClause.m; path = Beans/WhereClause.m; sourceTree = "<group>"; };
+		F8606D1A1865D0FD001FF5B0 /* ArchiveOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArchiveOperation.h; path = Beans/ArchiveOperation.h; sourceTree = "<group>"; };
+		F8606D1B1865D0FD001FF5B0 /* ArchiveOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArchiveOperation.m; path = Beans/ArchiveOperation.m; sourceTree = "<group>"; };
+		F8606D1D1865D2CA001FF5B0 /* WhereCond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WhereCond.h; path = Beans/WhereCond.h; sourceTree = "<group>"; };
+		F8606D1E1865D2CA001FF5B0 /* WhereCond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WhereCond.m; path = Beans/WhereCond.m; sourceTree = "<group>"; };
 		F8606D201865D979001FF5B0 /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Beans/Operation.h; sourceTree = "<group>"; };
 		F8606D211865D979001FF5B0 /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Operation.m; path = Beans/Operation.m; sourceTree = "<group>"; };
 		F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -594,6 +600,8 @@
 		F8090C33185C3A0D0098939B /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				F842F3401867155D00982B7A /* UserBean+Device.h */,
+				F842F3411867155D00982B7A /* UserBean+Device.m */,
 				F8090C36185C3B580098939B /* LoginViewController.h */,
 				F8090C37185C3B580098939B /* LoginViewController.m */,
 				F8090C38185C3B580098939B /* LoginViewController.xib */,
@@ -635,6 +643,8 @@
 				F8606D171865CF7D001FF5B0 /* PrintObject.m */,
 				F8606D0A1865C007001FF5B0 /* HttpUtils+DeviceServer.h */,
 				F8606D0B1865C007001FF5B0 /* HttpUtils+DeviceServer.m */,
+				F842F343186725F200982B7A /* DeviceManager.h */,
+				F842F344186725F200982B7A /* DeviceManager.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -652,10 +662,10 @@
 		F8606D191865CFEB001FF5B0 /* Beans */ = {
 			isa = PBXGroup;
 			children = (
-				F8606D1A1865D0FD001FF5B0 /* DatabaseOperation.h */,
-				F8606D1B1865D0FD001FF5B0 /* DatabaseOperation.m */,
-				F8606D1D1865D2CA001FF5B0 /* WhereClause.h */,
-				F8606D1E1865D2CA001FF5B0 /* WhereClause.m */,
+				F8606D1A1865D0FD001FF5B0 /* ArchiveOperation.h */,
+				F8606D1B1865D0FD001FF5B0 /* ArchiveOperation.m */,
+				F8606D1D1865D2CA001FF5B0 /* WhereCond.h */,
+				F8606D1E1865D2CA001FF5B0 /* WhereCond.m */,
 				F8606D201865D979001FF5B0 /* Operation.h */,
 				F8606D211865D979001FF5B0 /* Operation.m */,
 			);
@@ -833,9 +843,11 @@
 				F8606D0C1865C007001FF5B0 /* HttpUtils+DeviceServer.m in Sources */,
 				F8606D111865C9A9001FF5B0 /* TestApiViewController.m in Sources */,
 				F8606D181865CF7D001FF5B0 /* PrintObject.m in Sources */,
-				F8606D1C1865D0FD001FF5B0 /* DatabaseOperation.m in Sources */,
-				F8606D1F1865D2CA001FF5B0 /* WhereClause.m in Sources */,
+				F8606D1C1865D0FD001FF5B0 /* ArchiveOperation.m in Sources */,
+				F8606D1F1865D2CA001FF5B0 /* WhereCond.m in Sources */,
 				F8606D221865D979001FF5B0 /* Operation.m in Sources */,
+				F842F3421867155D00982B7A /* UserBean+Device.m in Sources */,
+				F842F345186725F200982B7A /* DeviceManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

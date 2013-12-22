@@ -6,13 +6,13 @@
 //  Copyright (c) 2013年 XF. All rights reserved.
 //
 
-#import "DatabaseOperation.h"
+#import "ArchiveOperation.h"
 
-@implementation DatabaseOperation
+@implementation ArchiveOperation
 
 @synthesize tablename;
 @synthesize operation;
 @synthesize field;
-@synthesize where_clause;
+@synthesize wherecond;
 
 @end

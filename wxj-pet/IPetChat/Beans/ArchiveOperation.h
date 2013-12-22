@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DatabaseOperation : NSObject
+@interface ArchiveOperation : NSObject
 
 @property (nonatomic, strong) NSString *tablename;
 @property (nonatomic, strong) NSString *operation;
 @property (nonatomic, strong) NSArray *field;
-@property (nonatomic, strong) NSArray *where_clause;
+@property (nonatomic, strong) NSArray *wherecond;
 
 @end

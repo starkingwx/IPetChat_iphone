@@ -10,6 +10,7 @@
 
 @implementation Operation
 
-
+@synthesize cmdtype;
+@synthesize archive_operation;
 
 @end

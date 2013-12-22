@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WhereClause : NSObject
+@interface WhereCond : NSObject
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *op;
 @property (nonatomic, strong) NSString *value;
 @end

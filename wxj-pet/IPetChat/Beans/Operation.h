@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DatabaseOperation.h"
+#import "ArchiveOperation.h"
 
 @interface Operation : NSObject
 
 @property (nonatomic, strong) NSString *cmdtype;
-@property (nonatomic, strong) DatabaseOperation *database_operation;
+@property (nonatomic, strong) ArchiveOperation *archive_operation;
 
 @end

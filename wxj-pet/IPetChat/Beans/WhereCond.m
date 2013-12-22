@@ -6,10 +6,9 @@
 //  Copyright (c) 2013年 XF. All rights reserved.
 //
 
-#import "WhereClause.h"
+#import "WhereCond.h"
 
-@implementation WhereClause
+@implementation WhereCond
 @synthesize name;
-@synthesize op;
 @synthesize value;
 @end

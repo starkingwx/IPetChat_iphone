@@ -7,8 +7,9 @@
 //
 
 #import "HttpUtils+DeviceServer.h"
+#import "UserBean+Device.h"
 
-#define SIGNATURE_PARAMETER_KEY    @"sign"
+#define SIGNATURE_PARAMETER_KEY    @"s"
 
 @implementation HttpUtils (DeviceServer)
 
@@ -58,9 +59,10 @@
     // create and init signature get request parameter
     NSMutableDictionary *_signatureGetRequestParameter = [NSMutableDictionary dictionaryWithDictionary:pParameter];
     
-
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    
     // add signature to get request url
-    [_signatureGetRequestParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:@""] forKey:SIGNATURE_PARAMETER_KEY];
+    [_signatureGetRequestParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:[[userBean devicePassword] md5]] forKey:SIGNATURE_PARAMETER_KEY];
     
     // send get request
     [self getRequestWithUrl:pUrl andParameter:_signatureGetRequestParameter andUserInfo:pUserInfo andRequestType:pType andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];
@@ -71,8 +73,10 @@
     // check parameter
     pParameter = pParameter ? pParameter : [[NSMutableDictionary alloc] init];
     
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    
     // add signature to post parameter
-    [pParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:@""] forKey:SIGNATURE_PARAMETER_KEY];
+    [pParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:[[userBean devicePassword] md5]] forKey:SIGNATURE_PARAMETER_KEY];
     
     // send post request
     [self postRequestWithUrl:pUrl andPostFormat:pPostFormat andParameter:pParameter andUserInfo:pUserInfo andRequestType:pType andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];
