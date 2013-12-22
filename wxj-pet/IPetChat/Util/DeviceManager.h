@@ -12,5 +12,6 @@
 + (DeviceManager *)shareDeviceManager;
 
 - (void)syncTime;
-
+- (void)startTimeSync;
+- (void)stopTimeSync;
 @end

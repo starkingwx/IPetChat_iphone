@@ -16,6 +16,7 @@ static DeviceManager *instance;
     int _count;
     long long _timeDelta;
     long long _sysTimeBegin;
+    NSTimer *_timer;
     
 }
 
@@ -72,6 +73,14 @@ static DeviceManager *instance;
         }
     }
     NSLog(@"### time sync end ###");
+}
+
+- (void)startTimeSync {
+    _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(syncTime) userInfo:nil repeats:YES];
+}
+
+- (void)stopTimeSync {
+    [_timer invalidate];
 }
 
 @end
