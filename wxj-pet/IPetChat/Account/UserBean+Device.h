@@ -7,7 +7,9 @@
 //
 
 #import <CommonToolkit/CommonToolkit.h>
+#import "PetInfo.h"
 
 @interface UserBean (Device)
 @property NSString *devicePassword;
+@property PetInfo *petInfo;
 @end

@@ -10,4 +10,9 @@
 
 @interface TestApiViewController : UIViewController
 
+- (IBAction)testQueryLatestPetInfo:(id)sender;
+
+- (IBAction)testQueryMotionStatInfo:(id)sender;
+
+- (IBAction)testOrderDeviceServer:(id)sender;
 @end

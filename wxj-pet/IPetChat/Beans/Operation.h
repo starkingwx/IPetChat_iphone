@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ArchiveOperation.h"
+#import "TerminalControl.h"
 
 @interface Operation : NSObject
 
 @property (nonatomic, strong) NSString *cmdtype;
 @property (nonatomic, strong) ArchiveOperation *archive_operation;
-
+@property (nonatomic, strong) TerminalControl *terminal_control;
 @end

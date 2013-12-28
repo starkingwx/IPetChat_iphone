@@ -12,5 +12,5 @@
 
 @synthesize cmdtype;
 @synthesize archive_operation;
-
+@synthesize terminal_control;
 @end

@@ -18,4 +18,12 @@
 - (NSString *)devicePassword {
     return [self.extensionDic objectForKey:@"DevicePassword"];
 }
+
+- (void)setPetInfo:(PetInfo *)petInfo {
+    [self.extensionDic setObject:petInfo forKey:@"PetInfo"];
+}
+
+- (PetInfo *)petInfo {
+    return [self.extensionDic objectForKey:@"PetInfo"];
+}
 @end

@@ -132,6 +132,9 @@
 		F8C9D9C5185DAF2300643F06 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9C4185DAF2300643F06 /* CoreFoundation.framework */; };
 		F8CC84C0185C84B600B44DDC /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */; };
 		F8CC84C1185C84B600B44DDC /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */; };
+		F8DB1B64186EB34C0010B771 /* PetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B63186EB34C0010B771 /* PetInfo.m */; };
+		F8DB1B67186F101C0010B771 /* TerminalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B66186F101C0010B771 /* TerminalControl.m */; };
+		F8DB1B6A186F105E0010B771 /* RollCall.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B69186F105E0010B771 /* RollCall.m */; };
 		F8E1B941185DCB9F0049B461 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E1B940185DCB9F0049B461 /* libstdc++.dylib */; };
 		F8E1B943185DD44E0049B461 /* QQ_Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E1B942185DD44E0049B461 /* QQ_Logo.png */; };
 /* End PBXBuildFile section */
@@ -319,6 +322,12 @@
 		F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		F8CC84BF185C84B600B44DDC /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		F8DB1B62186EB34C0010B771 /* PetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PetInfo.h; path = Beans/PetInfo.h; sourceTree = "<group>"; };
+		F8DB1B63186EB34C0010B771 /* PetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PetInfo.m; path = Beans/PetInfo.m; sourceTree = "<group>"; };
+		F8DB1B65186F101C0010B771 /* TerminalControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerminalControl.h; path = Beans/TerminalControl.h; sourceTree = "<group>"; };
+		F8DB1B66186F101C0010B771 /* TerminalControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TerminalControl.m; path = Beans/TerminalControl.m; sourceTree = "<group>"; };
+		F8DB1B68186F105E0010B771 /* RollCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RollCall.h; path = Beans/RollCall.h; sourceTree = "<group>"; };
+		F8DB1B69186F105E0010B771 /* RollCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RollCall.m; path = Beans/RollCall.m; sourceTree = "<group>"; };
 		F8E1B940185DCB9F0049B461 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F8E1B942185DD44E0049B461 /* QQ_Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QQ_Logo.png; path = Pictures/QQ_Logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -668,6 +677,12 @@
 				F8606D1E1865D2CA001FF5B0 /* WhereCond.m */,
 				F8606D201865D979001FF5B0 /* Operation.h */,
 				F8606D211865D979001FF5B0 /* Operation.m */,
+				F8DB1B62186EB34C0010B771 /* PetInfo.h */,
+				F8DB1B63186EB34C0010B771 /* PetInfo.m */,
+				F8DB1B65186F101C0010B771 /* TerminalControl.h */,
+				F8DB1B66186F101C0010B771 /* TerminalControl.m */,
+				F8DB1B68186F105E0010B771 /* RollCall.h */,
+				F8DB1B69186F105E0010B771 /* RollCall.m */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -848,6 +863,9 @@
 				F8606D221865D979001FF5B0 /* Operation.m in Sources */,
 				F842F3421867155D00982B7A /* UserBean+Device.m in Sources */,
 				F842F345186725F200982B7A /* DeviceManager.m in Sources */,
+				F8DB1B64186EB34C0010B771 /* PetInfo.m in Sources */,
+				F8DB1B67186F101C0010B771 /* TerminalControl.m in Sources */,
+				F8DB1B6A186F105E0010B771 /* RollCall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

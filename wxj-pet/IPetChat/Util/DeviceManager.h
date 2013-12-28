@@ -11,6 +11,12 @@
 @interface DeviceManager : NSObject
 + (DeviceManager *)shareDeviceManager;
 
+- (void)queryLastestInfoWithProcessor:(id)pProcessor andFinishedRespSelector:(SEL)pFinRespSel andFailedRespSelector:(SEL)pFailRespSel;
+
+- (void)queryPetExerciseStatInfoWithBeginTime:(NSDate *)beginTime andEndTime:(NSDate *)endTime andProcessor:(id)pProcessor andFinishedRespSelector:(SEL)pFinRespSel andFailedRespSelector:(SEL)pFailRespSel;
+
+- (void)orderDeviceServerWithProcessor:(id)pProcessor andFinishedRespSelector:(SEL)pFinRespSel andFailedRespSelector:(SEL)pFailRespSel;
+
 - (void)syncTime;
 - (void)startTimeSync;
 - (void)stopTimeSync;

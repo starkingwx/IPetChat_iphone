@@ -7,6 +7,8 @@
 //
 
 #import "TestApiViewController.h"
+#import "DeviceManager.h"
+#import "CommonToolkit/CommonToolkit.h"
 
 @interface TestApiViewController ()
 
@@ -35,4 +37,93 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)testQueryLatestPetInfo:(id)sender {
+    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+}
+
+- (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onQueryFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+- (void)testQueryMotionStatInfo:(id)sender {
+    NSDate *today = [NSDate date];
+    NSCalendar *calender = [NSCalendar currentCalendar];
+    NSDateComponents *dateCom = [calender components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:today];
+    [dateCom setHour:0];
+    [dateCom setMinute:0];
+    [dateCom setSecond:0];
+    NSDate *beginTime = [calender dateFromComponents:dateCom];
+    
+    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:beginTime andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:nil];
+}
+
+- (void)onFinishedQueryMotionStatInfo:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedQueryMotionStatInfo - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+
+}
+
+- (void)testOrderDeviceServer:(id)sender {
+    [[DeviceManager shareDeviceManager] orderDeviceServerWithProcessor:self andFinishedRespSelector:@selector(onFinishedOrderDeviceServer:) andFailedRespSelector:nil];
+}
+
+
+- (void)onFinishedOrderDeviceServer:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedOrderDeviceServer - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
 @end
