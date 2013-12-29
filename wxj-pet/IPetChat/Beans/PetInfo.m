@@ -12,4 +12,10 @@
 @synthesize petId;
 @synthesize nickname;
 @synthesize deviceno;
+@synthesize sex;
+@synthesize weight;
+@synthesize avatar;
+@synthesize breed;
+@synthesize birthday;
+@synthesize height;
 @end

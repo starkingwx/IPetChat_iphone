@@ -7,8 +7,8 @@
 //
 
 #import "Enhttpmanager.h"
-#import "NSString+Extension.h"
-#import "NSArray+Extension.h"
+#import "CommonToolkit/CommonToolkit.h"
+#import "UserBean+Device.h"
 
 #define BOUNDARY @"------------0x0x0x0x0x0x0x0x"
 
@@ -989,8 +989,10 @@ typedef enum {
 -(NSString*)getsigstr:(NSDictionary *)pParameter{
     // create need to signature parameter data array
     NSMutableArray *_parameterDataArray = [[NSMutableArray alloc] init];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userkey = [defaults objectForKey:@"userkey"];
+    
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    
+    NSString *userkey = userBean.userKey;
     // init need to signature parameter data array
     [pParameter enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
         [_parameterDataArray addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
@@ -998,7 +1000,7 @@ typedef enum {
     
     // append user name to post body data array and add to http request post body
     
-    [_parameterDataArray addObject:[NSString stringWithFormat:@"%@=%@", @"username", [defaults objectForKey:@"username"]]];
+    [_parameterDataArray addObject:[NSString stringWithFormat:@"%@=%@", @"username", userBean.name]];
     NSLog(@"post body data array = %@", _parameterDataArray);
     
     // sort parameter data array

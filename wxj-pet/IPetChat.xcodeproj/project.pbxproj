@@ -48,9 +48,6 @@
 		B71A9CE61837403C00B68D10 /* petphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = B71A9CE51837403C00B68D10 /* petphoto.png */; };
 		B71A9CE91837973100B68D10 /* img_female.png in Resources */ = {isa = PBXBuildFile; fileRef = B71A9CE71837973100B68D10 /* img_female.png */; };
 		B71A9CEA1837973100B68D10 /* img_male.png in Resources */ = {isa = PBXBuildFile; fileRef = B71A9CE81837973100B68D10 /* img_male.png */; };
-		B71A9CED1838C22F00B68D10 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B71A9CEC1838C22F00B68D10 /* NSString+Extension.m */; };
-		B71A9CF31838F74600B68D10 /* NSArray+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B71A9CF21838F74600B68D10 /* NSArray+Extension.m */; };
-		B71A9CF61838F8E700B68D10 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B71A9CF51838F8E600B68D10 /* UIDevice+Extension.m */; };
 		B71D9227184C842C002297ED /* img_red_btn_normal_bg.ios.png in Resources */ = {isa = PBXBuildFile; fileRef = B71D9226184C842C002297ED /* img_red_btn_normal_bg.ios.png */; };
 		B71D9229184C8439002297ED /* img_red_btn_pressed_bg.ios.png in Resources */ = {isa = PBXBuildFile; fileRef = B71D9228184C8439002297ED /* img_red_btn_pressed_bg.ios.png */; };
 		B71D9232184CBD93002297ED /* sendphotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = B71D9230184CBD93002297ED /* sendphotoController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -192,12 +189,6 @@
 		B71A9CE51837403C00B68D10 /* petphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petphoto.png; path = Pictures/petphoto.png; sourceTree = "<group>"; };
 		B71A9CE71837973100B68D10 /* img_female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_female.png; path = Pictures/img_female.png; sourceTree = "<group>"; };
 		B71A9CE81837973100B68D10 /* img_male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_male.png; path = Pictures/img_male.png; sourceTree = "<group>"; };
-		B71A9CEB1838C22200B68D10 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
-		B71A9CEC1838C22F00B68D10 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
-		B71A9CF11838F74600B68D10 /* NSArray+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extension.h"; sourceTree = "<group>"; };
-		B71A9CF21838F74600B68D10 /* NSArray+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extension.m"; sourceTree = "<group>"; };
-		B71A9CF41838F8E600B68D10 /* UIDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
-		B71A9CF51838F8E600B68D10 /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
 		B71D9226184C842C002297ED /* img_red_btn_normal_bg.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_red_btn_normal_bg.ios.png; path = Pictures/img_red_btn_normal_bg.ios.png; sourceTree = "<group>"; };
 		B71D9228184C8439002297ED /* img_red_btn_pressed_bg.ios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_red_btn_pressed_bg.ios.png; path = Pictures/img_red_btn_pressed_bg.ios.png; sourceTree = "<group>"; };
 		B71D922F184CBD93002297ED /* sendphotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sendphotoController.h; sourceTree = "<group>"; };
@@ -548,12 +539,6 @@
 				F84352B0185C0D61006A7C4A /* Config */,
 				F84352A3185C094C006A7C4A /* Resources */,
 				B74A341E1845CC4D005D8EE1 /* sdwebimage */,
-				B71A9CF41838F8E600B68D10 /* UIDevice+Extension.h */,
-				B71A9CF51838F8E600B68D10 /* UIDevice+Extension.m */,
-				B71A9CF11838F74600B68D10 /* NSArray+Extension.h */,
-				B71A9CF21838F74600B68D10 /* NSArray+Extension.m */,
-				B71A9CEB1838C22200B68D10 /* NSString+Extension.h */,
-				B71A9CEC1838C22F00B68D10 /* NSString+Extension.m */,
 				B7D015A818311A190004679D /* Enhttpmanager.h */,
 				B7D015A918311A190004679D /* Enhttpmanager.m */,
 				B7F9A0D8182B1ECB00756ED3 /* AppDelegate.h */,
@@ -825,9 +810,6 @@
 				B70622C8182B8A20002BDCED /* ListViewController.m in Sources */,
 				B70622CB182CBC38002BDCED /* PetInfoViewController.m in Sources */,
 				B7D015AA18311A190004679D /* Enhttpmanager.m in Sources */,
-				B71A9CED1838C22F00B68D10 /* NSString+Extension.m in Sources */,
-				B71A9CF31838F74600B68D10 /* NSArray+Extension.m in Sources */,
-				B71A9CF61838F8E700B68D10 /* UIDevice+Extension.m in Sources */,
 				5FEF2B7F183CBF4B00D2EA46 /* ConcernPetViewController.m in Sources */,
 				B79C232A18432318002CBF24 /* AccountManagerController.m in Sources */,
 				B7C2D2A218443C770087323E /* PetBlackListController.m in Sources */,

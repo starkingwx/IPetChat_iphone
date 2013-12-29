@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface PetInfo : NSObject
-@property (nonatomic) NSString *petId;
+@property (nonatomic) NSNumber *petId;
 @property (nonatomic) NSString *nickname;
 @property (nonatomic) NSString *deviceno;
-
+@property (nonatomic) NSNumber *sex;
+@property (nonatomic) NSNumber *weight;
+@property (nonatomic) NSString *avatar;
+@property (nonatomic) NSNumber *breed;
+@property (nonatomic) NSNumber *birthday;
+@property (nonatomic) NSNumber *height;
 @end

@@ -11,7 +11,9 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import "Constant.h"
 #import "MainTabController.h"
-
+#import "PetInfo.h"
+#import "UserBean+Device.h"
+#import "PrintObject.h"
 
 @interface LoginViewController () {
     TencentOAuth* _tencentOAuth;
@@ -19,6 +21,8 @@
 }
 - (void)thirdLogin:(NSString *)identifier;
 - (void)onFinishedThirdLogin:(ASIHTTPRequest*)pRequest;
+
+- (void)queryPetInfo;
 @end
 
 @implementation LoginViewController
@@ -47,6 +51,22 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     [super viewWillAppear:animated];
     
+    if (![self needLogin]) {
+        [self queryPetInfo];
+        
+        [self jumpToMainPage];
+    }
+    
+}
+
+- (BOOL)needLogin {
+    BOOL ret = YES;
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    if (user && user.userKey) {
+        // jump to main page directly
+        ret = NO;
+    }
+    return ret;
 }
 
 - (void)viewDidLoad
@@ -201,8 +221,10 @@
                     [userDefaults setObject:userBean.name forKey:USERNAME];
                     [userDefaults setObject:userBean.userKey forKey:USERKEY];
                  
+                    [self queryPetInfo];
+                    
                     // jump to main view
-                    [self.navigationController pushViewController:[[MainTabController alloc] init] animated:YES];
+                    [self jumpToMainPage];
                 } else {
                     goto login_error;
                 }
@@ -220,6 +242,53 @@
     
 login_error:
     [[[iToast makeText:NSLocalizedString(@"Error in third login, please retry.", "")] setDuration:iToastDurationLong] show];
+}
+
+- (void)jumpToMainPage {
+     [self.navigationController pushViewController:[[MainTabController alloc] init] animated:YES];
+}
+
+- (void)queryPetInfo {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [HttpUtils postSignatureRequestWithUrl:GET_PET_LIST_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onGetPetInfoListFinished:) andFailedRespSelector:nil];
+}
+
+- (void)onGetPetInfoListFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onGetPetInfoListFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"json data: %@", jsonData);
+            if (jsonData) {
+                NSArray *list = [jsonData objectForKey:LIST];
+                if (list && [list count] > 0) {
+                    NSDictionary *petInfo = [list objectAtIndex:0];
+                    PetInfo *petBean = [[PetInfo alloc] init];
+                    petBean.petId = [petInfo objectForKey:PETID];
+                    petBean.avatar = [petInfo objectForKey:AVATAR];
+                    petBean.nickname = [petInfo objectForKey:NICKNAME];
+                    petBean.sex = [petInfo objectForKey:SEX];
+                    petBean.breed = [petInfo objectForKey:BREED];
+                    petBean.birthday = [petInfo objectForKey:BIRTHDAY];
+                    petBean.height = [petInfo objectForKey:HEIGHT];
+                    petBean.weight = [petInfo objectForKey:WEIGHT];
+                    petBean.deviceno = [petInfo objectForKey:DEVICEID];
+                    
+                    UserBean *user = [[UserManager shareUserManager] userBean];
+                    user.petInfo = petBean;
+                    NSData *petInfoData = [PrintObject getJSON:petBean options:NSJSONWritingPrettyPrinted error:nil];
+                    NSString *jsonPetInfo = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                    
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    [userDefaults setObject:jsonPetInfo forKey:PETINFO];
+                }
+            }
+        }
+    }
 }
 
 @end

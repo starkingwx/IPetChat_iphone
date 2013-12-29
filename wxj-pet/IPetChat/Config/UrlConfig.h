@@ -19,6 +19,7 @@
 
 #define SERVER_ADDR                 @"http://www.segopet.com/segopet"
 #define THIRD_LOGIN_URL             [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/thirdlogin"]
+#define GET_PET_LIST_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/getpets"]
 
 
 

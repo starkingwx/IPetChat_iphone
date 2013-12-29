@@ -15,6 +15,7 @@
 //将getObjectData方法返回的NSDictionary转化成JSON
 + (NSData*)getJSON:(id)obj options:(NSJSONWritingOptions)options error:(NSError**)error;
 
++ (NSString *)stringFromObj:(id)obj;
 //直接通过NSLog输出getObjectData方法返回的NSDictionary
 + (void)print:(id)obj;
 

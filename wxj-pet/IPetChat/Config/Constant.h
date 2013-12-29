@@ -75,4 +75,21 @@ static NSString *TRACK_SDATE = @"track_sdate";
 
 // Termial control
 static NSString *ROLL_CALL = @"ROLL_CALL";
+
+// Pet Info
+static NSString *PETINFO = @"petinfo";
+static NSString *PETID = @"petid";
+static NSString *AVATAR = @"avatar";
+static NSString *NICKNAME = @"nickname";
+static NSString *SEX = @"sex";
+static NSString *BREED = @"breed";
+static NSString *BIRTHDAY = @"birthday";
+static NSString *WEIGHT = @"weight";
+static NSString *DISTRICT = @"district";
+static NSString *PLACEOFTENGO = @"placeoftengo";
+static NSString *DEVICEID = @"deviceid";
+
+
+// Other
+static NSString *LIST = @"list";
 #endif

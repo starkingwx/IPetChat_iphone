@@ -14,6 +14,14 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "DeviceManager.h"
+#import "UserBean+Device.h"
+#import "Constant.h"
+
+void uncaughtExceptionHandler(NSException *exception) {
+    NSLog(@"CRASH: %@", exception);
+    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+    // Internal error reporting
+}
 
 @interface WBBaseRequest ()
 - (void)debugPrint;
@@ -37,6 +45,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    [self loadAccount];
     
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:kAppKey];
@@ -137,6 +148,29 @@
     
 }
 
+
+- (void)loadAccount {
+     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    UserBean *user = [[UserBean alloc] init];
+    user.name = [userDefaults objectForKey:USERNAME];
+    user.userKey = [userDefaults objectForKey:USERKEY];
+    NSString *jsonPetInfo = [userDefaults objectForKey:PETINFO];
+    if (jsonPetInfo) {
+        NSDictionary *petInfoDic = [jsonPetInfo objectFromJSONString];
+        PetInfo *petInfoBean = [[PetInfo alloc] init];
+        petInfoBean.petId = [petInfoDic objectForKey:PETID];
+        petInfoBean.avatar = [petInfoDic objectForKey:AVATAR];
+        petInfoBean.nickname = [petInfoDic objectForKey:NICKNAME];
+        petInfoBean.sex = [petInfoDic objectForKey:SEX];
+        petInfoBean.breed = [petInfoDic objectForKey:BREED];
+        petInfoBean.birthday = [petInfoDic objectForKey:BIRTHDAY];
+        petInfoBean.height = [petInfoDic objectForKey:HEIGHT];
+        petInfoBean.weight = [petInfoDic objectForKey:WEIGHT];
+        petInfoBean.deviceno = [petInfoDic objectForKey:DEVICEID];
+        user.petInfo = petInfoBean;
+    }
+    [[UserManager shareUserManager] setUserBean:user];
+}
 
 
 @end

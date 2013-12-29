@@ -11,6 +11,8 @@
 #import "AccountManagerController.h"
 #import "PetBlackListController.h"
 #import "GalleryViewController.h"
+#import "CommonToolkit/CommonToolkit.h"
+#import "UserBean+Device.h"
 
 #define DEVICE_HEIGHT_DIFF [UIScreen mainScreen].bounds.size.height-480 
 
@@ -99,11 +101,6 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
     
-    //登录请求，主要用来获取返回参数（将来有了登录模块，此处可以删除）
-    Enhttpmanager *http = [[Enhttpmanager alloc]init];
-    [http StartLogin:self selector:@selector(logincallback:) username:@"18652970720" loginPwd:@"123456"];
-    [http release];
-    
     petdatadic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"未填入",@"昵称",@"未填入",@"性别",@"未填入",@"品种",@"未填入",@"年龄",@"未填入",@"身高",@"未填入",@"体重",@"未填入",@"城市",@"未填入",@"常去玩的地方",@"nothing",@"headphoto",nil];
     
     pettypes = [[NSArray alloc]initWithObjects:@"黄金猎犬",@"哈士奇",@"贵宾（泰迪）",@"赛摩耶",@"博美",@"雪纳瑞",@"苏格兰牧羊犬",@"松狮",@"京巴",@"其他犬种", nil];
@@ -113,10 +110,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self tabbarappear];
-}
-
--(void)logincallback:(NSArray*)args{
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -333,9 +326,17 @@
     if (tableView.tag == 0) {
         if ([indexPath section] == 0) {
             whichback = false;
-            Enhttpmanager *http = [[Enhttpmanager alloc]init];
-            [http getpetdetail:self selector:@selector(getpetuserlistcallback:) petid:26];
-            [http release];
+            UserBean *user = [[UserManager shareUserManager] userBean];
+            PetInfo *petinfo = user.petInfo;
+            if (petinfo && petinfo.petId) {
+                Enhttpmanager *http = [[Enhttpmanager alloc]init];
+                [http getpetdetail:self selector:@selector(getpetuserlistcallback:) petid:[petinfo.petId longValue]];
+                [http release];
+            } else {
+                // jump to detail directly cause there is no petinfo
+                [self jumpToPetInfoDetailView];
+            }
+          
             
         }else if ([indexPath section] == 1){
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -500,6 +501,8 @@
 
 //访问获取宠物详细信息接口，返回的结果
 -(void)getpetuserlistcallback:(NSArray*)args{
+    
+    
     if ([[args objectAtIndex:0]intValue] == PORTAL_RESULT_GET_PETDETAIL_SUCCESS) {
         NSDictionary *dict = [[NSDictionary alloc]initWithDictionary:[args objectAtIndex:2]];
         NSString *string1 = [[NSString alloc]init];
@@ -523,6 +526,11 @@
         [dict release];
         
     }
+    [self jumpToPetInfoDetailView];
+    
+}
+
+- (void)jumpToPetInfoDetailView {
     _Petdocumentlist.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
     _petinfotableview.title = @"宠物档案";
     [self makeTabBarHidden:YES];
@@ -531,7 +539,6 @@
     self.hidesBottomBarWhenPushed = NO;
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStyleDone target:self action:@selector(backaction)];
     _petinfotableview.navigationItem.leftBarButtonItem = leftItem;
-    
 }
 
 //宠物档案点击头像触发的事件

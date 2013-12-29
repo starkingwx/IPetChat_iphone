@@ -41,6 +41,12 @@
     NSLog(@"%@", [self getObjectData:obj]);
 }
 
++ (NSString *)stringFromObj:(id)obj {
+    NSData *jsonData = [PrintObject getJSON:obj options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonStr;
+}
 
 + (NSData*)getJSON:(id)obj options:(NSJSONWritingOptions)options error:(NSError**)error
 {
