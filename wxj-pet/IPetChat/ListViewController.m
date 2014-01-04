@@ -51,6 +51,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
     if (stylenum == 0) {
         [httpmanager getrecommendpets:self selector:@selector(getrecommendpetsCallback:) username:@"18652970720"];

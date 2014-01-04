@@ -27,6 +27,10 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [self.navigationController setNavigationBarHidden:NO animated:NO];  
+}
+
 - (void)viewDidLoad
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

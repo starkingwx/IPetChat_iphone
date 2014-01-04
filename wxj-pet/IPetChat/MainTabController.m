@@ -22,6 +22,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         //    CommunityViewController *ctrl3 = [[[CommunityViewController alloc] initWithNibName:@"CommunityViewController" bundle:nil] autorelease];
         //    UINavigationController *nav3 = [[[UINavigationController alloc] initWithRootViewController:ctrl3] autorelease];
         //    nav3.navigationBar.tintColor = [UIColor colorWithRed:(77/255.0) green:(78/255.0) blue:(78/255.0) alpha:1];
@@ -31,18 +32,21 @@
         
         //    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
         //    tabBarController.viewControllers = [NSArray arrayWithObjects:nav3, nav4, nil];
-        UIViewController *tab1 = [[UINavigationController alloc] initWithRootViewController:[[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil] andBarStyle:UIBarStyleBlack];
+        UIViewController *tab1 = [[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil];
         
-        UIViewController *tab3 = [[UINavigationController alloc] initWithRootViewController:[[CommunityViewController alloc] initWithNibName:@"CommunityViewController" bundle:nil] andBarStyle:UIBarStyleBlack];
-    
-        UIViewController *tab4 = [[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil] andBarStyle:UIBarStyleBlack];
+        UIViewController *tab3 = [[CommunityViewController alloc] initWithNibName:@"CommunityViewController" bundle:nil];
+        UIViewController *tab4 = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
+        
         
         self.viewControllers = [NSArray arrayWithObjects:tab1, tab3, tab4, nil];
         self.selectedViewController = tab1;
+                
+        self.delegate = self;
   
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -55,5 +59,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (BOOL)mh_tabBarController:(MHTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+{
+	NSLog(@"mh_tabBarController %@ shouldSelectViewController %@ at index %u", tabBarController, viewController, index);
+    
+	// Uncomment this to prevent "Tab 3" from being selected.
+	//return (index != 2);
+    
+	return YES;
+}
+
+- (void)mh_tabBarController:(MHTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+{
+	NSLog(@"mh_tabBarController %@ didSelectViewController %@ at index %u", tabBarController, viewController, index);
+}
+
+
 
 @end

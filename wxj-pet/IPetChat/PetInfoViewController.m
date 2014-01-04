@@ -76,6 +76,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.avatar setImage:nil];
     [self.sex setImage:nil];
     [self.nickname setText:@"昵称"];
@@ -136,6 +138,13 @@
         
         self.tabBarController.tabBar.hidden = YES;
     }
+    
+//    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning

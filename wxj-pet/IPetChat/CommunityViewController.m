@@ -32,13 +32,16 @@
         // Custom initialization
         self.title = @"社区";
         
-        if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"ic_tab_community_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"ic_tab_community_unselected.png"]];
-            [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3.0)];
-        }
-        else {
-            [self.tabBarItem setImage:[UIImage imageNamed:@"ic_tab_community_unselected.png"]];
-        }
+//        if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
+//            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"ic_tab_community_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"ic_tab_community_unselected.png"]];
+//            [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3.0)];
+//        }
+//        else {
+//            [self.tabBarItem setImage:[UIImage imageNamed:@"ic_tab_community_unselected.png"]];
+//        }
+        
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Community", @"社区") image:[UIImage imageNamed:@"ic_tab_community_unselected"] tag:2];
+
     }
     return self;
 }
@@ -67,10 +70,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     if (self.tabBarController.tabBar.hidden == TRUE) {
         self.tabBarController.tabBar.hidden = FALSE;
     }
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -155,6 +160,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self makeTabBarHidden:YES];
+    
     [self.listViewController setStylenum:[indexPath section]];
     [self.listViewController.tableView reloadData];
     self.listViewController.title = [[self.contentArray objectAtIndex:[indexPath section]] objectAtIndex:0];

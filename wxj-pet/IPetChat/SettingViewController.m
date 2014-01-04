@@ -53,13 +53,14 @@
     if (self) {
         // Custom initialization
         self.title = @"设置";
-        if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
-            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"ic_tab_settings_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"ic_tab_settings_unselected.png"]];
-            [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3.0)];
-        }
-        else {
-            [self.tabBarItem setImage:[UIImage imageNamed:@"ic_tab_settings_unselected.png"]];
-        }
+//        if ([[[UIDevice currentDevice] systemVersion] compare:@"5.0" options:NSNumericSearch] != NSOrderedAscending) {
+//            [self.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"ic_tab_settings_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"ic_tab_settings_unselected.png"]];
+//            [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -3.0)];
+//        }
+//        else {
+//            [self.tabBarItem setImage:[UIImage imageNamed:@"ic_tab_settings_unselected.png"]];
+//        }
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Setting", @"设置") image:[UIImage imageNamed:@"ic_tab_settings_unselected.png"] tag:2];
     }
     return self;
 }
@@ -109,6 +110,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self tabbarappear];
 }
 
@@ -347,6 +349,7 @@
             [gallerylisthttp release];
         }else if ([indexPath section] == 2){
             [self makeTabBarHidden:YES];
+//            [self.navigationController setNavigationBarHidden:NO animated:NO];
             AccountManagerController *accountctrl = [[AccountManagerController alloc]init];
             accountctrl.title = @"账号";
             self.hidesBottomBarWhenPushed = YES;
@@ -534,6 +537,8 @@
     _Petdocumentlist.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
     _petinfotableview.title = @"宠物档案";
     [self makeTabBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:_petinfotableview animated:YES];
     self.hidesBottomBarWhenPushed = NO;
@@ -673,6 +678,7 @@
             [defaults setObject:array forKey:@"blacklist"];
             [defaults synchronize];
             [self makeTabBarHidden:YES];
+//             [self.navigationController setNavigationBarHidden:NO animated:NO];
             self.hidesBottomBarWhenPushed = YES;
             PetBlackListController *blacklistctrl = [[PetBlackListController alloc]init];
             blacklistctrl.title = @"黑名单管理";
@@ -695,6 +701,7 @@
             
             self.hidesBottomBarWhenPushed = YES;
             [self makeTabBarHidden:YES];
+//            [self.navigationController setNavigationBarHidden:NO animated:NO];
             _gallerylistctrl = [[GalleryViewController alloc]init];
             [_gallerylistctrl setType:0];
             [_gallerylistctrl setContentArray:[dict objectForKey:@"list"]];

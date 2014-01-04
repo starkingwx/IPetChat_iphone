@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHTabBarController.h"
 
-@interface MainTabController : UITabBarController
+
+@interface MainTabController : MHTabBarController <MHTabBarControllerDelegate>
 
 @end
