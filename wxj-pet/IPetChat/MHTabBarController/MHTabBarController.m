@@ -36,7 +36,7 @@ static const NSInteger TagOffset = 1000;
 - (id)init {
     self = [super init];
     if (self) {
-        self.tabBarHeight = 48.0f;
+        self.tabBarHeight = 60.0f;
     }
     return self;
 }
@@ -135,19 +135,19 @@ static const NSInteger TagOffset = 1000;
 
 - (void)centerImageAndTextOfButton:(UIButton *)button {
     // the space between the image and text
-    CGFloat spacing = 8.0;
+    CGFloat spacing = 0.0;
     
     // lower the text and push it left so it appears centered
     //  below the image
     CGSize imageSize = button.imageView.frame.size;
     button.titleEdgeInsets = UIEdgeInsetsMake(
-                                              0.0, - imageSize.width, - (imageSize.height + spacing) / 2, 0.0);
+                                              0.0, - imageSize.width, - (imageSize.height + spacing), 0.0);
     
     // raise the image and push it right so it appears centered
     //  above the text
     CGSize titleSize = button.titleLabel.frame.size;
     button.imageEdgeInsets = UIEdgeInsetsMake(
-                                              - (titleSize.height + spacing) / 2, 0.0, 0.0, - titleSize.width);
+                                              - (titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
 }
 
 - (void)removeTabButtons
