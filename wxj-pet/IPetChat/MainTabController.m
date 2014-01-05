@@ -11,6 +11,7 @@
 #import "SettingViewController.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "TestApiViewController.h"
+#import "MainPageViewController.h"
 
 @interface MainTabController ()
 
@@ -32,13 +33,15 @@
         
         //    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
         //    tabBarController.viewControllers = [NSArray arrayWithObjects:nav3, nav4, nil];
-        UIViewController *tab1 = [[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil];
+        UIViewController *tab1 = [[MainPageViewController alloc] initWithNibName:@"MainPageViewController" bundle:nil];
+        
+        UIViewController *tab2 = [[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil];
         
         UIViewController *tab3 = [[CommunityViewController alloc] initWithNibName:@"CommunityViewController" bundle:nil];
         UIViewController *tab4 = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
         
         
-        self.viewControllers = [NSArray arrayWithObjects:tab1, tab3, tab4, nil];
+        self.viewControllers = [NSArray arrayWithObjects:tab1, tab2, tab3, tab4, nil];
         self.selectedViewController = tab1;
                 
         self.delegate = self;

@@ -125,6 +125,27 @@
 		F8C9D9C1185DAEE100643F06 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9C0185DAEE100643F06 /* CoreTelephony.framework */; };
 		F8C9D9C3185DAF0000643F06 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9C2185DAF0000643F06 /* Security.framework */; };
 		F8C9D9C5185DAF2300643F06 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9C4185DAF2300643F06 /* CoreFoundation.framework */; };
+		F8CAE6FE18793C5600EA9F66 /* bg_locate_bt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */; };
+		F8CAE6FF18793C5600EA9F66 /* bg_locate_bt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */; };
+		F8CAE703187947E400EA9F66 /* PetMotionStatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE701187947E400EA9F66 /* PetMotionStatViewController.m */; };
+		F8CAE704187947E400EA9F66 /* PetMotionStatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE702187947E400EA9F66 /* PetMotionStatViewController.xib */; };
+		F8CAE7081879870A00EA9F66 /* sep_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7051879870A00EA9F66 /* sep_line@2x.png */; };
+		F8CAE7091879870A00EA9F66 /* tab_bar_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7061879870A00EA9F66 /* tab_bar_right@2x.png */; };
+		F8CAE70A1879870A00EA9F66 /* tab_bt_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7071879870A00EA9F66 /* tab_bt_left@2x.png */; };
+		F8CAE725187992AD00EA9F66 /* BarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE70D187992AD00EA9F66 /* BarChartView.m */; };
+		F8CAE726187992AD00EA9F66 /* BarLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE70F187992AD00EA9F66 /* BarLabel.m */; };
+		F8CAE727187992AD00EA9F66 /* BarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE712187992AD00EA9F66 /* BarView.m */; };
+		F8CAE728187992AD00EA9F66 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE716187992AD00EA9F66 /* CMPopTipView.m */; };
+		F8CAE729187992AD00EA9F66 /* UIColor+i7HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE719187992AD00EA9F66 /* UIColor+i7HexColor.m */; };
+		F8CAE72A187992AD00EA9F66 /* UIViewSizeShortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE71B187992AD00EA9F66 /* UIViewSizeShortcuts.m */; };
+		F8CAE72B187992AD00EA9F66 /* XMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE71E187992AD00EA9F66 /* XMLElement.m */; };
+		F8CAE72C187992AD00EA9F66 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE720187992AD00EA9F66 /* XMLParser.m */; };
+		F8CAE72D187992AD00EA9F66 /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE722187992AD00EA9F66 /* XMLParserDelegate.m */; };
+		F8CAE72E187992AD00EA9F66 /* PlotChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CAE724187992AD00EA9F66 /* PlotChartView.m */; };
+		F8CAE7331879975F00EA9F66 /* blue_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE72F1879975F00EA9F66 /* blue_block.png */; };
+		F8CAE7341879975F00EA9F66 /* green_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7301879975F00EA9F66 /* green_block.png */; };
+		F8CAE7351879975F00EA9F66 /* orange_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7311879975F00EA9F66 /* orange_block.png */; };
+		F8CAE7361879975F00EA9F66 /* yellow_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7321879975F00EA9F66 /* yellow_block.png */; };
 		F8CC84C0185C84B600B44DDC /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */; };
 		F8CC84C1185C84B600B44DDC /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */; };
 		F8DB1B64186EB34C0010B771 /* PetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B63186EB34C0010B771 /* PetInfo.m */; };
@@ -317,6 +338,39 @@
 		F8C9D9C0185DAEE100643F06 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		F8C9D9C2185DAF0000643F06 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F8C9D9C4185DAF2300643F06 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_locate_bt.png; path = Pictures/bg_locate_bt.png; sourceTree = "<group>"; };
+		F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_locate_bt@2x.png"; path = "Pictures/bg_locate_bt@2x.png"; sourceTree = "<group>"; };
+		F8CAE700187947E400EA9F66 /* PetMotionStatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetMotionStatViewController.h; sourceTree = "<group>"; };
+		F8CAE701187947E400EA9F66 /* PetMotionStatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetMotionStatViewController.m; sourceTree = "<group>"; };
+		F8CAE702187947E400EA9F66 /* PetMotionStatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetMotionStatViewController.xib; sourceTree = "<group>"; };
+		F8CAE7051879870A00EA9F66 /* sep_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sep_line@2x.png"; path = "Pictures/sep_line@2x.png"; sourceTree = "<group>"; };
+		F8CAE7061879870A00EA9F66 /* tab_bar_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_bar_right@2x.png"; path = "Pictures/tab_bar_right@2x.png"; sourceTree = "<group>"; };
+		F8CAE7071879870A00EA9F66 /* tab_bt_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tab_bt_left@2x.png"; path = "Pictures/tab_bt_left@2x.png"; sourceTree = "<group>"; };
+		F8CAE70C187992AD00EA9F66 /* BarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChartView.h; sourceTree = "<group>"; };
+		F8CAE70D187992AD00EA9F66 /* BarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarChartView.m; sourceTree = "<group>"; };
+		F8CAE70E187992AD00EA9F66 /* BarLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarLabel.h; sourceTree = "<group>"; };
+		F8CAE70F187992AD00EA9F66 /* BarLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarLabel.m; sourceTree = "<group>"; };
+		F8CAE710187992AD00EA9F66 /* BarTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarTypes.h; sourceTree = "<group>"; };
+		F8CAE711187992AD00EA9F66 /* BarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarView.h; sourceTree = "<group>"; };
+		F8CAE712187992AD00EA9F66 /* BarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarView.m; sourceTree = "<group>"; };
+		F8CAE715187992AD00EA9F66 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		F8CAE716187992AD00EA9F66 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
+		F8CAE718187992AD00EA9F66 /* UIColor+i7HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+i7HexColor.h"; sourceTree = "<group>"; };
+		F8CAE719187992AD00EA9F66 /* UIColor+i7HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+i7HexColor.m"; sourceTree = "<group>"; };
+		F8CAE71A187992AD00EA9F66 /* UIViewSizeShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewSizeShortcuts.h; sourceTree = "<group>"; };
+		F8CAE71B187992AD00EA9F66 /* UIViewSizeShortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewSizeShortcuts.m; sourceTree = "<group>"; };
+		F8CAE71D187992AD00EA9F66 /* XMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLElement.h; sourceTree = "<group>"; };
+		F8CAE71E187992AD00EA9F66 /* XMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLElement.m; sourceTree = "<group>"; };
+		F8CAE71F187992AD00EA9F66 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		F8CAE720187992AD00EA9F66 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		F8CAE721187992AD00EA9F66 /* XMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserDelegate.h; sourceTree = "<group>"; };
+		F8CAE722187992AD00EA9F66 /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
+		F8CAE723187992AD00EA9F66 /* PlotChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlotChartView.h; sourceTree = "<group>"; };
+		F8CAE724187992AD00EA9F66 /* PlotChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlotChartView.m; sourceTree = "<group>"; };
+		F8CAE72F1879975F00EA9F66 /* blue_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue_block.png; path = Pictures/blue_block.png; sourceTree = "<group>"; };
+		F8CAE7301879975F00EA9F66 /* green_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = green_block.png; path = Pictures/green_block.png; sourceTree = "<group>"; };
+		F8CAE7311879975F00EA9F66 /* orange_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange_block.png; path = Pictures/orange_block.png; sourceTree = "<group>"; };
+		F8CAE7321879975F00EA9F66 /* yellow_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellow_block.png; path = Pictures/yellow_block.png; sourceTree = "<group>"; };
 		F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		F8CC84BF185C84B600B44DDC /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -397,6 +451,8 @@
 		B71A9CE418373FE300B68D10 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */,
+				F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */,
 				F8E1D79E18785FC6009A02C6 /* ic_tab_community_unselected.png */,
 				F8E1D79F18785FC6009A02C6 /* ic_tab_settings_unselected.png */,
 				F8E1B942185DD44E0049B461 /* QQ_Logo.png */,
@@ -427,8 +483,15 @@
 				5F8D5AB91837131D00743FAA /* img_red_btn_pressed_bg.9.png */,
 				5F8D5ACD1837167D00743FAA /* ic_tab_community_unselected@2x.png */,
 				5F8D5ACF1837167D00743FAA /* ic_tab_settings_unselected@2x.png */,
+				F8CAE7051879870A00EA9F66 /* sep_line@2x.png */,
+				F8CAE7061879870A00EA9F66 /* tab_bar_right@2x.png */,
+				F8CAE7071879870A00EA9F66 /* tab_bt_left@2x.png */,
 				5F8D5AD51837182700743FAA /* img_concern@2x.png */,
 				5F8D5AD61837182700743FAA /* img_messagebox@2x.png */,
+				F8CAE72F1879975F00EA9F66 /* blue_block.png */,
+				F8CAE7301879975F00EA9F66 /* green_block.png */,
+				F8CAE7311879975F00EA9F66 /* orange_block.png */,
+				F8CAE7321879975F00EA9F66 /* yellow_block.png */,
 				5F8D5AD71837182700743FAA /* img_petnearby@2x.png */,
 				5F8D5AD81837182700743FAA /* img_petstar@2x.png */,
 				B7F9A0DB182B1ECB00756ED3 /* Default.png */,
@@ -551,6 +614,7 @@
 		B7F9A0CF182B1ECB00756ED3 /* IPetChat */ = {
 			isa = PBXGroup;
 			children = (
+				F8CAE70B187992AD00EA9F66 /* BarChart Library */,
 				F8E1D7891877FFBB009A02C6 /* MHTabBarController */,
 				F8606D191865CFEB001FF5B0 /* Beans */,
 				F8606D0D1865C974001FF5B0 /* Test */,
@@ -596,6 +660,9 @@
 				F8E1D79918785B46009A02C6 /* MainPageViewController.h */,
 				F8E1D79A18785B47009A02C6 /* MainPageViewController.m */,
 				F8E1D79B18785B49009A02C6 /* MainPageViewController.xib */,
+				F8CAE700187947E400EA9F66 /* PetMotionStatViewController.h */,
+				F8CAE701187947E400EA9F66 /* PetMotionStatViewController.m */,
+				F8CAE702187947E400EA9F66 /* PetMotionStatViewController.xib */,
 			);
 			path = IPetChat;
 			sourceTree = "<group>";
@@ -694,6 +761,66 @@
 				F8DB1B69186F105E0010B771 /* RollCall.m */,
 			);
 			name = Beans;
+			sourceTree = "<group>";
+		};
+		F8CAE70B187992AD00EA9F66 /* BarChart Library */ = {
+			isa = PBXGroup;
+			children = (
+				F8CAE70C187992AD00EA9F66 /* BarChartView.h */,
+				F8CAE70D187992AD00EA9F66 /* BarChartView.m */,
+				F8CAE70E187992AD00EA9F66 /* BarLabel.h */,
+				F8CAE70F187992AD00EA9F66 /* BarLabel.m */,
+				F8CAE710187992AD00EA9F66 /* BarTypes.h */,
+				F8CAE711187992AD00EA9F66 /* BarView.h */,
+				F8CAE712187992AD00EA9F66 /* BarView.m */,
+				F8CAE713187992AD00EA9F66 /* External */,
+				F8CAE723187992AD00EA9F66 /* PlotChartView.h */,
+				F8CAE724187992AD00EA9F66 /* PlotChartView.m */,
+			);
+			path = "BarChart Library";
+			sourceTree = "<group>";
+		};
+		F8CAE713187992AD00EA9F66 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				F8CAE714187992AD00EA9F66 /* CMPopTipView */,
+				F8CAE717187992AD00EA9F66 /* Helpers */,
+				F8CAE71C187992AD00EA9F66 /* XMLParser */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		F8CAE714187992AD00EA9F66 /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				F8CAE715187992AD00EA9F66 /* CMPopTipView.h */,
+				F8CAE716187992AD00EA9F66 /* CMPopTipView.m */,
+			);
+			path = CMPopTipView;
+			sourceTree = "<group>";
+		};
+		F8CAE717187992AD00EA9F66 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8CAE718187992AD00EA9F66 /* UIColor+i7HexColor.h */,
+				F8CAE719187992AD00EA9F66 /* UIColor+i7HexColor.m */,
+				F8CAE71A187992AD00EA9F66 /* UIViewSizeShortcuts.h */,
+				F8CAE71B187992AD00EA9F66 /* UIViewSizeShortcuts.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F8CAE71C187992AD00EA9F66 /* XMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				F8CAE71D187992AD00EA9F66 /* XMLElement.h */,
+				F8CAE71E187992AD00EA9F66 /* XMLElement.m */,
+				F8CAE71F187992AD00EA9F66 /* XMLParser.h */,
+				F8CAE720187992AD00EA9F66 /* XMLParser.m */,
+				F8CAE721187992AD00EA9F66 /* XMLParserDelegate.h */,
+				F8CAE722187992AD00EA9F66 /* XMLParserDelegate.m */,
+			);
+			path = XMLParser;
 			sourceTree = "<group>";
 		};
 		F8CC84BC185C84B600B44DDC /* libWeiboSDK */ = {
@@ -838,6 +965,16 @@
 				F8E1D79D18785B4A009A02C6 /* MainPageViewController.xib in Resources */,
 				F8E1D7A018785FC7009A02C6 /* ic_tab_community_unselected.png in Resources */,
 				F8E1D7A118785FC7009A02C6 /* ic_tab_settings_unselected.png in Resources */,
+				F8CAE6FE18793C5600EA9F66 /* bg_locate_bt.png in Resources */,
+				F8CAE6FF18793C5600EA9F66 /* bg_locate_bt@2x.png in Resources */,
+				F8CAE704187947E400EA9F66 /* PetMotionStatViewController.xib in Resources */,
+				F8CAE7081879870A00EA9F66 /* sep_line@2x.png in Resources */,
+				F8CAE7091879870A00EA9F66 /* tab_bar_right@2x.png in Resources */,
+				F8CAE70A1879870A00EA9F66 /* tab_bt_left@2x.png in Resources */,
+				F8CAE7331879975F00EA9F66 /* blue_block.png in Resources */,
+				F8CAE7341879975F00EA9F66 /* green_block.png in Resources */,
+				F8CAE7351879975F00EA9F66 /* orange_block.png in Resources */,
+				F8CAE7361879975F00EA9F66 /* yellow_block.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,6 +1033,17 @@
 				F8DB1B6A186F105E0010B771 /* RollCall.m in Sources */,
 				F8E1D7941877FFBB009A02C6 /* MHTabBarController.m in Sources */,
 				F8E1D79C18785B4A009A02C6 /* MainPageViewController.m in Sources */,
+				F8CAE703187947E400EA9F66 /* PetMotionStatViewController.m in Sources */,
+				F8CAE725187992AD00EA9F66 /* BarChartView.m in Sources */,
+				F8CAE726187992AD00EA9F66 /* BarLabel.m in Sources */,
+				F8CAE727187992AD00EA9F66 /* BarView.m in Sources */,
+				F8CAE728187992AD00EA9F66 /* CMPopTipView.m in Sources */,
+				F8CAE729187992AD00EA9F66 /* UIColor+i7HexColor.m in Sources */,
+				F8CAE72A187992AD00EA9F66 /* UIViewSizeShortcuts.m in Sources */,
+				F8CAE72B187992AD00EA9F66 /* XMLElement.m in Sources */,
+				F8CAE72C187992AD00EA9F66 /* XMLParser.m in Sources */,
+				F8CAE72D187992AD00EA9F66 /* XMLParserDelegate.m in Sources */,
+				F8CAE72E187992AD00EA9F66 /* PlotChartView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
