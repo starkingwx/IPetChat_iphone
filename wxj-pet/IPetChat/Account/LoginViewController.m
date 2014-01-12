@@ -62,7 +62,7 @@
 - (BOOL)needLogin {
     BOOL ret = YES;
     UserBean *user = [[UserManager shareUserManager] userBean];
-    if (user && user.userKey) {
+    if (user != nil && user.userKey != nil && ![user.userKey isEqualToString:@""]) {
         // jump to main page directly
         ret = NO;
     }
@@ -281,7 +281,7 @@ login_error:
                     UserBean *user = [[UserManager shareUserManager] userBean];
                     user.petInfo = petBean;
                     NSData *petInfoData = [PrintObject getJSON:petBean options:NSJSONWritingPrettyPrinted error:nil];
-                    NSString *jsonPetInfo = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                    NSString *jsonPetInfo = [[NSString alloc] initWithData:petInfoData encoding:NSUTF8StringEncoding];
                     
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setObject:jsonPetInfo forKey:PETINFO];

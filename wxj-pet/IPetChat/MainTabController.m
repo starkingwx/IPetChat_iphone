@@ -12,6 +12,7 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import "TestApiViewController.h"
 #import "MainPageViewController.h"
+#import "PetMotionStatViewController.h"
 
 @interface MainTabController ()
 
@@ -35,7 +36,7 @@
         //    tabBarController.viewControllers = [NSArray arrayWithObjects:nav3, nav4, nil];
         UIViewController *tab1 = [[MainPageViewController alloc] initWithNibName:@"MainPageViewController" bundle:nil];
         
-        UIViewController *tab2 = [[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil];
+        UIViewController *tab2 = [[PetMotionStatViewController alloc] initWithNibName:@"PetMotionStatViewController" bundle:nil];
         
         UIViewController *tab3 = [[CommunityViewController alloc] initWithNibName:@"CommunityViewController" bundle:nil];
         UIViewController *tab4 = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];

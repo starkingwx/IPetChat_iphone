@@ -13,6 +13,7 @@
 #import "GalleryViewController.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "UserBean+Device.h"
+#import "Constant.h"
 
 #define DEVICE_HEIGHT_DIFF [UIScreen mainScreen].bounds.size.height-480 
 
@@ -73,7 +74,7 @@
     self.contentArray = [NSArray arrayWithObjects:@"宠物档案", @"相册", @"账号", @"黑名单管理",@"更多", nil];
     
     NSArray *Arr0 = [[NSArray alloc] initWithObjects:@"昵称",@"性别",   nil];
-    NSArray *Arr1 = [[NSArray alloc] initWithObjects:@"品种", @"年龄",@"身高", @"体重", nil];
+    NSArray *Arr1 = [[NSArray alloc] initWithObjects:@"品种", @"生日",@"身高", @"体重", nil];
     NSArray *Arr2 = [[NSArray alloc] initWithObjects:@"城市", @"常去玩的地方", nil];
     
     NSDictionary *stTableInfo = [[NSDictionary alloc] initWithObjectsAndKeys:Arr0, @"0", Arr1, @"1", Arr2, @"2", nil];
@@ -102,7 +103,7 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
     
-    petdatadic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"未填入",@"昵称",@"未填入",@"性别",@"未填入",@"品种",@"未填入",@"年龄",@"未填入",@"身高",@"未填入",@"体重",@"未填入",@"城市",@"未填入",@"常去玩的地方",@"nothing",@"headphoto",nil];
+    petdatadic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"未填入",@"昵称",@"未填入",@"性别",@"未填入",@"品种",@"未填入",@"生日",@"未填入",@"身高",@"未填入",@"体重",@"未填入",@"城市",@"未填入",@"常去玩的地方",@"nothing",@"headphoto",nil];
     
     pettypes = [[NSArray alloc]initWithObjects:@"黄金猎犬",@"哈士奇",@"贵宾（泰迪）",@"赛摩耶",@"博美",@"雪纳瑞",@"苏格兰牧羊犬",@"松狮",@"京巴",@"其他犬种", nil];
     petsexs = [[NSArray alloc]initWithObjects:@"帅哥",@"美女", nil];
@@ -249,9 +250,9 @@
         _petinfo.backgroundColor = [UIColor clearColor];
         _petinfo.textAlignment = UITextAlignmentRight;
         NSMutableString *string;
-        if ([rowvalue isEqualToString:@"年龄"]) {
-            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"年龄"]];
-            [string appendString:@"个月"];
+        if ([rowvalue isEqualToString:@"生日"]) {
+            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"生日"]];
+            [string appendString:@""];
             _petinfo.text = string;
             [string release];
         }else if ([rowvalue isEqualToString:@"身高"]) {
@@ -397,9 +398,9 @@
             _sextype.tag = 3;
             _sextype.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
             [_backviewctrl.view addSubview:_sextype];
-        }else if ([rowvalue isEqualToString:@"年龄"]) {
+        }else if ([rowvalue isEqualToString:@"生日"]) {
             [self addbackviewandsavebtn];
-            _nameinput.text = [petdatadic objectForKey:@"年龄"];
+            _nameinput.text = [petdatadic objectForKey:@"生日"];
             [_backviewctrl.view addSubview:_nameinput];
         }else if ([rowvalue isEqualToString:@"身高"]) {
             [self addbackviewandsavebtn];
@@ -477,8 +478,8 @@
     }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"品种"]){
         [petdatadic setObject:[pettypes objectAtIndex:[self.lastIndexPath row]] forKey:@"品种"];
         [_Pettypelist removeFromSuperview];
-    }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"年龄"]){
-        [petdatadic setObject:_nameinput.text forKey:@"年龄"];
+    }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"生日"]){
+        [petdatadic setObject:_nameinput.text forKey:@"生日"];
         [_nameinput removeFromSuperview];
     }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"身高"]){
         [petdatadic setObject:_nameinput.text forKey:@"身高"];
@@ -519,13 +520,16 @@
         [petdatadic setObject:string1 forKey:@"品种"];
         
         NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-        [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"age"]] forKey:@"年龄"];
+        [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"birthday"]] forKey:@"生日"];
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"height"]] forKey:@"身高"];
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"weight"]] forKey:@"体重"];
         
         [petdatadic setObject:[dict objectForKey:@"district"] forKey:@"城市"];
         [petdatadic setObject:[dict objectForKey:@"placeoftengo"] forKey:@"常去玩的地方"];
-        [petdatadic setObject:[dict objectForKey:@"avatar"] forKey:@"headphoto"];
+        if ([dict objectForKey:@"avatar"]) {
+            [petdatadic setObject:[dict objectForKey:@"avatar"] forKey:@"headphoto"];
+     
+        }
         [dict release];
         
     }
@@ -650,8 +654,12 @@
         self.navigationItem.title = @"设置";
         [self.navigationController popViewControllerAnimated:YES];
         
+        UserBean *user = [[UserManager shareUserManager] userBean];
+        PetInfo *petInfo = user.petInfo;
+        
+        
         Enhttpmanager *modifyhttpmanager = [[Enhttpmanager alloc]init];
-        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:26 nickname:[petdatadic objectForKey:@"昵称"] sex:[self.lastIndexPath1 row] breed:[self.lastIndexPath row] age:[petdatadic objectForKey:@"年龄"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
+        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:petInfo.petId nickname:[petdatadic objectForKey:@"昵称"] sex:[self.lastIndexPath1 row] breed:[self.lastIndexPath row] age:[petdatadic objectForKey:@"生日"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
         [modifyhttpmanager release];
     }
 }
@@ -660,11 +668,14 @@
 - (void)logoutButtonClick {
     UIAlertView * alertview = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否退出客户端？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertview.tag = 0;
+    
+    
     [alertview show];
     [alertview release];
 }
 
 -(void)modifycallback:(NSArray*)args{
+    NSLog(@"modifycallback: %@", args);
     
 }
 
@@ -719,7 +730,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![[defaults objectForKey:@"whichsave"]isEqualToString:@"品种"]&&![[defaults objectForKey:@"whichsave"]isEqualToString:@"性别"]) {
         _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 280, 36)]autorelease];
-        if ([[defaults objectForKey:@"whichsave"]isEqualToString:@"年龄"]) {
+        if ([[defaults objectForKey:@"whichsave"]isEqualToString:@"生日"]) {
             _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 240, 36)]autorelease];
             _unitlabel = [[[UILabel alloc]initWithFrame:CGRectMake(265, 18, 40, 36)]autorelease];
             _unitlabel.text = @"月";
@@ -782,6 +793,12 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 0) {
         if (buttonIndex == 1) {
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:@"" forKey:USERNAME];
+            [userDefaults setObject:@"" forKey:USERKEY];
+            [userDefaults setObject:@"" forKey:PETINFO];
+            BOOL ret = [userDefaults synchronize];
+            NSLog(@"save before exit: %d", ret);
             exit(0);
         }
     }

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AsynImageView.h"
+#import "XYPieChart.h"
 
-@interface PetMotionStatViewController : UIViewController
+@interface PetMotionStatViewController : UIViewController <XYPieChartDataSource>
 @property (strong, nonatomic) IBOutlet AsynImageView *avatarImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *breedLabel;
@@ -17,6 +18,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *heightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *weightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usageCountLabel;
+@property (strong, nonatomic) IBOutlet UIView *todayTabBody;
+@property (strong, nonatomic) IBOutlet UIView *historyTabBody;
+@property (strong, nonatomic) IBOutlet XYPieChart *piechart;
 
 - (IBAction)selectTodayStat:(id)sender;
 - (IBAction)selectHistoryStat:(id)sender;

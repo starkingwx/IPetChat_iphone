@@ -152,6 +152,11 @@
 		F8CB9CBA18826BE4009C0EC4 /* PetInfoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CB9CB918826BE4009C0EC4 /* PetInfoUtil.m */; };
 		F8CC84C0185C84B600B44DDC /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */; };
 		F8CC84C1185C84B600B44DDC /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */; };
+		F8D2E0D51882E69F00A8D62D /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D2E0D41882E69F00A8D62D /* XYPieChart.m */; };
+		F8D2E0DA1882EBDE00A8D62D /* ic_home.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D2E0D61882EBDD00A8D62D /* ic_home.png */; };
+		F8D2E0DB1882EBDE00A8D62D /* ic_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D2E0D71882EBDE00A8D62D /* ic_home@2x.png */; };
+		F8D2E0DC1882EBDE00A8D62D /* ic_motion.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D2E0D81882EBDE00A8D62D /* ic_motion.png */; };
+		F8D2E0DD1882EBDE00A8D62D /* ic_motion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8D2E0D91882EBDE00A8D62D /* ic_motion@2x.png */; };
 		F8DB1B64186EB34C0010B771 /* PetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B63186EB34C0010B771 /* PetInfo.m */; };
 		F8DB1B67186F101C0010B771 /* TerminalControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B66186F101C0010B771 /* TerminalControl.m */; };
 		F8DB1B6A186F105E0010B771 /* RollCall.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B69186F105E0010B771 /* RollCall.m */; };
@@ -383,6 +388,12 @@
 		F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		F8CC84BF185C84B600B44DDC /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		F8D2E0D31882E69F00A8D62D /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		F8D2E0D41882E69F00A8D62D /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		F8D2E0D61882EBDD00A8D62D /* ic_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_home.png; path = Pictures/ic_home.png; sourceTree = "<group>"; };
+		F8D2E0D71882EBDE00A8D62D /* ic_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_home@2x.png"; path = "Pictures/ic_home@2x.png"; sourceTree = "<group>"; };
+		F8D2E0D81882EBDE00A8D62D /* ic_motion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_motion.png; path = Pictures/ic_motion.png; sourceTree = "<group>"; };
+		F8D2E0D91882EBDE00A8D62D /* ic_motion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic_motion@2x.png"; path = "Pictures/ic_motion@2x.png"; sourceTree = "<group>"; };
 		F8DB1B62186EB34C0010B771 /* PetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PetInfo.h; path = Beans/PetInfo.h; sourceTree = "<group>"; };
 		F8DB1B63186EB34C0010B771 /* PetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PetInfo.m; path = Beans/PetInfo.m; sourceTree = "<group>"; };
 		F8DB1B65186F101C0010B771 /* TerminalControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerminalControl.h; path = Beans/TerminalControl.h; sourceTree = "<group>"; };
@@ -487,6 +498,10 @@
 				5FA4B75C1846172600217A1D /* chatto_bg_normal.9.png */,
 				B71A9CE71837973100B68D10 /* img_female.png */,
 				B71A9CE81837973100B68D10 /* img_male.png */,
+				F8D2E0D61882EBDD00A8D62D /* ic_home.png */,
+				F8D2E0D71882EBDE00A8D62D /* ic_home@2x.png */,
+				F8D2E0D81882EBDE00A8D62D /* ic_motion.png */,
+				F8D2E0D91882EBDE00A8D62D /* ic_motion@2x.png */,
 				5F8D5AB71837131D00743FAA /* ic_launcher.png */,
 				5F8D5AB81837131D00743FAA /* img_red_btn_normal_bg.9.png */,
 				5F8D5AB91837131D00743FAA /* img_red_btn_pressed_bg.9.png */,
@@ -626,6 +641,7 @@
 		B7F9A0CF182B1ECB00756ED3 /* IPetChat */ = {
 			isa = PBXGroup;
 			children = (
+				F8D2E0D21882E69F00A8D62D /* XYPieChart */,
 				F8CAE70B187992AD00EA9F66 /* BarChart Library */,
 				F8E1D7891877FFBB009A02C6 /* MHTabBarController */,
 				F8606D191865CFEB001FF5B0 /* Beans */,
@@ -847,6 +863,15 @@
 			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
+		F8D2E0D21882E69F00A8D62D /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				F8D2E0D31882E69F00A8D62D /* XYPieChart.h */,
+				F8D2E0D41882E69F00A8D62D /* XYPieChart.m */,
+			);
+			path = XYPieChart;
+			sourceTree = "<group>";
+		};
 		F8E1D7891877FFBB009A02C6 /* MHTabBarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -992,6 +1017,10 @@
 				F8CAE7391879B41400EA9F66 /* bottom_bar.png in Resources */,
 				F8CAE73A1879B41400EA9F66 /* bottom_bar@2x.png in Resources */,
 				F8CAE73C1879B4C600EA9F66 /* logo.png in Resources */,
+				F8D2E0DA1882EBDE00A8D62D /* ic_home.png in Resources */,
+				F8D2E0DB1882EBDE00A8D62D /* ic_home@2x.png in Resources */,
+				F8D2E0DC1882EBDE00A8D62D /* ic_motion.png in Resources */,
+				F8D2E0DD1882EBDE00A8D62D /* ic_motion@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1062,6 +1091,7 @@
 				F8CAE72D187992AD00EA9F66 /* XMLParserDelegate.m in Sources */,
 				F8CAE72E187992AD00EA9F66 /* PlotChartView.m in Sources */,
 				F8CB9CBA18826BE4009C0EC4 /* PetInfoUtil.m in Sources */,
+				F8D2E0D51882E69F00A8D62D /* XYPieChart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,8 +1177,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 鑫箭 王 (ZB55572W6X)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 鑫箭 王 (ZB55572W6X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -1167,8 +1197,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "87F2FB29-EFC0-451A-9B8C-1781CF05E5A5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "87F2FB29-EFC0-451A-9B8C-1781CF05E5A5";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1177,8 +1207,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangsu East Century Network Information Co.,Ltd. (MAHHA4ZFXH)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiangsu East Century Network Information Co.,Ltd. (MAHHA4ZFXH)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Xinlian Jiang (4UKEB375ND)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xinlian Jiang (4UKEB375ND)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -1197,8 +1227,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7951C73D-1014-4022-80C8-A66937BF5077";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7951C73D-1014-4022-80C8-A66937BF5077";
+				PROVISIONING_PROFILE = "6BFBAFEE-4A19-47B5-AF38-637303219CD8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6BFBAFEE-4A19-47B5-AF38-637303219CD8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

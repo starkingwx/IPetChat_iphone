@@ -42,6 +42,7 @@
 						<int key="NSvFlags">301</int>
 						<string key="NSFrame">{{85, 88}, {150, 150}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="398487950"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">2</int>
@@ -49,7 +50,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">dog.png</string>
+							<string key="NSResourceName">ic_launcher.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="286179627">
@@ -57,6 +58,7 @@
 						<int key="NSvFlags">293</int>
 						<string key="NSFrame">{{10, 330}, {190, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="77928831"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -98,6 +100,7 @@
 						<int key="NSvFlags">293</int>
 						<string key="NSFrame">{{53, 268}, {226, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="286179627"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -129,6 +132,8 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{213, 324}, {49, 55}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -150,6 +155,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="539062946"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -331,7 +337,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="QQ_Logo.png">{187, 216}</string>
-			<string key="dog.png">{163, 136}</string>
+			<string key="ic_launcher.png">{72, 72}</string>
 			<string key="weibo_logo.png">{121, 40}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

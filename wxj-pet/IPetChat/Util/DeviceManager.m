@@ -55,7 +55,11 @@ static DeviceManager *instance;
     _count++;
 
     _sysTimeBegin = (long long)([[NSDate date] timeIntervalSince1970] * 1000);
-    [HttpUtils getRequestWithUrl:GET_TIME_URL andParameter:nil andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onGetTimeFinished:) andFailedRespSelector:nil];
+    [HttpUtils getRequestWithUrl:GET_TIME_URL andParameter:nil andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onGetTimeFinished:) andFailedRespSelector:@selector(onGEtTimeFailed:)];
+}
+
+- (void)onGEtTimeFailed:(ASIHTTPRequest *)pRequest {
+    
 }
 
 - (void)onGetTimeFinished:(ASIHTTPRequest *)pRequest {

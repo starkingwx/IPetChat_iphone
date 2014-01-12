@@ -150,7 +150,7 @@ void uncaughtExceptionHandler(NSException *exception) {
 
 
 - (void)loadAccount {
-     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     UserBean *user = [[UserBean alloc] init];
     user.name = [userDefaults objectForKey:USERNAME];
     user.userKey = [userDefaults objectForKey:USERKEY];

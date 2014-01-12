@@ -458,10 +458,16 @@ typedef enum {
     current_command = PORTAL_COMMAND_MODIFY_PETINFO;
     stage = PORTAL_STAGE_MODIFY_PETINFO;
     
-    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:[[NSString alloc]initWithFormat:@"%ld",petid],@"petid",nickname,@"nickname",[NSString stringWithFormat:@"%d",sex],@"sex",[NSString stringWithFormat:@"%d",breed],@"breed",age,@"age",height,@"height",weight,@"weight",district,@"district",placeoftengo,@"placeoftengo",nil];
+    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:nickname,@"nickname",[NSString stringWithFormat:@"%d",sex],@"sex",[NSString stringWithFormat:@"%d",breed],@"breed",age,@"birthday",height,@"height",weight,@"weight",district,@"district",placeoftengo,@"placeoftengo",nil];
+    if (petid != 0) {
+        [paramedict setObject:[[NSString alloc]initWithFormat:@"%ld",petid] forKey:@"petid"];
+    }
     NSString *sigstr = [self getsigstr:paramedict];
     
-    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&petid=%ld&nickname=%@&sex=%d&breed=%d&age=%d&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,petid,nickname,sex,breed,[age intValue],[height floatValue],[weight floatValue],district,placeoftengo];
+    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&nickname=%@&sex=%d&breed=%d&age=%d&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,nickname,sex,breed,[age intValue],[height floatValue],[weight floatValue],district,placeoftengo];
+    if (petid != 0) {
+        body = [NSString stringWithFormat:@"%@&petid=%ld", body, petid];
+    }
     
     [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/modify" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     

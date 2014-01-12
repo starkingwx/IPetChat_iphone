@@ -8,3 +8,14 @@
 
 "Community" = "社区";
 "Setting" = "设置";
+"Processing" = "正在处理中";
+"Weibo SSO Result" = "微博认证结果";
+"SSO Login failed" = "SSO 登录失败";
+"OK" = "确定";
+"QQ SSO Result" = "QQ认证结果";
+"Login Cancelled" = "登录被取消";
+"Network Error" = "网络不可用";
+"Error in third login, please retry." = "第三方登录失败，请稍后重试！";
+"Home" = "首页";
+"Setting" = "设置";
+"Motion And Health" = "运动健康";
