@@ -18,4 +18,6 @@
 @property (nonatomic) NSNumber *breed;
 @property (nonatomic) NSNumber *birthday;
 @property (nonatomic) NSNumber *height;
+@property (nonatomic) NSString *area;
+@property (nonatomic) NSString *placeOftenGo;
 @end

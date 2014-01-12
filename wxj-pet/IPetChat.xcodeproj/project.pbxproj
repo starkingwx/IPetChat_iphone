@@ -146,6 +146,10 @@
 		F8CAE7341879975F00EA9F66 /* green_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7301879975F00EA9F66 /* green_block.png */; };
 		F8CAE7351879975F00EA9F66 /* orange_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7311879975F00EA9F66 /* orange_block.png */; };
 		F8CAE7361879975F00EA9F66 /* yellow_block.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7321879975F00EA9F66 /* yellow_block.png */; };
+		F8CAE7391879B41400EA9F66 /* bottom_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7371879B41400EA9F66 /* bottom_bar.png */; };
+		F8CAE73A1879B41400EA9F66 /* bottom_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE7381879B41400EA9F66 /* bottom_bar@2x.png */; };
+		F8CAE73C1879B4C600EA9F66 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CAE73B1879B4C600EA9F66 /* logo.png */; };
+		F8CB9CBA18826BE4009C0EC4 /* PetInfoUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CB9CB918826BE4009C0EC4 /* PetInfoUtil.m */; };
 		F8CC84C0185C84B600B44DDC /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */; };
 		F8CC84C1185C84B600B44DDC /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */; };
 		F8DB1B64186EB34C0010B771 /* PetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F8DB1B63186EB34C0010B771 /* PetInfo.m */; };
@@ -371,6 +375,11 @@
 		F8CAE7301879975F00EA9F66 /* green_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = green_block.png; path = Pictures/green_block.png; sourceTree = "<group>"; };
 		F8CAE7311879975F00EA9F66 /* orange_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange_block.png; path = Pictures/orange_block.png; sourceTree = "<group>"; };
 		F8CAE7321879975F00EA9F66 /* yellow_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellow_block.png; path = Pictures/yellow_block.png; sourceTree = "<group>"; };
+		F8CAE7371879B41400EA9F66 /* bottom_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bottom_bar.png; path = Pictures/bottom_bar.png; sourceTree = "<group>"; };
+		F8CAE7381879B41400EA9F66 /* bottom_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bottom_bar@2x.png"; path = "Pictures/bottom_bar@2x.png"; sourceTree = "<group>"; };
+		F8CAE73B1879B4C600EA9F66 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Pictures/logo.png; sourceTree = "<group>"; };
+		F8CB9CB818826BE4009C0EC4 /* PetInfoUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PetInfoUtil.h; path = Util/PetInfoUtil.h; sourceTree = "<group>"; };
+		F8CB9CB918826BE4009C0EC4 /* PetInfoUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PetInfoUtil.m; path = Util/PetInfoUtil.m; sourceTree = "<group>"; };
 		F8CC84BD185C84B600B44DDC /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		F8CC84BE185C84B600B44DDC /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		F8CC84BF185C84B600B44DDC /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -496,7 +505,10 @@
 				5F8D5AD81837182700743FAA /* img_petstar@2x.png */,
 				B7F9A0DB182B1ECB00756ED3 /* Default.png */,
 				B7F9A0DD182B1ECB00756ED3 /* Default@2x.png */,
+				F8CAE73B1879B4C600EA9F66 /* logo.png */,
 				B7F9A0DF182B1ECB00756ED3 /* Default-568h@2x.png */,
+				F8CAE7371879B41400EA9F66 /* bottom_bar.png */,
+				F8CAE7381879B41400EA9F66 /* bottom_bar@2x.png */,
 				B71A9CE51837403C00B68D10 /* petphoto.png */,
 				B70622BD182B81C3002BDCED /* image.png */,
 			);
@@ -730,6 +742,8 @@
 				F8606D0B1865C007001FF5B0 /* HttpUtils+DeviceServer.m */,
 				F842F343186725F200982B7A /* DeviceManager.h */,
 				F842F344186725F200982B7A /* DeviceManager.m */,
+				F8CB9CB818826BE4009C0EC4 /* PetInfoUtil.h */,
+				F8CB9CB918826BE4009C0EC4 /* PetInfoUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -975,6 +989,9 @@
 				F8CAE7341879975F00EA9F66 /* green_block.png in Resources */,
 				F8CAE7351879975F00EA9F66 /* orange_block.png in Resources */,
 				F8CAE7361879975F00EA9F66 /* yellow_block.png in Resources */,
+				F8CAE7391879B41400EA9F66 /* bottom_bar.png in Resources */,
+				F8CAE73A1879B41400EA9F66 /* bottom_bar@2x.png in Resources */,
+				F8CAE73C1879B4C600EA9F66 /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1044,6 +1061,7 @@
 				F8CAE72C187992AD00EA9F66 /* XMLParser.m in Sources */,
 				F8CAE72D187992AD00EA9F66 /* XMLParserDelegate.m in Sources */,
 				F8CAE72E187992AD00EA9F66 /* PlotChartView.m in Sources */,
+				F8CB9CBA18826BE4009C0EC4 /* PetInfoUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

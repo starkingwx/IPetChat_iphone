@@ -18,4 +18,7 @@
 @synthesize breed;
 @synthesize birthday;
 @synthesize height;
+@synthesize area;
+@synthesize placeOftenGo;
+
 @end
