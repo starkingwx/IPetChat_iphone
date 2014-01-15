@@ -505,12 +505,16 @@
 
 //访问获取宠物详细信息接口，返回的结果
 -(void)getpetuserlistcallback:(NSArray*)args{
-    
+    NSLog(@"getpetuserlistcallback: %@", args);
     
     if ([[args objectAtIndex:0]intValue] == PORTAL_RESULT_GET_PETDETAIL_SUCCESS) {
         NSDictionary *dict = [[NSDictionary alloc]initWithDictionary:[args objectAtIndex:2]];
         NSString *string1 = [[NSString alloc]init];
-        [petdatadic setObject:[dict objectForKey:@"nickname"] forKey:@"昵称"];
+        NSString *nickname = [dict objectForKey:@"nickname"];
+        if (nickname == nil) {
+            nickname = @"";
+        }
+        [petdatadic setObject:nickname forKey:@"昵称"];
         if ([[dict objectForKey:@"sex"]intValue]==0) {
             [petdatadic setObject:@"帅哥" forKey:@"性别"];
         }else{
@@ -524,8 +528,17 @@
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"height"]] forKey:@"身高"];
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"weight"]] forKey:@"体重"];
         
-        [petdatadic setObject:[dict objectForKey:@"district"] forKey:@"城市"];
-        [petdatadic setObject:[dict objectForKey:@"placeoftengo"] forKey:@"常去玩的地方"];
+        NSString *district = [dict objectForKey:DISTRICT];
+        if (district == nil) {
+            district = @"";
+        }
+        [petdatadic setObject:district forKey:@"城市"];
+        
+        NSString *place = [dict objectForKey:PLACEOFTENGO];
+        if (place == nil) {
+            place = @"";
+        }
+        [petdatadic setObject:place forKey:@"常去玩的地方"];
         if ([dict objectForKey:@"avatar"]) {
             [petdatadic setObject:[dict objectForKey:@"avatar"] forKey:@"headphoto"];
      
@@ -657,9 +670,13 @@
         UserBean *user = [[UserManager shareUserManager] userBean];
         PetInfo *petInfo = user.petInfo;
         
+        NSString *breedStr = [petdatadic objectForKey:@"品种"];
+        NSInteger breed = [pettypes indexOfObject:breedStr];
+        
+        NSInteger petsex = [petsexs indexOfObject:[petdatadic objectForKey:@"性别"]];
         
         Enhttpmanager *modifyhttpmanager = [[Enhttpmanager alloc]init];
-        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:petInfo.petId nickname:[petdatadic objectForKey:@"昵称"] sex:[self.lastIndexPath1 row] breed:[self.lastIndexPath row] age:[petdatadic objectForKey:@"生日"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
+        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:[petInfo.petId longValue] nickname:[petdatadic objectForKey:@"昵称"] sex:petsex breed:breed age:[petdatadic objectForKey:@"生日"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
         [modifyhttpmanager release];
     }
 }

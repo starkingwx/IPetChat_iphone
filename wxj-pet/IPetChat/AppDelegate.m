@@ -161,12 +161,23 @@ void uncaughtExceptionHandler(NSException *exception) {
         petInfoBean.petId = [petInfoDic objectForKey:PETID];
         petInfoBean.avatar = [petInfoDic objectForKey:AVATAR];
         petInfoBean.nickname = [petInfoDic objectForKey:NICKNAME];
+        if (petInfoBean.nickname == nil) {
+            petInfoBean.nickname = @"";
+        }
         petInfoBean.sex = [petInfoDic objectForKey:SEX];
         petInfoBean.breed = [petInfoDic objectForKey:BREED];
         petInfoBean.birthday = [petInfoDic objectForKey:BIRTHDAY];
         petInfoBean.height = [petInfoDic objectForKey:HEIGHT];
         petInfoBean.weight = [petInfoDic objectForKey:WEIGHT];
         petInfoBean.deviceno = [petInfoDic objectForKey:DEVICEID];
+        petInfoBean.area = [petInfoDic objectForKey:DISTRICT];
+        if (petInfoBean.area == nil) {
+            petInfoBean.area = @"";
+        }
+        petInfoBean.placeOftenGo = [petInfoDic objectForKey:PLACEOFTENGO];
+        if (petInfoBean.placeOftenGo == nil) {
+            petInfoBean.placeOftenGo = @"";
+        }
         user.petInfo = petInfoBean;
     }
     [[UserManager shareUserManager] setUserBean:user];

@@ -26,7 +26,6 @@
 @synthesize motionScoreLabel;
 @synthesize breedLabel;
 @synthesize ageLabel;
-@synthesize colorLabel;
 @synthesize heightLabel;
 @synthesize weightLabel;
 @synthesize areaLabel;
@@ -101,6 +100,15 @@
                     petBean.height = [petInfo objectForKey:HEIGHT];
                     petBean.weight = [petInfo objectForKey:WEIGHT];
                     petBean.deviceno = [petInfo objectForKey:DEVICEID];
+                    petBean.area = [petInfo objectForKey:DISTRICT];
+                    petBean.placeOftenGo = [petInfo objectForKey:PLACEOFTENGO];
+                    
+                    if (petBean.area == nil) {
+                        petBean.area = @"";
+                    }
+                    if (petBean.placeOftenGo == nil) {
+                        petBean.placeOftenGo = @"";
+                    }
                     
                     UserBean *user = [[UserManager shareUserManager] userBean];
                     user.petInfo = petBean;
@@ -145,7 +153,6 @@
     [self setMotionScoreLabel:nil];
     [self setBreedLabel:nil];
     [self setAgeLabel:nil];
-    [self setColorLabel:nil];
     [self setHeightLabel:nil];
     [self setWeightLabel:nil];
     [self setAreaLabel:nil];

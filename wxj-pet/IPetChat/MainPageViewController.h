@@ -23,7 +23,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *breedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
-@property (strong, nonatomic) IBOutlet UILabel *colorLabel;
 @property (strong, nonatomic) IBOutlet UILabel *heightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *weightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *areaLabel;

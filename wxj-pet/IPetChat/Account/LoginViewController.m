@@ -276,7 +276,16 @@ login_error:
                     petBean.birthday = [petInfo objectForKey:BIRTHDAY];
                     petBean.height = [petInfo objectForKey:HEIGHT];
                     petBean.weight = [petInfo objectForKey:WEIGHT];
+                    petBean.area = [petInfo objectForKey:DISTRICT];
+                    petBean.placeOftenGo = [petInfo objectForKey:PLACEOFTENGO];
                     petBean.deviceno = [petInfo objectForKey:DEVICEID];
+                    
+                    if (petBean.area == nil) {
+                        petBean.area = @"";
+                    }
+                    if (petBean.placeOftenGo == nil) {
+                        petBean.placeOftenGo = @"";
+                    }
                     
                     UserBean *user = [[UserManager shareUserManager] userBean];
                     user.petInfo = petBean;
