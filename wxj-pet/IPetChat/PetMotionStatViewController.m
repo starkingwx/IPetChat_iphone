@@ -13,14 +13,22 @@
 #import "Constant.h"
 #import "PrintObject.h"
 
-@interface PetMotionStatViewController ()
+@interface PetMotionStatViewController () {
+    AsynImageView *_avatarView;
+    NSArray *_bcTitleArray;
+    NSArray *_bcValueArray;
+    NSArray *_bcColorArray;
+    NSArray *_bcLabelColorArray;
+    NSArray *_barChartDataArray;
+}
 @property (nonatomic) NSMutableArray *slices;
 @property (nonatomic) NSArray *sliceColors;
+
 @end
 
 @implementation PetMotionStatViewController
 
-@synthesize avatarImageView;
+@synthesize avatarImageViewContainer;
 @synthesize nicknameLabel;
 @synthesize usageCountLabel;
 @synthesize breedLabel;
@@ -32,6 +40,7 @@
 @synthesize slices;
 @synthesize sliceColors;
 @synthesize piechart;
+@synthesize barChart;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,13 +51,14 @@
         
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Motion And Health", @"") image:[UIImage imageNamed:@"ic_motion"] tag:1];
 
-        self.sliceColors = [NSArray arrayWithObjects:[UIColor colorWithIntegerRed:0 integerGreen:171 integerBlue:223 alpha:1],
-                            [UIColor colorWithIntegerRed:166 integerGreen:206 integerBlue:57 alpha:1],
-                            [UIColor colorWithIntegerRed:254 integerGreen:194 integerBlue:14 alpha:1],
-                            [UIColor colorWithIntegerRed:246 integerGreen:136 integerBlue:32 alpha:1]
+        self.sliceColors = [NSArray arrayWithObjects:BLUE,
+                            GREEN,
+                            YELLOW,
+                            ORANGE
                             ,nil];
         
         self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:52], [NSNumber numberWithInt:35], [NSNumber numberWithInt:10], [NSNumber numberWithInt:3], nil];
+        
     }
     return self;
 }
@@ -121,7 +131,7 @@
 
 - (void)fillPetInfo:(PetInfo *)petInfo {
     if (petInfo) {
-        [self.avatarImageView setImageURL:[NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar]];
+        [_avatarView setImageURL:[NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar]];
         [self.nicknameLabel setText:petInfo.nickname];
         
         [self.breedLabel setText:[PetInfoUtil getBreedByType:petInfo.breed]];
@@ -139,8 +149,12 @@
     self.todayTabBody.hidden = NO;
     self.historyTabBody.hidden = YES;
     
-    [self.avatarImageView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
+    CGRect frame = self.avatarImageViewContainer.frame;
+    _avatarView = [[AsynImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    [self.avatarImageViewContainer addSubview:_avatarView];
+    [_avatarView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
     
+    // pie chart
     [self.piechart setDataSource:self];
     [self.piechart setStartPieAngle:M_PI_2];
     [self.piechart setAnimationSpeed:1.0];
@@ -151,6 +165,31 @@
 //    [self.piechart setPieCenter:CGPointMake(240, 240)];
     [self.piechart setUserInteractionEnabled:NO];
     [self.piechart setLabelShadowColor:[UIColor blackColor]];
+    
+    
+    // bar chart
+    //Set the Shape of the Bars (Rounded or Squared) - Rounded is default
+    [self.barChart setupBarViewShape:BarShapeSquared];
+    
+    //Set the Style of the Bars (Glossy, Matte, or Flat) - Glossy is default
+    [self.barChart setupBarViewStyle:BarStyleFlat];
+    
+    //Set the Drop Shadow of the Bars (Light, Heavy, or None) - Light is default
+    [self.barChart setupBarViewShadow:BarShadowNone];
+    
+    _bcTitleArray = [NSArray arrayWithObjects:@"a", @"b", @"c", @"d", @"e", @"f", nil];
+    _bcValueArray = [NSArray arrayWithObjects:@"0", @"0", @"10", @"22", @"34", @"50", nil];
+    _bcColorArray = [NSArray arrayWithObjects:@"87E317",@"87E317",@"87E317", @"17A9E3", @"E32F17", @"FFE53D", nil];
+    _bcLabelColorArray = [NSArray arrayWithObjects:@"FFFFFF",@"FFFFFF",@"FFFFFF", @"FFFFFF", @"FFFFFF", @"FFFFFF", nil];
+    _barChartDataArray = [barChart createChartDataWithTitles:_bcTitleArray values:_bcValueArray colors:_bcColorArray labelColors:_bcLabelColorArray];
+
+    
+    //Generate the bar chart using the formatted data
+    [self.barChart setDataWithArray:_barChartDataArray
+                      showAxis:DisplayOnlyYAxis
+                     withColor:[UIColor whiteColor]
+       shouldPlotVerticalLines:NO];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,7 +199,7 @@
 }
 
 - (void)viewDidUnload {
-    [self setAvatarImageView:nil];
+    [self setAvatarImageViewContainer:nil];
     [self setNicknameLabel:nil];
     [self setBreedLabel:nil];
     [self setAgeLabel:nil];
@@ -170,6 +209,8 @@
     [self setTodayTabBody:nil];
     [self setHistoryTabBody:nil];
     [self setPiechart:nil];
+    [_avatarView removeFromSuperview];
+    [self setBarChart:nil];
     [super viewDidUnload];
 }
 - (IBAction)selectTodayStat:(id)sender {

@@ -11,7 +11,7 @@
 
 @interface MainPageViewController : UIViewController
 
-@property (strong, nonatomic) IBOutlet AsynImageView *avatarImageView;
+@property (strong, nonatomic) IBOutlet UIView *avatarImageViewContainer;
 
 @property (strong, nonatomic) IBOutlet UILabel *nicknameLabel;
 

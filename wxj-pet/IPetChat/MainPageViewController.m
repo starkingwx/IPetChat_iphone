@@ -13,12 +13,14 @@
 #import "Constant.h"
 #import "PrintObject.h"
 
-@interface MainPageViewController ()
+@interface MainPageViewController () {
+    AsynImageView *_avatarView;
+}
 
 @end
 
 @implementation MainPageViewController
-@synthesize avatarImageView;
+@synthesize avatarImageViewContainer;
 @synthesize nicknameLabel;
 @synthesize powerProgressView;
 @synthesize powerLabel;
@@ -42,7 +44,6 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Home", @"") image:[UIImage imageNamed:@"ic_home"] tag:0];
         
         
-
     }
     return self;
 }
@@ -57,8 +58,9 @@
 
 - (void)fillPetInfo:(PetInfo *)petInfo {
     if (petInfo) {
-//        [self.avatarImageView setImageURL:[NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar]];
-        [self.avatarImageView setImage:[UIImage imageNamed:@"img_petstar"]];
+        [_avatarView setImageURL:[NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar]];
+//        [self.avatarImageViewContainer setImage:[UIImage imageNamed:@"img_petstar"]];
+        self.avatarImageViewContainer.hidden = NO;
         [self.nicknameLabel setText:petInfo.nickname];
         
         [self.breedLabel setText:[PetInfoUtil getBreedByType:petInfo.breed]];
@@ -133,8 +135,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self.avatarImageView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
+
+    CGRect frame = self.avatarImageViewContainer.frame;
+    _avatarView = [[AsynImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+    [self.avatarImageViewContainer addSubview:_avatarView];
+    [_avatarView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
+//    [_avatarView setImage:[UIImage imageNamed:@"img_petstar"]];
 
 }
 
@@ -145,7 +151,7 @@
 }
 
 - (void)viewDidUnload {
-    [self setAvatarImageView:nil];
+    [self setAvatarImageViewContainer:nil];
     [self setNicknameLabel:nil];
     [self setPowerProgressView:nil];
     [self setPowerLabel:nil];
@@ -157,6 +163,7 @@
     [self setWeightLabel:nil];
     [self setAreaLabel:nil];
     [self setPlaceOftenGoLabel:nil];
+    [_avatarView removeFromSuperview];
     [super viewDidUnload];
 }
 @end

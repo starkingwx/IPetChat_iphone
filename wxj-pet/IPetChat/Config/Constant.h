@@ -16,6 +16,13 @@
 #define CHARACTER_FONT          @"ArialMT"
 #define CHARACTER_BOLD_FONT     @"Arial-BoldMT"
 
+
+// color
+#define BLUE                [UIColor colorWithIntegerRed:0 integerGreen:171 integerBlue:223 alpha:1]
+#define GREEN               [UIColor colorWithIntegerRed:166 integerGreen:206 integerBlue:57 alpha:1]
+#define YELLOW              [UIColor colorWithIntegerRed:254 integerGreen:194 integerBlue:14 alpha:1]
+#define ORANGE              [UIColor colorWithIntegerRed:246 integerGreen:136 integerBlue:32 alpha:1]
+
 static NSString *RESULT = @"result";
 
 // Account CONSTANTS
