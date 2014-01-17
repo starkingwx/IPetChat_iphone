@@ -22,6 +22,9 @@
 }
 
 + (NSNumber *)getAgeByBirthday:(NSNumber *)birthday {
+    if (birthday == nil) {
+        return [NSNumber numberWithInt:0];
+    }
     NSDate *today = [NSDate date];
     NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:birthday.doubleValue];
     NSCalendar *calender = [NSCalendar currentCalendar];

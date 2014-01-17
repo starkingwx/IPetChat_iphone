@@ -64,7 +64,12 @@
         [self.nicknameLabel setText:petInfo.nickname];
         
         [self.breedLabel setText:[PetInfoUtil getBreedByType:petInfo.breed]];
-        [self.ageLabel setText:[[PetInfoUtil getAgeByBirthday:petInfo.birthday] stringValue]];
+        NSNumber *month = [PetInfoUtil getAgeByBirthday:petInfo.birthday];
+        if ([month intValue] > 0) {
+            [self.ageLabel setText:[month stringValue]];
+        } else {
+            [self.ageLabel setText:@""];
+        }
         [self.heightLabel setText:[NSString stringWithFormat:@"%@cm", petInfo.height]];
         [self.weightLabel setText:[NSString stringWithFormat:@"%@g", petInfo.weight]];
         [self.areaLabel setText:petInfo.area];

@@ -14,10 +14,13 @@
 #import "CommonToolkit/CommonToolkit.h"
 #import "UserBean+Device.h"
 #import "Constant.h"
+#import "PetInfoUtil.h"
+
 
 #define DEVICE_HEIGHT_DIFF [UIScreen mainScreen].bounds.size.height-480 
 
-@interface SettingViewController ()
+@interface SettingViewController () {
+}
 
 @end
 
@@ -38,6 +41,7 @@
 @synthesize backviewctrl = _backviewctrl;
 @synthesize gallerylistctrl = _gallerylistctrl;
 @synthesize unitlabel = _unitlabel;
+@synthesize datePicker = _datePicker;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -107,6 +111,7 @@
     
     pettypes = [[NSArray alloc]initWithObjects:@"黄金猎犬",@"哈士奇",@"贵宾（泰迪）",@"赛摩耶",@"博美",@"雪纳瑞",@"苏格兰牧羊犬",@"松狮",@"京巴",@"其他犬种", nil];
     petsexs = [[NSArray alloc]initWithObjects:@"帅哥",@"美女", nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -249,18 +254,27 @@
         _petinfo = [[UILabel alloc]initWithFrame:CGRectMake(size.width, 0, 270-size.width, 44)];
         _petinfo.backgroundColor = [UIColor clearColor];
         _petinfo.textAlignment = UITextAlignmentRight;
-        NSMutableString *string;
+       
         if ([rowvalue isEqualToString:@"生日"]) {
-            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"生日"]];
-            [string appendString:@""];
+            NSString *string;
+            NSNumber *month = [PetInfoUtil getAgeByBirthday:[petdatadic objectForKey:@"生日"]];
+            if ([month intValue] > 0) {
+                string = [month stringValue];
+            } else {
+                string = @"";
+            }
+            //            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"生日"]];
+      
             _petinfo.text = string;
-            [string release];
         }else if ([rowvalue isEqualToString:@"身高"]) {
+            NSMutableString *string;
             string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"身高"]];
             [string appendString:@"厘米"];
             _petinfo.text = string;
             [string release];
         }else if ([rowvalue isEqualToString:@"体重"]) {
+            NSMutableString *string;
+
             string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"体重"]];
             [string appendString:@"公斤"];
             _petinfo.text = string;
@@ -326,11 +340,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petinfo = user.petInfo;
+
     if (tableView.tag == 0) {
         if ([indexPath section] == 0) {
             whichback = false;
-            UserBean *user = [[UserManager shareUserManager] userBean];
-            PetInfo *petinfo = user.petInfo;
+            
             if (petinfo && petinfo.petId) {
                 Enhttpmanager *http = [[Enhttpmanager alloc]init];
                 [http getpetdetail:self selector:@selector(getpetuserlistcallback:) petid:[petinfo.petId longValue]];
@@ -345,9 +361,13 @@
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setBool:YES forKey:@"fromset"];
             [defaults synchronize];
-            Enhttpmanager *gallerylisthttp = [[Enhttpmanager alloc]init];
-            [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] petid:26];
-            [gallerylisthttp release];
+            if (petinfo && petinfo.petId) {
+                Enhttpmanager *gallerylisthttp = [[Enhttpmanager alloc]init];
+                [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:user.name petid:[petinfo.petId longValue]];
+                [gallerylisthttp release];
+            } else {
+                [[iToast makeText:@"请先设置宠物资料！"] show];
+            }
         }else if ([indexPath section] == 2){
             [self makeTabBarHidden:YES];
 //            [self.navigationController setNavigationBarHidden:NO animated:NO];
@@ -400,8 +420,15 @@
             [_backviewctrl.view addSubview:_sextype];
         }else if ([rowvalue isEqualToString:@"生日"]) {
             [self addbackviewandsavebtn];
-            _nameinput.text = [petdatadic objectForKey:@"生日"];
-            [_backviewctrl.view addSubview:_nameinput];
+            NSNumber *birthday = [petdatadic objectForKey:@"生日"];
+            NSDate *date = [NSDate date];
+            if (birthday) {
+                NSDate *date = [NSDate dateWithTimeIntervalSince1970:[birthday doubleValue] / 1000];
+            }
+            _datePicker.date = date;
+            [_backviewctrl.view addSubview:_datePicker];
+            
+            
         }else if ([rowvalue isEqualToString:@"身高"]) {
             [self addbackviewandsavebtn];
             _nameinput.text = [petdatadic objectForKey:@"身高"];
@@ -479,8 +506,11 @@
         [petdatadic setObject:[pettypes objectAtIndex:[self.lastIndexPath row]] forKey:@"品种"];
         [_Pettypelist removeFromSuperview];
     }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"生日"]){
-        [petdatadic setObject:_nameinput.text forKey:@"生日"];
-        [_nameinput removeFromSuperview];
+        NSDate *birthday = [_datePicker date];
+        long long msTime =  (long long)([birthday timeIntervalSince1970] * 1000);
+        NSNumber *birthdayMs = [NSNumber numberWithLongLong:msTime];
+        [petdatadic setObject:birthdayMs forKey:@"生日"];
+        [_datePicker removeFromSuperview];
     }else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"身高"]){
         [petdatadic setObject:_nameinput.text forKey:@"身高"];
         [_nameinput removeFromSuperview];
@@ -524,7 +554,7 @@
         [petdatadic setObject:string1 forKey:@"品种"];
         
         NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-        [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"birthday"]] forKey:@"生日"];
+        [petdatadic setObject:[dict objectForKey:@"birthday"] forKey:@"生日"];
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"height"]] forKey:@"身高"];
         [petdatadic setObject:[numberFormatter stringFromNumber:[dict objectForKey:@"weight"]] forKey:@"体重"];
         
@@ -615,8 +645,11 @@
         [[NSFileManager defaultManager] createFileAtPath:imagePath contents:data attributes:nil];
         
     }
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
+    long petid = petInfo == nil ? -1 : [petInfo.petId longValue];
     Enhttpmanager *http = [[Enhttpmanager alloc]init];
-    [http uploadimage:self selector:@selector(logincallback:) username:@"18652970720" petid:26 imagepath:imagePath];
+    [http uploadimage:self selector:@selector(logincallback:) username:user.name petid:petid imagepath:imagePath];
     [http release];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -748,11 +781,15 @@
     if (![[defaults objectForKey:@"whichsave"]isEqualToString:@"品种"]&&![[defaults objectForKey:@"whichsave"]isEqualToString:@"性别"]) {
         _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 280, 36)]autorelease];
         if ([[defaults objectForKey:@"whichsave"]isEqualToString:@"生日"]) {
-            _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 240, 36)]autorelease];
-            _unitlabel = [[[UILabel alloc]initWithFrame:CGRectMake(265, 18, 40, 36)]autorelease];
-            _unitlabel.text = @"月";
-            [_unitlabel setBackgroundColor:[UIColor clearColor]];
-            [_backviewctrl.view addSubview:_unitlabel];
+//            _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 240, 36)]autorelease];
+//            _unitlabel = [[[UILabel alloc]initWithFrame:CGRectMake(265, 18, 40, 36)]autorelease];
+//            _unitlabel.text = @"月";
+//            [_unitlabel setBackgroundColor:[UIColor clearColor]];
+//            [_backviewctrl.view addSubview:_unitlabel];
+            
+            _datePicker = [[[UIDatePicker alloc] initWithFrame:CGRectMake(0, 18, 325, 300)] autorelease];
+//            [_datePicker addTarget:self action:@selector(birthdateChanged:) forControlEvents:UIControlEventValueChanged];
+            [_datePicker setDatePickerMode:UIDatePickerModeDate];
         }
         if ([[defaults objectForKey:@"whichsave"]isEqualToString:@"身高"]) {
             _nameinput = [[[UITextField alloc]initWithFrame:CGRectMake(20, 18, 240, 36)]autorelease];

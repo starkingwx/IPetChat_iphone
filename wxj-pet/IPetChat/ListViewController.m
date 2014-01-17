@@ -11,6 +11,7 @@
 #import "pinyin.h"
 #import "Enhttpmanager.h"
 #import "AsynImageView.h"
+#import "UserBean+Device.h"
 
 #define IMGPATH @"http://www.segopet.com/segoimg/"
 
@@ -52,19 +53,21 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
     if (stylenum == 0) {
-        [httpmanager getrecommendpets:self selector:@selector(getrecommendpetsCallback:) username:@"18652970720"];
+      
+        [httpmanager getrecommendpets:self selector:@selector(getrecommendpetsCallback:) username:user.name];
     }
     else if (stylenum == 1) {
       //[httpmanager getnearbypets:self selector:@selector(getnearbypetsCallback:) longitude:1.0f latitude:1.0f];
     }
     else if (stylenum == 2) {
-        [httpmanager getconcernpets:self selector:@selector(getconcernpetsCallback:) username:@"18652970720"];
+        [httpmanager getconcernpets:self selector:@selector(getconcernpetsCallback:) username:user.name];
     }
     else {
-        [httpmanager getleavemsg:self selector:@selector(getleavemsgCallback:) username:@"18652970720" petid:26];
+        [httpmanager getleavemsg:self selector:@selector(getleavemsgCallback:) username:user.name petid:[petInfo.petId longValue]];
     }
     [httpmanager release];
     

@@ -135,7 +135,12 @@
         [self.nicknameLabel setText:petInfo.nickname];
         
         [self.breedLabel setText:[PetInfoUtil getBreedByType:petInfo.breed]];
-        [self.ageLabel setText:[[PetInfoUtil getAgeByBirthday:petInfo.birthday] stringValue]];
+        NSNumber *month = [PetInfoUtil getAgeByBirthday:petInfo.birthday];
+        if ([month intValue] > 0) {
+            [self.ageLabel setText:[month stringValue]];
+        } else {
+            [self.ageLabel setText:@""];
+        }
         [self.heightLabel setText:[NSString stringWithFormat:@"%@cm", petInfo.height]];
         [self.weightLabel setText:[NSString stringWithFormat:@"%@g", petInfo.weight]];
     }
@@ -178,8 +183,8 @@
     [self.barChart setupBarViewShadow:BarShadowNone];
     
     _bcTitleArray = [NSArray arrayWithObjects:@"a", @"b", @"c", @"d", @"e", @"f", nil];
-    _bcValueArray = [NSArray arrayWithObjects:@"0", @"0", @"10", @"22", @"34", @"50", nil];
-    _bcColorArray = [NSArray arrayWithObjects:@"87E317",@"87E317",@"87E317", @"17A9E3", @"E32F17", @"FFE53D", nil];
+    _bcValueArray = [NSArray arrayWithObjects:@"10", @"0", @"10", @"22", @"34", @"50", nil];
+    _bcColorArray = [NSArray arrayWithObjects:BLUE_VALUE, BLUE_VALUE, GREEN_VALUE, YELLOW_VALUE, ORANGE_VALUE, GREEN_VALUE, nil];
     _bcLabelColorArray = [NSArray arrayWithObjects:@"FFFFFF",@"FFFFFF",@"FFFFFF", @"FFFFFF", @"FFFFFF", @"FFFFFF", nil];
     _barChartDataArray = [barChart createChartDataWithTitles:_bcTitleArray values:_bcValueArray colors:_bcColorArray labelColors:_bcLabelColorArray];
 

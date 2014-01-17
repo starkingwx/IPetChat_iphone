@@ -23,6 +23,11 @@
 #define YELLOW              [UIColor colorWithIntegerRed:254 integerGreen:194 integerBlue:14 alpha:1]
 #define ORANGE              [UIColor colorWithIntegerRed:246 integerGreen:136 integerBlue:32 alpha:1]
 
+#define BLUE_VALUE          @"00abdf"
+#define GREEN_VALUE         @"a6ce39"
+#define YELLOW_VALUE        @"fec20e"
+#define ORANGE_VALUE        @"f68820"
+
 static NSString *RESULT = @"result";
 
 // Account CONSTANTS

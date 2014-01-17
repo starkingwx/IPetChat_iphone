@@ -10,6 +10,7 @@
 #import "Enhttpmanager.h"
 #import "QuartzCore/CALayer.h"
 #import "GalleryViewController.h"
+#import "UserBean+Device.h"
 
 #define IMGPATH @"http://www.segopet.com/segoimg/"
 
@@ -313,8 +314,11 @@
 
 //点击关注宠物详细信息页面中的取消关注按钮触发的操作
 - (void)unconcernpetclick {
+
+    UserBean *user = [[UserManager shareUserManager] userBean];
+  
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
-    [httpmanager unconcernpets:self selector:@selector(unconcernpetsCallback:) username:@"18652970720" petid:[[self.contentDic objectForKey:@"petid"] longValue]];
+    [httpmanager unconcernpets:self selector:@selector(unconcernpetsCallback:) username:user.name petid:[[self.contentDic objectForKey:@"petid"] longValue]];
     [httpmanager release];
     
     [self.moreactionView removeFromSuperview];
@@ -323,8 +327,9 @@
 
 //点击关注宠物详细信息页面中的加入黑名单按钮触发的操作
 - (void)addblacklistclick {
+    UserBean *user = [[UserManager shareUserManager] userBean];
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
-    [httpmanager addblacklist:self selector:@selector(concernpetsCallback:) username:@"18652970720" petid:[[self.contentDic objectForKey:@"petid"] longValue]];
+    [httpmanager addblacklist:self selector:@selector(concernpetsCallback:) username:user.name petid:[[self.contentDic objectForKey:@"petid"] longValue]];
     [httpmanager release];
     
     [self.moreactionView removeFromSuperview];
@@ -350,8 +355,9 @@
 }
 
 - (IBAction)concernpetButtonClick:(id)sender {
+    UserBean *user = [[UserManager shareUserManager] userBean];
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
-    [httpmanager concernpets:self selector:@selector(concernpetsCallback:) username:@"18652970720" petid:[[self.contentDic objectForKey:@"petid"] longValue]];
+    [httpmanager concernpets:self selector:@selector(concernpetsCallback:) username:user.name petid:[[self.contentDic objectForKey:@"petid"] longValue]];
     [httpmanager release];
 }
 

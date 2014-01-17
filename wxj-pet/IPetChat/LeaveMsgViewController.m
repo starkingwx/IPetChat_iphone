@@ -10,6 +10,7 @@
 #import "Enhttpmanager.h"
 #import "UIBubbleTableView.h"
 #import "NSBubbleData.h"
+#import "UserBean+Device.h"
 
 #define IMGPATH @"http://www.segopet.com/segoimg/"
 #define DEVICE_HEIGHT_DIFF [UIScreen mainScreen].bounds.size.height-480
@@ -90,13 +91,15 @@
 
 //访问获取留言详情接口返回的信息
 - (void)getleavemsgdetailCallback:(NSArray*)args {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    
     if ([[args objectAtIndex:0] integerValue] == PORTAL_RESULT_GET_LEAVEMSG_DETAIL_SUCCESS) {
         if ([[[args objectAtIndex:2] objectForKey:@"result"] integerValue] == 0) {
             NSArray *array = [[args objectAtIndex:2] objectForKey:@"list"];
             NSMutableArray *bubblearray = [NSMutableArray array];
             for (int i = 0; i < [array count]; i++) {
                 NSDictionary *dic = [array objectAtIndex:i];
-                [bubblearray addObject:[NSBubbleData dataWithText:[dic objectForKey:@"content"] andDate:[NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"leave_timestamp"] integerValue]] andType:([[dic objectForKey:@"author"] isEqualToString:@"18652970720"])?BubbleTypeMine:BubbleTypeSomeoneElse andAvatar:[IMGPATH stringByAppendingString:[dic objectForKey:@"leaver_avatar"]]]];
+                [bubblearray addObject:[NSBubbleData dataWithText:[dic objectForKey:@"content"] andDate:[NSDate dateWithTimeIntervalSince1970:[[dic objectForKey:@"leave_timestamp"] integerValue]] andType:([[dic objectForKey:@"author"] isEqualToString:user.name])?BubbleTypeMine:BubbleTypeSomeoneElse andAvatar:[IMGPATH stringByAppendingString:[dic objectForKey:@"leaver_avatar"]]]];
                 
             }
             self.bubbleData = bubblearray;
@@ -110,9 +113,11 @@
 
 //访问回复留言接口返回的信息
 - (void)replymsgCallback:(NSArray*)args {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
     if ([[args objectAtIndex:0] integerValue] == PORTAL_RESULT_REPLY_MSG_SUCCESS) {
         if ([[[args objectAtIndex:2] objectForKey:@"result"] integerValue] == 0) {
-            [self.bubbleData addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:@"c2cea737-da41-4694-8a0d-7b1416fa5467"]]];
+            [self.bubbleData addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:petInfo.avatar]]];
             [self.bubbleTable reloadData];
         }
         else {
@@ -141,16 +146,18 @@
 
 //访问留言接口返回的信息
 - (void)leavemsgCallback:(NSArray*)args {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
     if ([[args objectAtIndex:0] integerValue] == PORTAL_RESULT_LEAVE_MSG_SUCCESS) {
         if ([[[args objectAtIndex:2] objectForKey:@"result"] integerValue] == 0) {
             if (!self.bubbleData) {
                 NSMutableArray *bubblearray = [NSMutableArray array];
-                [bubblearray addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:@"c2cea737-da41-4694-8a0d-7b1416fa5467"]]];
+                [bubblearray addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:petInfo.avatar]]];
                 self.bubbleData = bubblearray;
                 [self.bubbleTable reloadData];
             }
             else {
-                [self.bubbleData addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:@"c2cea737-da41-4694-8a0d-7b1416fa5467"]]];
+                [self.bubbleData addObject:[NSBubbleData dataWithText:self.textfield.text andDate:[NSDate dateWithTimeIntervalSinceNow:0] andType:BubbleTypeMine andAvatar:[IMGPATH stringByAppendingString:petInfo.avatar]]];
                 [self.bubbleTable reloadData];
             }
         }
@@ -241,14 +248,15 @@
 
 //点击发送留言按钮触发的操作
 - (IBAction)sendtext:(id)sender {
+    UserBean *user = [[UserManager shareUserManager] userBean];
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
     // reply msg
     if (self.type == 0) {
-        [httpmanager replymsg:self selector:@selector(replymsgCallback:) username:@"18652970720" content:self.textfield.text msgid:self.msgID];
+        [httpmanager replymsg:self selector:@selector(replymsgCallback:) username:user.name content:self.textfield.text msgid:self.msgID];
     }
     // leave msg
     else {
-        [httpmanager leavemsg:self selector:@selector(leavemsgCallback:) username:@"18652970720" petid:self.petID content:self.textfield.text];
+        [httpmanager leavemsg:self selector:@selector(leavemsgCallback:) username:user.name petid:self.petID content:self.textfield.text];
     }
     [httpmanager release];
 }

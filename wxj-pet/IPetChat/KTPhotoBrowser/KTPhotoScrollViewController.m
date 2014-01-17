@@ -11,6 +11,7 @@
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoView.h"
 #import "Enhttpmanager.h"
+#import "UserBean+Device.h"
 
 const CGFloat ktkDefaultPortraitToolbarHeight   = 44;
 const CGFloat ktkDefaultLandscapeToolbarHeight  = 33;
@@ -254,10 +255,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 -(void)modifygallerycallback:(NSArray*)args{
     NSString *msg = @"操作失败";
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
     if ([[args objectAtIndex:0]intValue] == PORTAL_RESULT_MODIFY_GALLERYINFO_SUCCESS) {
         if ([[[args objectAtIndex:2] objectForKey:@"result"]intValue] == 0) {
             Enhttpmanager *gallerylisthttp = [[Enhttpmanager alloc]init];
-            [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] petid:26];
+            [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] petid:[petInfo.petId longValue]];
             [gallerylisthttp release];
             msg = @"操作成功";
         }

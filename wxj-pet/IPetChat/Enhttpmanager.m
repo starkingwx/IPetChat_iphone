@@ -447,7 +447,7 @@ typedef enum {
     
 }
 
--(void)ModifyPetinfo:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid nickname:(NSString*)nickname sex:(int)sex breed:(int)breed age:(NSString*)age height:(NSString*)height weight:(NSString*)weight district:(NSString*)district placeoftengo:(NSString*)placeoftengo{
+-(void)ModifyPetinfo:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid nickname:(NSString*)nickname sex:(int)sex breed:(int)breed age:(NSNumber*)age height:(NSString*)height weight:(NSString*)weight district:(NSString*)district placeoftengo:(NSString*)placeoftengo{
     timeout_timer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(handleTimeOut:) userInfo:nil repeats:NO];
     portal_result_callback_object = callback_object;
     portal_result_callback_selector = callback_selector;
@@ -458,7 +458,7 @@ typedef enum {
     current_command = PORTAL_COMMAND_MODIFY_PETINFO;
     stage = PORTAL_STAGE_MODIFY_PETINFO;
     
-    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:nickname,@"nickname",[NSString stringWithFormat:@"%d",sex],@"sex",[NSString stringWithFormat:@"%d",breed],@"breed",age,@"birthday",height,@"height",weight,@"weight",district,@"district",placeoftengo,@"placeoftengo",nil];
+    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:nickname,@"nickname",[NSString stringWithFormat:@"%d",sex],@"sex",[NSString stringWithFormat:@"%d",breed],@"breed",[age stringValue],@"birthday",height,@"height",weight,@"weight",district,@"district",placeoftengo,@"placeoftengo",nil];
     if (petid != 0) {
         [paramedict setObject:[[NSString alloc]initWithFormat:@"%ld",petid] forKey:@"petid"];
     }
@@ -825,7 +825,9 @@ typedef enum {
     NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     
 	[post_dict setObject:username forKey:@"username"];
-    [post_dict setObject:[NSNumber numberWithUnsignedLong:petid] forKey:@"petid"];
+    if (petid != -1) {
+        [post_dict setObject:[NSNumber numberWithUnsignedLong:petid] forKey:@"petid"];
+    }
     [post_dict setObject:imageData forKey:@"avatar_file"];
     
     filename = @"avatar_file";

@@ -37,6 +37,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *unitlabel;
 @property (retain, nonatomic) IBOutlet UIViewController *petinfotableview;
 @property (retain, nonatomic) IBOutlet UIViewController *backviewctrl;
+@property (retain, nonatomic) UIDatePicker *datePicker;
 @property (retain, nonatomic) GalleryViewController *gallerylistctrl;
 
 - (void)addbackviewandsavebtn;

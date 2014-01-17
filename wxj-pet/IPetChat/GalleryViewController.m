@@ -9,6 +9,7 @@
 #import "GalleryViewController.h"
 #import "Enhttpmanager.h"
 #import "SDWebImageRootViewController.h"
+#import "UserBean+Device.h"
 
 #define server_path_image   "http://www.segopet.com/segoimg/"
 
@@ -663,8 +664,10 @@
 
 //访问修改相册信息接口返回的结果
 -(void)modifygallerycallback:(NSArray*)args{
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
     Enhttpmanager *gallerylisthttp = [[Enhttpmanager alloc]init];
-    [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] petid:26];
+    [gallerylisthttp getgallerylist:self selector:@selector(getgallerylist:) username:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"] petid:[[petInfo petId] longValue]];
     [gallerylisthttp release];
 }
 
