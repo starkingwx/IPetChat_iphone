@@ -137,7 +137,14 @@
 
 
 - (void)locatePet:(id)sender {
-    // todo: jump to location map
+    //jump to location map
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = user.petInfo;
+    if (petInfo == nil || petInfo.petId == nil) {
+        [[iToast makeText:@"请先设置宠物信息！"] show];
+        return;
+    }
+    
     [self.navigationController pushViewController:[[LocationMapViewController alloc] initWithNibName:@"LocationMapViewController" bundle:nil] animated:YES];
     
 }

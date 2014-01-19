@@ -157,6 +157,7 @@ void uncaughtExceptionHandler(NSException *exception) {
     UserBean *user = [[UserBean alloc] init];
     user.name = [userDefaults objectForKey:USERNAME];
     user.userKey = [userDefaults objectForKey:USERKEY];
+    user.devicePassword = [userDefaults objectForKey:DEVICEPWD];
     NSString *jsonPetInfo = [userDefaults objectForKey:PETINFO];
     if (jsonPetInfo) {
         NSDictionary *petInfoDic = [jsonPetInfo objectFromJSONString];

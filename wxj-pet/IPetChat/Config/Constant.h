@@ -100,7 +100,7 @@ static NSString *WEIGHT = @"weight";
 static NSString *DISTRICT = @"district";
 static NSString *PLACEOFTENGO = @"placeoftengo";
 static NSString *DEVICEID = @"deviceid";
-
+static NSString *DEVICEPWD = @"devicepwd";
 
 // Other
 static NSString *LIST = @"list";

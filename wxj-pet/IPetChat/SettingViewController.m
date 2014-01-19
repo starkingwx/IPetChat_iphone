@@ -15,7 +15,7 @@
 #import "UserBean+Device.h"
 #import "Constant.h"
 #import "PetInfoUtil.h"
-
+#import "DeviceBindViewController.h"
 
 #define DEVICE_HEIGHT_DIFF [UIScreen mainScreen].bounds.size.height-480 
 
@@ -75,7 +75,7 @@
     [super viewDidLoad];
 
     self.tableView.scrollEnabled = FALSE;
-    self.contentArray = [NSArray arrayWithObjects:@"宠物档案", @"相册", @"账号", @"黑名单管理",@"更多", nil];
+    self.contentArray = [NSArray arrayWithObjects:@"宠物档案", @"相册", @"账号", @"黑名单管理",@"设备绑定", nil];
     
     NSArray *Arr0 = [[NSArray alloc] initWithObjects:@"昵称",@"性别",   nil];
     NSArray *Arr1 = [[NSArray alloc] initWithObjects:@"品种", @"生日",@"身高", @"体重", nil];
@@ -264,7 +264,6 @@
             } else {
                 string = @"";
             }
-            //            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"生日"]];
       
             _petinfo.text = [NSString stringWithFormat:@"%@月", string];
         }else if ([rowvalue isEqualToString:@"身高"]) {
@@ -382,6 +381,13 @@
             Enhttpmanager *blacklisthttp = [[Enhttpmanager alloc]init];
             [blacklisthttp getblacklist:self selector:@selector(getblacklistcallback:) username:[defaults objectForKey:@"username"]];
             [blacklisthttp release];
+        } else if ([indexPath section] == 4) {
+            // bind device
+            if ([PetInfoUtil isPetInfoSet]) {
+                [self.navigationController pushViewController:[[DeviceBindViewController alloc] initWithNibName:@"DeviceBindViewController" bundle:nil] animated:YES];
+            } else {
+                [[iToast makeText:@"请先设置宠物资料！"] show];
+            }
         }
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }else if (tableView.tag == 1){

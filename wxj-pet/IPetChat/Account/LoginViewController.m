@@ -287,13 +287,24 @@ login_error:
                         petBean.placeOftenGo = @"";
                     }
                     
+                    NSString *devicePwd = [petInfo objectForKey:DEVICEPWD];
+                  
+                    
                     UserBean *user = [[UserManager shareUserManager] userBean];
+                 
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    if (devicePwd != nil) {
+                        user.devicePassword = devicePwd;
+                        [userDefaults setObject:user.devicePassword forKey:DEVICEPWD];
+                    }
+                    
                     user.petInfo = petBean;
                     NSData *petInfoData = [PrintObject getJSON:petBean options:NSJSONWritingPrettyPrinted error:nil];
                     NSString *jsonPetInfo = [[NSString alloc] initWithData:petInfoData encoding:NSUTF8StringEncoding];
                     
-                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                   
                     [userDefaults setObject:jsonPetInfo forKey:PETINFO];
+                  
                 }
             }
         }

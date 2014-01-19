@@ -8,6 +8,7 @@
 
 #import "CustomAnnotationView.h"
 #import "CustomCalloutView.h"
+#import "AsynImageView.h"
 
 #define kWidth  150.f
 #define kHeight 60.f
@@ -15,13 +16,15 @@
 #define kHoriMargin 5.f
 #define kVertMargin 5.f
 
-#define kPortraitWidth  50.f
-#define kPortraitHeight 50.f
+#define kPortraitWidth  30.f
+#define kPortraitHeight 30.f
 
 #define kCalloutWidth   200.0
 #define kCalloutHeight  70.0
 
-@interface CustomAnnotationView ()
+@interface CustomAnnotationView () {
+    NSString *_name;
+}
 
 @property (nonatomic, strong) UIImageView *portraitImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -33,7 +36,7 @@
 @synthesize calloutView;
 @synthesize portraitImageView   = _portraitImageView;
 @synthesize nameLabel           = _nameLabel;
-
+@synthesize avatarUrl = _avatarUrl;
 #pragma mark - Handle Action
 
 - (void)btnAction
@@ -52,6 +55,7 @@
 
 - (void)setName:(NSString *)name
 {
+    _name = name;
     self.nameLabel.text = name;
 }
 
@@ -86,19 +90,16 @@
             self.calloutView.center = CGPointMake(CGRectGetWidth(self.bounds) / 2.f + self.calloutOffset.x,
                                                   -CGRectGetHeight(self.calloutView.bounds) / 2.f + self.calloutOffset.y);
             
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            AsynImageView *btn = [[AsynImageView alloc] init];
             btn.frame = CGRectMake(10, 10, 40, 40);
-            [btn setTitle:@"Test" forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
-            [btn setBackgroundColor:[UIColor whiteColor]];
-            [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+            [btn setImageURL:_avatarUrl];
             
             [self.calloutView addSubview:btn];
             
             UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 100, 30)];
             name.backgroundColor = [UIColor clearColor];
             name.textColor = [UIColor whiteColor];
-            name.text = @"Hello Amap!";
+            name.text = _name;
             [self.calloutView addSubview:name];
         }
         
@@ -135,12 +136,12 @@
     
     if (self)
     {
-        self.bounds = CGRectMake(0.f, 0.f, kWidth, kHeight);
+        self.bounds = CGRectMake(0.f, 0.f, kPortraitWidth, kPortraitHeight);
         
-        self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = [UIColor clearColor];
         
         /* Create portrait image view and add to view hierarchy. */
-        self.portraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kHoriMargin, kVertMargin, kPortraitWidth, kPortraitHeight)];
+        self.portraitImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kPortraitWidth, kPortraitHeight)];
         [self addSubview:self.portraitImageView];
         
         /* Create name label. */
@@ -152,7 +153,7 @@
         self.nameLabel.textAlignment    = UITextAlignmentCenter;
         self.nameLabel.textColor        = [UIColor whiteColor];
         self.nameLabel.font             = [UIFont systemFontOfSize:15.f];
-        [self addSubview:self.nameLabel];
+//        [self addSubview:self.nameLabel];
     }
     
     return self;

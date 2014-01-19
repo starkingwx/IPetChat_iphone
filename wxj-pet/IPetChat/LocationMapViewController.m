@@ -9,6 +9,7 @@
 #import "LocationMapViewController.h"
 #import "UserBean+Device.h"
 #import "CustomAnnotationView.h"
+#import "UrlConfig.h"
 
 @interface LocationMapViewController () {
     MAPointAnnotation *_petLoc;
@@ -34,6 +35,7 @@
         _petLoc.coordinate = CLLocationCoordinate2DMake(32.0586, 118.7490);
         if (petInfo && petInfo.nickname) {
             _petLoc.title = petInfo.nickname;
+            _petLoc.subtitle = [NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar];
         }
     }
     return self;
@@ -99,6 +101,7 @@
         
         annotationView.portrait = [UIImage imageNamed:@"ic_dog_annotation"];
         annotationView.name     = annotation.title;
+        annotationView.avatarUrl = [annotation subtitle];
         return annotationView;
     }
     

@@ -25,6 +25,7 @@ const static NSString *MAMapAPIKey = @"88c4c1b8e85d0d7d0fb45175636f2dfd";
 
 #define THIRD_LOGIN_URL             [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/thirdlogin"]
 #define GET_PET_LIST_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/getpets"]
+#define BIND_DEVICE_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/binddevice"]
 
 
 

@@ -109,9 +109,11 @@
 		F8606D1C1865D0FD001FF5B0 /* ArchiveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1B1865D0FD001FF5B0 /* ArchiveOperation.m */; };
 		F8606D1F1865D2CA001FF5B0 /* WhereCond.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1E1865D2CA001FF5B0 /* WhereCond.m */; };
 		F8606D221865D979001FF5B0 /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D211865D979001FF5B0 /* Operation.m */; };
-		F8C98DE7188BD94200D1E069 /* ic_dog_annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */; };
 		F8C98DEB188BD9BD00D1E069 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */; };
 		F8C98DEE188BDA6300D1E069 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C98DED188BDA6300D1E069 /* CustomCalloutView.m */; };
+		F8C98DF0188BF98000D1E069 /* ic_dog_annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C98DEF188BF98000D1E069 /* ic_dog_annotation.png */; };
+		F8C98DF4188C00F500D1E069 /* DeviceBindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C98DF2188C00F500D1E069 /* DeviceBindViewController.m */; };
+		F8C98DF5188C00F500D1E069 /* DeviceBindViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C98DF3188C00F500D1E069 /* DeviceBindViewController.xib */; };
 		F8C9D9A0185D5A4400643F06 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */; };
 		F8C9D9A2185D5A6D00643F06 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9A1185D5A6D00643F06 /* CFNetwork.framework */; };
 		F8C9D9A4185D5A9F00643F06 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9A3185D5A9F00643F06 /* CoreText.framework */; };
@@ -338,11 +340,14 @@
 		F8606D1E1865D2CA001FF5B0 /* WhereCond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WhereCond.m; path = Beans/WhereCond.m; sourceTree = "<group>"; };
 		F8606D201865D979001FF5B0 /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Beans/Operation.h; sourceTree = "<group>"; };
 		F8606D211865D979001FF5B0 /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Operation.m; path = Beans/Operation.m; sourceTree = "<group>"; };
-		F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_dog_annotation.png; path = Pictures/ic_dog_annotation.png; sourceTree = "<group>"; };
 		F8C98DE9188BD9BD00D1E069 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
 		F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		F8C98DEC188BDA6300D1E069 /* CustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
 		F8C98DED188BDA6300D1E069 /* CustomCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
+		F8C98DEF188BF98000D1E069 /* ic_dog_annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_dog_annotation.png; path = Pictures/ic_dog_annotation.png; sourceTree = "<group>"; };
+		F8C98DF1188C00F500D1E069 /* DeviceBindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceBindViewController.h; sourceTree = "<group>"; };
+		F8C98DF2188C00F500D1E069 /* DeviceBindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceBindViewController.m; sourceTree = "<group>"; };
+		F8C98DF3188C00F500D1E069 /* DeviceBindViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceBindViewController.xib; sourceTree = "<group>"; };
 		F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F8C9D9A1185D5A6D00643F06 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F8C9D9A3185D5A9F00643F06 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -496,7 +501,7 @@
 		B71A9CE418373FE300B68D10 /* picture */ = {
 			isa = PBXGroup;
 			children = (
-				F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */,
+				F8C98DEF188BF98000D1E069 /* ic_dog_annotation.png */,
 				F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */,
 				F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */,
 				F8E1D79E18785FC6009A02C6 /* ic_tab_community_unselected.png */,
@@ -621,7 +626,6 @@
 		B7F9A0BD182B1ECB00756ED3 = {
 			isa = PBXGroup;
 			children = (
-				F8C98DE8188BD9BD00D1E069 /* customview */,
 				B7F9A0CF182B1ECB00756ED3 /* IPetChat */,
 				B7F9A0C8182B1ECB00756ED3 /* Frameworks */,
 				B7F9A0C7182B1ECB00756ED3 /* Products */,
@@ -671,6 +675,7 @@
 		B7F9A0CF182B1ECB00756ED3 /* IPetChat */ = {
 			isa = PBXGroup;
 			children = (
+				F8C98DE8188BD9BD00D1E069 /* customview */,
 				F8D2E0D21882E69F00A8D62D /* XYPieChart */,
 				F8CAE70B187992AD00EA9F66 /* BarChart Library */,
 				F8E1D7891877FFBB009A02C6 /* MHTabBarController */,
@@ -725,6 +730,9 @@
 				F8CAE702187947E400EA9F66 /* PetMotionStatViewController.xib */,
 				F8F32458188BA82500B82A97 /* LocationMapViewController.h */,
 				F8F32459188BA82500B82A97 /* LocationMapViewController.m */,
+				F8C98DF1188C00F500D1E069 /* DeviceBindViewController.h */,
+				F8C98DF2188C00F500D1E069 /* DeviceBindViewController.m */,
+				F8C98DF3188C00F500D1E069 /* DeviceBindViewController.xib */,
 			);
 			path = IPetChat;
 			sourceTree = "<group>";
@@ -836,8 +844,7 @@
 				F8C98DE9188BD9BD00D1E069 /* CustomAnnotationView.h */,
 				F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */,
 			);
-			name = customview;
-			path = IPetChat/customview;
+			path = customview;
 			sourceTree = "<group>";
 		};
 		F8CAE70B187992AD00EA9F66 /* BarChart Library */ = {
@@ -1069,7 +1076,8 @@
 				F8D2E0DC1882EBDE00A8D62D /* ic_motion.png in Resources */,
 				F8D2E0DD1882EBDE00A8D62D /* ic_motion@2x.png in Resources */,
 				F8F32460188BA8F000B82A97 /* AMap.bundle in Resources */,
-				F8C98DE7188BD94200D1E069 /* ic_dog_annotation.png in Resources */,
+				F8C98DF0188BF98000D1E069 /* ic_dog_annotation.png in Resources */,
+				F8C98DF5188C00F500D1E069 /* DeviceBindViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1153,7 @@
 				F8F32467188BBDCA00B82A97 /* BaseMapViewController.m in Sources */,
 				F8C98DEB188BD9BD00D1E069 /* CustomAnnotationView.m in Sources */,
 				F8C98DEE188BDA6300D1E069 /* CustomCalloutView.m in Sources */,
+				F8C98DF4188C00F500D1E069 /* DeviceBindViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

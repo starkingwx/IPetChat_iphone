@@ -12,4 +12,9 @@
 
 + (NSString *)getBreedByType:(NSNumber *)type;
 + (NSNumber *)getAgeByBirthday:(NSNumber *)birthday;
+
+/**
+ * Whether user has set pet info
+ */
++ (BOOL)isPetInfoSet;
 @end

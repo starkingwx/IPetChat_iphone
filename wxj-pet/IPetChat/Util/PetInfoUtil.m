@@ -7,7 +7,7 @@
 //
 
 #import "PetInfoUtil.h"
-
+#import "UserBean+Device.h"
 
 @implementation PetInfoUtil
 
@@ -31,6 +31,15 @@
     NSDateComponents *comps = [calender components:NSMonthCalendarUnit fromDate:birthDate toDate:today options:0];
     NSNumber *ret = [NSNumber numberWithInt:comps.month];
     return ret;
+}
+
++ (BOOL)isPetInfoSet {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = user.petInfo;
+    if (petInfo == nil || petInfo.petId == nil) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

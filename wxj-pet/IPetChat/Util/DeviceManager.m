@@ -87,7 +87,8 @@ static DeviceManager *instance;
 }
 
 - (void)startTimeSync {
-    _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(syncTime) userInfo:nil repeats:YES];
+    [self syncTime];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(syncTime) userInfo:nil repeats:YES];
 }
 
 - (void)stopTimeSync {

@@ -16,4 +16,5 @@
 
 @property (nonatomic, strong) UIView *calloutView;
 
+@property (nonatomic, strong) NSString *avatarUrl;
 @end
