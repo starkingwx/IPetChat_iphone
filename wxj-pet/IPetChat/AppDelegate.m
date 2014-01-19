@@ -16,6 +16,7 @@
 #import "DeviceManager.h"
 #import "UserBean+Device.h"
 #import "Constant.h"
+#import <MAMapKit/MAMapKit.h>
 
 void uncaughtExceptionHandler(NSException *exception) {
     NSLog(@"CRASH: %@", exception);
@@ -51,6 +52,8 @@ void uncaughtExceptionHandler(NSException *exception) {
     
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:kAppKey];
+    
+    [MAMapServices sharedServices].apiKey = (NSString *)MAMapAPIKey;
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.

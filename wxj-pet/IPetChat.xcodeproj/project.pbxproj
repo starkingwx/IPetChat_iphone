@@ -109,6 +109,9 @@
 		F8606D1C1865D0FD001FF5B0 /* ArchiveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1B1865D0FD001FF5B0 /* ArchiveOperation.m */; };
 		F8606D1F1865D2CA001FF5B0 /* WhereCond.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D1E1865D2CA001FF5B0 /* WhereCond.m */; };
 		F8606D221865D979001FF5B0 /* Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D211865D979001FF5B0 /* Operation.m */; };
+		F8C98DE7188BD94200D1E069 /* ic_dog_annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */; };
+		F8C98DEB188BD9BD00D1E069 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */; };
+		F8C98DEE188BDA6300D1E069 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C98DED188BDA6300D1E069 /* CustomCalloutView.m */; };
 		F8C9D9A0185D5A4400643F06 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */; };
 		F8C9D9A2185D5A6D00643F06 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9A1185D5A6D00643F06 /* CFNetwork.framework */; };
 		F8C9D9A4185D5A9F00643F06 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C9D9A3185D5A9F00643F06 /* CoreText.framework */; };
@@ -173,6 +176,12 @@
 		F8E1D79D18785B4A009A02C6 /* MainPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8E1D79B18785B49009A02C6 /* MainPageViewController.xib */; };
 		F8E1D7A018785FC7009A02C6 /* ic_tab_community_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E1D79E18785FC6009A02C6 /* ic_tab_community_unselected.png */; };
 		F8E1D7A118785FC7009A02C6 /* ic_tab_settings_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E1D79F18785FC6009A02C6 /* ic_tab_settings_unselected.png */; };
+		F8F3245B188BA82500B82A97 /* LocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F32459188BA82500B82A97 /* LocationMapViewController.m */; };
+		F8F3245E188BA8BE00B82A97 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F3245D188BA8BE00B82A97 /* MAMapKit.framework */; };
+		F8F32460188BA8F000B82A97 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8F3245F188BA8F000B82A97 /* AMap.bundle */; };
+		F8F32462188BA93500B82A97 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F32461188BA93500B82A97 /* CoreLocation.framework */; };
+		F8F32464188BA95C00B82A97 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F32463188BA95C00B82A97 /* OpenGLES.framework */; };
+		F8F32467188BBDCA00B82A97 /* BaseMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F32466188BBDC900B82A97 /* BaseMapViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -329,6 +338,11 @@
 		F8606D1E1865D2CA001FF5B0 /* WhereCond.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WhereCond.m; path = Beans/WhereCond.m; sourceTree = "<group>"; };
 		F8606D201865D979001FF5B0 /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Beans/Operation.h; sourceTree = "<group>"; };
 		F8606D211865D979001FF5B0 /* Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Operation.m; path = Beans/Operation.m; sourceTree = "<group>"; };
+		F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_dog_annotation.png; path = Pictures/ic_dog_annotation.png; sourceTree = "<group>"; };
+		F8C98DE9188BD9BD00D1E069 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		F8C98DEC188BDA6300D1E069 /* CustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		F8C98DED188BDA6300D1E069 /* CustomCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
 		F8C9D99F185D5A4400643F06 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F8C9D9A1185D5A6D00643F06 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F8C9D9A3185D5A9F00643F06 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -415,6 +429,14 @@
 		F8E1D79B18785B49009A02C6 /* MainPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPageViewController.xib; sourceTree = "<group>"; };
 		F8E1D79E18785FC6009A02C6 /* ic_tab_community_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_tab_community_unselected.png; path = Pictures/ic_tab_community_unselected.png; sourceTree = "<group>"; };
 		F8E1D79F18785FC6009A02C6 /* ic_tab_settings_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_tab_settings_unselected.png; path = Pictures/ic_tab_settings_unselected.png; sourceTree = "<group>"; };
+		F8F32458188BA82500B82A97 /* LocationMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMapViewController.h; sourceTree = "<group>"; };
+		F8F32459188BA82500B82A97 /* LocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapViewController.m; sourceTree = "<group>"; };
+		F8F3245D188BA8BE00B82A97 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = IPetChat/Frameworks/MAMapKit.framework; sourceTree = "<group>"; };
+		F8F3245F188BA8F000B82A97 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = IPetChat/Frameworks/MAMapKit.framework/Versions/2.1.3/Resources/AMap.bundle; sourceTree = SOURCE_ROOT; };
+		F8F32461188BA93500B82A97 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F8F32463188BA95C00B82A97 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		F8F32465188BBDC900B82A97 /* BaseMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMapViewController.h; sourceTree = "<group>"; };
+		F8F32466188BBDC900B82A97 /* BaseMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +444,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F32464188BA95C00B82A97 /* OpenGLES.framework in Frameworks */,
+				F8F32462188BA93500B82A97 /* CoreLocation.framework in Frameworks */,
+				F8F3245E188BA8BE00B82A97 /* MAMapKit.framework in Frameworks */,
 				F8E1B941185DCB9F0049B461 /* libstdc++.dylib in Frameworks */,
 				F8C9D9C5185DAF2300643F06 /* CoreFoundation.framework in Frameworks */,
 				F8C9D9C3185DAF0000643F06 /* Security.framework in Frameworks */,
@@ -471,6 +496,7 @@
 		B71A9CE418373FE300B68D10 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				F8C98DE6188BD94200D1E069 /* ic_dog_annotation.png */,
 				F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */,
 				F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */,
 				F8E1D79E18785FC6009A02C6 /* ic_tab_community_unselected.png */,
@@ -595,6 +621,7 @@
 		B7F9A0BD182B1ECB00756ED3 = {
 			isa = PBXGroup;
 			children = (
+				F8C98DE8188BD9BD00D1E069 /* customview */,
 				B7F9A0CF182B1ECB00756ED3 /* IPetChat */,
 				B7F9A0C8182B1ECB00756ED3 /* Frameworks */,
 				B7F9A0C7182B1ECB00756ED3 /* Products */,
@@ -612,6 +639,9 @@
 		B7F9A0C8182B1ECB00756ED3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8F32463188BA95C00B82A97 /* OpenGLES.framework */,
+				F8F32461188BA93500B82A97 /* CoreLocation.framework */,
+				F8F3245D188BA8BE00B82A97 /* MAMapKit.framework */,
 				F8E1B940185DCB9F0049B461 /* libstdc++.dylib */,
 				F8C9D9C4185DAF2300643F06 /* CoreFoundation.framework */,
 				F8C9D9C2185DAF0000643F06 /* Security.framework */,
@@ -685,12 +715,16 @@
 				B7F9A0D0182B1ECB00756ED3 /* Supporting Files */,
 				F8C9D9B9185D984700643F06 /* MainTabController.h */,
 				F8C9D9BA185D984700643F06 /* MainTabController.m */,
+				F8F32465188BBDC900B82A97 /* BaseMapViewController.h */,
+				F8F32466188BBDC900B82A97 /* BaseMapViewController.m */,
 				F8E1D79918785B46009A02C6 /* MainPageViewController.h */,
 				F8E1D79A18785B47009A02C6 /* MainPageViewController.m */,
 				F8E1D79B18785B49009A02C6 /* MainPageViewController.xib */,
 				F8CAE700187947E400EA9F66 /* PetMotionStatViewController.h */,
 				F8CAE701187947E400EA9F66 /* PetMotionStatViewController.m */,
 				F8CAE702187947E400EA9F66 /* PetMotionStatViewController.xib */,
+				F8F32458188BA82500B82A97 /* LocationMapViewController.h */,
+				F8F32459188BA82500B82A97 /* LocationMapViewController.m */,
 			);
 			path = IPetChat;
 			sourceTree = "<group>";
@@ -733,6 +767,7 @@
 		F84352A4185C094D006A7C4A /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
+				F8F3245F188BA8F000B82A97 /* AMap.bundle */,
 				F8C9D9BE185DADAC00643F06 /* TencentOpenApi_IOS_Bundle.bundle */,
 				F84352A5185C094D006A7C4A /* CommonToolkitBundle.bundle */,
 				F84352A6185C094D006A7C4A /* Pinyin4jBundle.bundle */,
@@ -791,6 +826,18 @@
 				F8DB1B69186F105E0010B771 /* RollCall.m */,
 			);
 			name = Beans;
+			sourceTree = "<group>";
+		};
+		F8C98DE8188BD9BD00D1E069 /* customview */ = {
+			isa = PBXGroup;
+			children = (
+				F8C98DEC188BDA6300D1E069 /* CustomCalloutView.h */,
+				F8C98DED188BDA6300D1E069 /* CustomCalloutView.m */,
+				F8C98DE9188BD9BD00D1E069 /* CustomAnnotationView.h */,
+				F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */,
+			);
+			name = customview;
+			path = IPetChat/customview;
 			sourceTree = "<group>";
 		};
 		F8CAE70B187992AD00EA9F66 /* BarChart Library */ = {
@@ -1021,6 +1068,8 @@
 				F8D2E0DB1882EBDE00A8D62D /* ic_home@2x.png in Resources */,
 				F8D2E0DC1882EBDE00A8D62D /* ic_motion.png in Resources */,
 				F8D2E0DD1882EBDE00A8D62D /* ic_motion@2x.png in Resources */,
+				F8F32460188BA8F000B82A97 /* AMap.bundle in Resources */,
+				F8C98DE7188BD94200D1E069 /* ic_dog_annotation.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,6 +1141,10 @@
 				F8CAE72E187992AD00EA9F66 /* PlotChartView.m in Sources */,
 				F8CB9CBA18826BE4009C0EC4 /* PetInfoUtil.m in Sources */,
 				F8D2E0D51882E69F00A8D62D /* XYPieChart.m in Sources */,
+				F8F3245B188BA82500B82A97 /* LocationMapViewController.m in Sources */,
+				F8F32467188BBDCA00B82A97 /* BaseMapViewController.m in Sources */,
+				F8C98DEB188BD9BD00D1E069 /* CustomAnnotationView.m in Sources */,
+				F8C98DEE188BDA6300D1E069 /* CustomCalloutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

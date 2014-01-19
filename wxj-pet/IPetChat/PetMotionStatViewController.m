@@ -65,6 +65,7 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = user.petInfo;

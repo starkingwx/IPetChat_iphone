@@ -11,7 +11,7 @@
 #define kAppKey         @"3809471856"
 #define kRedirectURI    @"https://api.weibo.com/oauth2/default.html"
 #define TencentAppId    @"100585565"
-
+const static NSString *MAMapAPIKey = @"88c4c1b8e85d0d7d0fb45175636f2dfd";
 
 
 #define DEVICE_SERVER_ADDR          @"http://61.190.30.170:8090"

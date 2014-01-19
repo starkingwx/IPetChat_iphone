@@ -12,6 +12,7 @@
 #import "PetInfoUtil.h"
 #import "Constant.h"
 #import "PrintObject.h"
+#import "LocationMapViewController.h"
 
 @interface MainPageViewController () {
     AsynImageView *_avatarView;
@@ -49,6 +50,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = user.petInfo;
     [self fillPetInfo:petInfo];
@@ -135,6 +138,8 @@
 
 - (void)locatePet:(id)sender {
     // todo: jump to location map
+    [self.navigationController pushViewController:[[LocationMapViewController alloc] initWithNibName:@"LocationMapViewController" bundle:nil] animated:YES];
+    
 }
 
 - (void)viewDidLoad
