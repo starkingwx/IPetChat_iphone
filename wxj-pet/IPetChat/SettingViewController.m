@@ -257,15 +257,16 @@
        
         if ([rowvalue isEqualToString:@"生日"]) {
             NSString *string;
-            NSNumber *month = [PetInfoUtil getAgeByBirthday:[petdatadic objectForKey:@"生日"]];
-            if ([month intValue] > 0) {
+            NSNumber *birthday = [petdatadic objectForKey:@"生日"];
+            NSNumber *month = [PetInfoUtil getAgeByBirthday:birthday];
+            if ([birthday longLongValue] > 0) {
                 string = [month stringValue];
             } else {
                 string = @"";
             }
             //            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"生日"]];
       
-            _petinfo.text = string;
+            _petinfo.text = [NSString stringWithFormat:@"%@月", string];
         }else if ([rowvalue isEqualToString:@"身高"]) {
             NSMutableString *string;
             string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"身高"]];
@@ -423,7 +424,7 @@
             NSNumber *birthday = [petdatadic objectForKey:@"生日"];
             NSDate *date = [NSDate date];
             if (birthday) {
-                NSDate *date = [NSDate dateWithTimeIntervalSince1970:[birthday doubleValue] / 1000];
+                date = [NSDate dateWithTimeIntervalSince1970:[birthday doubleValue] / 1000];
             }
             _datePicker.date = date;
             [_backviewctrl.view addSubview:_datePicker];
@@ -708,8 +709,13 @@
         
         NSInteger petsex = [petsexs indexOfObject:[petdatadic objectForKey:@"性别"]];
         
+        long petId = 0;
+        if (petInfo != nil && petInfo.petId != nil) {
+            petId = [[petInfo petId] longValue];
+        }
+        
         Enhttpmanager *modifyhttpmanager = [[Enhttpmanager alloc]init];
-        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:[petInfo.petId longValue] nickname:[petdatadic objectForKey:@"昵称"] sex:petsex breed:breed age:[petdatadic objectForKey:@"生日"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
+        [modifyhttpmanager ModifyPetinfo:self selector:@selector(modifycallback:) username:[defaults objectForKey:@"username"] petid:petId nickname:[petdatadic objectForKey:@"昵称"] sex:petsex breed:breed age:[petdatadic objectForKey:@"生日"] height:[petdatadic objectForKey:@"身高"] weight:[petdatadic objectForKey:@"体重"] district:[petdatadic objectForKey:@"城市"] placeoftengo:[petdatadic objectForKey:@"常去玩的地方"]];
         [modifyhttpmanager release];
     }
 }

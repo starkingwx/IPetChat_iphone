@@ -51,7 +51,7 @@ static DeviceManager *instance;
 }
 
 - (void)syncTime {
-//    NSLog(@"### time sync begin - count:%d ###", _count);
+    NSLog(@"### time sync begin - count:%d ###", _count);
     _count++;
 
     _sysTimeBegin = (long long)([[NSDate date] timeIntervalSince1970] * 1000);
@@ -63,7 +63,7 @@ static DeviceManager *instance;
 }
 
 - (void)onGetTimeFinished:(ASIHTTPRequest *)pRequest {
-//    NSLog(@"onGetTimeFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    NSLog(@"onGetTimeFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     
     int statusCode = pRequest.responseStatusCode;
     
@@ -74,16 +74,16 @@ static DeviceManager *instance;
             int cost = (int)(sysTimeReturn - _sysTimeBegin);
             long long localSysTime = _sysTimeBegin + cost / 2;
             
-//            NSLog(@"systime begin: %lld, systime return: %lld, cost: %d", _sysTimeBegin, sysTimeReturn, cost);
+            NSLog(@"systime begin: %lld, systime return: %lld, cost: %d", _sysTimeBegin, sysTimeReturn, cost);
             
             NSString *responseText = [[NSString alloc] initWithData:[pRequest responseData] encoding:NSUTF8StringEncoding];
             long long deviceSysTime = [responseText longLongValue];
             
             _timeDelta = deviceSysTime - localSysTime;
-//            NSLog(@"local systime: %lld, device server time: %lld,  delta: %lld", localSysTime, deviceSysTime, _timeDelta);
+            NSLog(@"local systime: %lld, device server time: %lld,  delta: %lld", localSysTime, deviceSysTime, _timeDelta);
         }
     }
-//    NSLog(@"### time sync end ###");
+    NSLog(@"### time sync end ###");
 }
 
 - (void)startTimeSync {

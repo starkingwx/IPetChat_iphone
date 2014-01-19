@@ -26,7 +26,7 @@
         return [NSNumber numberWithInt:0];
     }
     NSDate *today = [NSDate date];
-    NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:birthday.doubleValue];
+    NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:birthday.longLongValue / 1000];
     NSCalendar *calender = [NSCalendar currentCalendar];
     NSDateComponents *comps = [calender components:NSMonthCalendarUnit fromDate:birthDate toDate:today options:0];
     NSNumber *ret = [NSNumber numberWithInt:comps.month];

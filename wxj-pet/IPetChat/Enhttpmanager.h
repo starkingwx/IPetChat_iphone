@@ -58,6 +58,7 @@ typedef enum {
 //获取宠物列表
 - (void)getpetuserlist:(id)callback_object selector:(SEL)callback_selector username:(NSString*)username;
 //登录
+//@Depreacted
 -(void)StartLogin:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username loginPwd:(NSString*)loginPwd;
 //修改宠物信息
 -(void)ModifyPetinfo:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid nickname:(NSString*)nickname sex:(int)sex breed:(int)breed age:(NSString*)age height:(NSString*)height weight:(NSString*)weight district:(NSString*)district placeoftengo:(NSString*)placeoftengo;

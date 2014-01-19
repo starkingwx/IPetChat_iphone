@@ -9,6 +9,7 @@
 #import "Enhttpmanager.h"
 #import "CommonToolkit/CommonToolkit.h"
 #import "UserBean+Device.h"
+#import "UrlConfig.h"
 
 #define BOUNDARY @"------------0x0x0x0x0x0x0x0x"
 
@@ -130,6 +131,10 @@ typedef enum {
 
 //http get 请求（用来ping baidu 看网络是否通畅）
 - (void)sendGetRequest:(NSString*)url {
+    if (![url hasPrefix:@"http://"]) {
+        url = [NSString stringWithFormat:@"%@%@", SERVER_ADDR, url];
+    }
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60];
     [request setValue:@"G3WLAN" forHTTPHeaderField:@"User-Agent"];
     [request setHTTPMethod:@"GET"];
@@ -141,6 +146,10 @@ typedef enum {
 
 //http post 请求
 - (void)sendPostRequest:(NSString*)url body:(NSData*)body {
+    if (![url hasPrefix:@"http://"]) {
+        url = [NSString stringWithFormat:@"%@%@", SERVER_ADDR, url];
+    }
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     if (stage == PORTAL_STAGE_UPLOAD_IMAGE||stage == PORTAL_STAGE_UPLOAD_GALLERYIMAGE) {
         NSString* MultiPartContentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", BOUNDARY];
@@ -420,7 +429,7 @@ typedef enum {
     loginPwd = [loginPwd md5];
     NSString *body = [NSString stringWithFormat:@"loginName=%@&loginPwd=%@",username,loginPwd];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/user/login" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/user/login" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
     
 }
@@ -442,7 +451,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&oldPwd=%@&newPwd=%@&newPwdConfirm=%@&sig=%@",username,oldpwd,newpwd,confirmpwd,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/profile/changePwd" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/profile/changePwd" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
     
 }
@@ -464,12 +473,12 @@ typedef enum {
     }
     NSString *sigstr = [self getsigstr:paramedict];
     
-    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&nickname=%@&sex=%d&breed=%d&age=%d&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,nickname,sex,breed,[age intValue],[height floatValue],[weight floatValue],district,placeoftengo];
+    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&nickname=%@&sex=%d&breed=%d&birthday=%@&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,nickname,sex,breed,[age stringValue],[height floatValue],[weight floatValue],district,placeoftengo];
     if (petid != 0) {
         body = [NSString stringWithFormat:@"%@&petid=%ld", body, petid];
     }
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/modify" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/petinfo/modify" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
     
 }
@@ -490,7 +499,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@",username,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/getpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/petinfo/getpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
 }
 
@@ -512,7 +521,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"petid=%ld&sig=%@",petid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/getpetdetail" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/petinfo/getpetdetail" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)getrecommendpets:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username
@@ -532,7 +541,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@",username,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getrecommendpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getrecommendpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
 }
 
@@ -555,7 +564,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"longitude=%f&latitude=%f&sig=%@",longitude,latitude,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getnearbypets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getnearbypets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
 }
 
@@ -576,7 +585,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@",username,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getconcernpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getconcernpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     
 }
 
@@ -598,7 +607,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid, sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/concernpet" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/concernpet" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)unconcernpets:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid
@@ -619,7 +628,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid, sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/unconcernpet" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/unconcernpet" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)leavemsg:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid content:(NSString *)content
@@ -640,7 +649,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&content=%@&sig=%@",username,petid,content, sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/leavemsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/leavemsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)getleavemsg:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid
@@ -661,7 +670,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid, sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getleavemsgs" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getleavemsgs" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)replymsg:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username content:(NSString *)content msgid:(long)msgid
@@ -682,7 +691,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&content=%@&msgid=%ld&sig=%@",username,content,msgid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/replymsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/replymsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)deletemsg:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username msgid:(long)msgid
@@ -703,7 +712,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&msgid=%ld&sig=%@",username,msgid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/delmsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/delmsg" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)getleavemsgdetail:(id)callback_object selector:(SEL)callback_selector msgid:(long)msgid
@@ -724,7 +733,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"msgid=%ld&sig=%@",msgid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getleavemsgdetail" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getleavemsgdetail" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)getblacklist:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username
@@ -744,7 +753,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@",username,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/getblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/getblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)addblacklist:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid
@@ -765,7 +774,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/addblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/addblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)deleteblacklist:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid
@@ -786,7 +795,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/community/delblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/community/delblacklist" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)searchpets:(id)callback_object selector:(SEL)callback_selector phone:(NSString *)phone
@@ -806,7 +815,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"phone=%@&sig=%@",phone,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/searchpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/petinfo/searchpets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)uploadimage:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid imagepath:(NSString *)imagepath
@@ -834,7 +843,7 @@ typedef enum {
 	
 	NSData *postData = [self generateFormDataFromPostDictionary:post_dict];
 	[post_dict release];
-    [self sendPostRequest:@"http://www.segopet.com/segopet/petinfo/uploadavatar" body:postData];
+    [self sendPostRequest:@"/petinfo/uploadavatar" body:postData];
 }
 
 -(void)uploadgalleryimage:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username galleryid:(long)galleryid imagepath:(NSString *)imagepath name:(NSString *)name type:(NSString *)type description:(NSString *)description{
@@ -867,7 +876,7 @@ typedef enum {
 	
 	NSData *postData = [self generateFormDataFromPostDictionary:post_dict];
 	[post_dict release];
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/uploadphoto" body:postData];
+    [self sendPostRequest:@"/gallery/uploadphoto" body:postData];
 }
 
 -(void)getgallerylist:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username petid:(long)petid
@@ -888,7 +897,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&petid=%ld&sig=%@",username,petid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/getgalleries" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/getgalleries" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)getgallery:(id)callback_object selector:(SEL)callback_selector galleryid:(long)galleryid{
@@ -908,7 +917,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"galleryid=%ld&sig=%@",galleryid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/getgallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/getgallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)creategallery:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username title:(NSString *)title{
@@ -927,7 +936,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&title=%@&sig=%@",username,title,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/creategallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/creategallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)modifygalleryinfo:(id)callback_object selector:(SEL)callback_selector galleryid:(long)galleryid coverurl:(NSString *)coverurl
@@ -948,7 +957,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"galleryid=%ld&coverurl=%@&sig=%@",galleryid,coverurl,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/setgalleryinfo" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/setgalleryinfo" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)deletephoto:(id)callback_object selector:(SEL)callback_selector photoid:(long)photoid username:(NSString *)username
@@ -969,7 +978,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&photoid=%ld&sig=%@",username,photoid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/delphoto" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/delphoto" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 -(void)deletegallery:(id)callback_object selector:(SEL)callback_selector galleryid:(long)galleryid username:(NSString *)username
@@ -990,7 +999,7 @@ typedef enum {
     
     NSString *body = [NSString stringWithFormat:@"username=%@&galleryid=%ld&sig=%@",username,galleryid,sigstr];
     
-    [self sendPostRequest:@"http://www.segopet.com/segopet/gallery/delgallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/gallery/delgallery" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 //生成sig签名

@@ -19,7 +19,10 @@
 #define OPERATE_URL                 [NSString stringWithFormat:@"%@%@", DEVICE_SERVER_ADDR, @"/rest/operate"]
 
 #define IMAGE_GET_ADDR              @"http://www.segopet.com/segoimg"
-#define SERVER_ADDR                 @"http://www.segopet.com/segopet"
+//#define SERVER_ADDR                 @"http://www.segopet.com/segopet"
+#define SERVER_ADDR                 @"http://127.0.0.1:8080/segopet"
+
+
 #define THIRD_LOGIN_URL             [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/thirdlogin"]
 #define GET_PET_LIST_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/getpets"]
 
