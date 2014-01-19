@@ -60,7 +60,7 @@
 }
 
 - (void)fillPetInfo:(PetInfo *)petInfo {
-    if (petInfo) {
+    if (petInfo && petInfo.petId) {
         [_avatarView setImageURL:[NSString stringWithFormat:@"%@/%@", IMAGE_GET_ADDR, petInfo.avatar]];
 //        [self.avatarImageViewContainer setImage:[UIImage imageNamed:@"img_petstar"]];
         self.avatarImageViewContainer.hidden = NO;
@@ -74,8 +74,16 @@
         } else {
             [self.ageLabel setText:@""];
         }
-        [self.heightLabel setText:[NSString stringWithFormat:@"%@cm", petInfo.height]];
-        [self.weightLabel setText:[NSString stringWithFormat:@"%@g", petInfo.weight]];
+        if (petInfo.height != nil) {
+            [self.heightLabel setText:[NSString stringWithFormat:@"%@厘米", petInfo.height]];      
+        } else {
+            [self.heightLabel setText:@""];
+        }
+        if (petInfo.weight) {
+            [self.weightLabel setText:[NSString stringWithFormat:@"%@公斤", petInfo.weight]];
+        } else {
+            [self.weightLabel setText:@""];
+        }
         [self.areaLabel setText:petInfo.area];
         [self.placeOftenGoLabel setText:petInfo.placeOftenGo];
     }

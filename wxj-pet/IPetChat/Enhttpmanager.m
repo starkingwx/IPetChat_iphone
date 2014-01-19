@@ -467,18 +467,48 @@ typedef enum {
     current_command = PORTAL_COMMAND_MODIFY_PETINFO;
     stage = PORTAL_STAGE_MODIFY_PETINFO;
     
-    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:nickname,@"nickname",[NSString stringWithFormat:@"%d",sex],@"sex",[NSString stringWithFormat:@"%d",breed],@"breed",[age stringValue],@"birthday",height,@"height",weight,@"weight",district,@"district",placeoftengo,@"placeoftengo",nil];
+    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc] init];
+    if (nickname) {
+        [paramedict setObject:nickname forKey:@"nickname"];
+    }
+    [paramedict setObject:[NSString stringWithFormat:@"%d",sex] forKey:@"sex"];
+    [paramedict setObject:[NSString stringWithFormat:@"%d",breed] forKey:@"breed"];
+    if (age) {
+        [paramedict setObject:[age stringValue] forKey:@"birthday"];
+    }
+    if (height) {
+        [paramedict setObject:height forKey:@"height"];
+    }
+    if (weight) {
+        [paramedict setObject:weight forKey:@"weight"];
+    }
+    if (district) {
+        [paramedict setObject:district forKey:@"district"];
+    }
+    if (placeoftengo) {
+        [paramedict setObject:placeoftengo forKey:@"placeoftengo"];
+    }
+    
+    
     if (petid != 0) {
         [paramedict setObject:[[NSString alloc]initWithFormat:@"%ld",petid] forKey:@"petid"];
     }
     NSString *sigstr = [self getsigstr:paramedict];
     
-    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&nickname=%@&sex=%d&breed=%d&birthday=%@&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,nickname,sex,breed,[age stringValue],[height floatValue],[weight floatValue],district,placeoftengo];
-    if (petid != 0) {
-        body = [NSString stringWithFormat:@"%@&petid=%ld", body, petid];
-    }
+//    NSString *body = [NSString stringWithFormat:@"username=%@&sig=%@&nickname=%@&sex=%d&breed=%d&birthday=%@&height=%f&weight=%f&district=%@&placeoftengo=%@",username,sigstr,nickname,sex,breed,[age stringValue],[height floatValue],[weight floatValue],district,placeoftengo];
+//    
+    NSMutableString *paramBody = [NSMutableString stringWithString:@""];
+    [paramedict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+        [paramBody appendFormat:@"%@=%@&", key, obj];
+    }];
+    [paramBody appendFormat:@"username=%@&", username];
+    [paramBody appendFormat:@"sig=%@", sigstr];
+    NSLog(@"param string: %@", paramBody);
+//    if (petid != 0) {
+//        body = [NSString stringWithFormat:@"%@&petid=%ld", paramBody, petid];
+//    }
     
-    [self sendPostRequest:@"/petinfo/modify" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    [self sendPostRequest:@"/petinfo/modify" body:[paramBody dataUsingEncoding:NSUTF8StringEncoding]];
     
     
 }

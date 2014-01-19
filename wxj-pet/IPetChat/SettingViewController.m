@@ -107,7 +107,9 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(239/255.0) green:(239/255.0) blue:(240/255.0) alpha:1];
     
-    petdatadic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"未填入",@"昵称",@"未填入",@"性别",@"未填入",@"品种",@"未填入",@"生日",@"未填入",@"身高",@"未填入",@"体重",@"未填入",@"城市",@"未填入",@"常去玩的地方",@"nothing",@"headphoto",nil];
+//    petdatadic = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@"",@"昵称",@"",@"性别",@"",@"品种",nil,@"生日",@"",@"身高",@"",@"体重",@"",@"城市",@"",@"常去玩的地方",@"nothing",@"headphoto",nil];
+
+    petdatadic = [[NSMutableDictionary alloc] init];
     
     pettypes = [[NSArray alloc]initWithObjects:@"黄金猎犬",@"哈士奇",@"贵宾（泰迪）",@"赛摩耶",@"博美",@"雪纳瑞",@"苏格兰牧羊犬",@"松狮",@"京巴",@"其他犬种", nil];
     petsexs = [[NSArray alloc]initWithObjects:@"帅哥",@"美女", nil];
@@ -268,19 +270,33 @@
             _petinfo.text = [NSString stringWithFormat:@"%@月", string];
         }else if ([rowvalue isEqualToString:@"身高"]) {
             NSMutableString *string;
-            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"身高"]];
-            [string appendString:@"厘米"];
+            NSString *heightstr = [petdatadic objectForKey:@"身高"];
+            if (heightstr != nil) {
+                string = [[NSMutableString alloc]initWithString:heightstr];
+                [string appendString:@"厘米"];
+            } else {
+                string = [[NSMutableString alloc] initWithString:@""];
+            }
+           
             _petinfo.text = string;
             [string release];
         }else if ([rowvalue isEqualToString:@"体重"]) {
             NSMutableString *string;
-
-            string = [[NSMutableString alloc]initWithString:[petdatadic objectForKey:@"体重"]];
-            [string appendString:@"公斤"];
+            NSString *weight = [petdatadic objectForKey:@"体重"];
+            if (weight) {
+                string = [[NSMutableString alloc]initWithString:weight];
+                [string appendString:@"公斤"];
+            } else {
+                string = [[NSMutableString alloc] initWithString:@""];
+            }
             _petinfo.text = string;
             [string release];
         }else{
-            _petinfo.text = [petdatadic objectForKey:rowvalue];
+            NSString *text = [petdatadic objectForKey:rowvalue];
+            if (text == nil) {
+                text = @"";
+            }
+            _petinfo.text = text;
         }
         [cell.contentView addSubview:_petinfo];
         
@@ -711,9 +727,16 @@
         PetInfo *petInfo = user.petInfo;
         
         NSString *breedStr = [petdatadic objectForKey:@"品种"];
-        NSInteger breed = [pettypes indexOfObject:breedStr];
+        NSInteger breed = 0;
+        if (breedStr) {
+            breed = [pettypes indexOfObject:breedStr];
+        }
+        NSString *sexStr = [petdatadic objectForKey:@"性别"];
+        NSInteger petsex = 0;
+        if (sexStr) {
+            petsex = [petsexs indexOfObject:sexStr];
+        }
         
-        NSInteger petsex = [petsexs indexOfObject:[petdatadic objectForKey:@"性别"]];
         
         long petId = 0;
         if (petInfo != nil && petInfo.petId != nil) {

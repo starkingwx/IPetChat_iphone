@@ -19,8 +19,8 @@ const static NSString *MAMapAPIKey = @"88c4c1b8e85d0d7d0fb45175636f2dfd";
 #define OPERATE_URL                 [NSString stringWithFormat:@"%@%@", DEVICE_SERVER_ADDR, @"/rest/operate"]
 
 #define IMAGE_GET_ADDR              @"http://www.segopet.com/segoimg"
-//#define SERVER_ADDR                 @"http://www.segopet.com/segopet"
-#define SERVER_ADDR                 @"http://127.0.0.1:8080/segopet"
+#define SERVER_ADDR                 @"http://www.segopet.com/segopet"
+//#define SERVER_ADDR                 @"http://127.0.0.1:8080/segopet"
 
 
 #define THIRD_LOGIN_URL             [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/thirdlogin"]
