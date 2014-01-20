@@ -468,10 +468,13 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *galleryidandtitle = [[NSArray alloc]initWithObjects:[[_contentArray objectAtIndex:0] objectForKey:@"id"],[[_contentArray objectAtIndex:0] objectForKey:@"title"], nil];
-    [defaults setObject:galleryidandtitle forKey:@"selectgallery"];
-    [defaults synchronize];
-    [galleryidandtitle release];
+    if (_contentArray && [_contentArray count] > 0) {
+        NSArray *galleryidandtitle = [[NSArray alloc]initWithObjects:[[_contentArray objectAtIndex:0] objectForKey:@"id"],[[_contentArray objectAtIndex:0] objectForKey:@"title"], nil];
+        [defaults setObject:galleryidandtitle forKey:@"selectgallery"];
+        [defaults synchronize];
+        [galleryidandtitle release];
+    }
+
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(canceltakephoto)];
     _Addphotoctrl.navigationItem.leftBarButtonItem = leftItem;
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStyleDone target:self action:@selector(sendphoto)];
