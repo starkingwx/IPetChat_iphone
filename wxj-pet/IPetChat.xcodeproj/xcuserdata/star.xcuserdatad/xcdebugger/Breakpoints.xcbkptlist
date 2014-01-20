@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411839861.531519"
+         timestampString = "411923151.838602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "723"
-         endingLineNumber = "723"
+         startingLineNumber = "738"
+         endingLineNumber = "738"
          landmarkName = "-backaction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411839861.531519"
+         timestampString = "411923151.838602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "727"
-         endingLineNumber = "727"
+         startingLineNumber = "742"
+         endingLineNumber = "742"
          landmarkName = "-backaction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411839861.531519"
+         timestampString = "411922015.50662"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "577"
-         endingLineNumber = "577"
+         startingLineNumber = "582"
+         endingLineNumber = "582"
          landmarkName = "-getpetuserlistcallback:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411839861.531519"
+         timestampString = "411922015.50662"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "446"
-         endingLineNumber = "446"
+         startingLineNumber = "450"
+         endingLineNumber = "450"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411841155.761629"
+         timestampString = "411923151.838602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "741"
-         endingLineNumber = "741"
+         startingLineNumber = "756"
+         endingLineNumber = "756"
          landmarkName = "-backaction"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411839861.531519"
+         timestampString = "411922015.50662"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "531"
-         endingLineNumber = "531"
+         startingLineNumber = "535"
+         endingLineNumber = "535"
          landmarkName = "-saveinfo"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,76 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/SettingViewController.m"
-         timestampString = "411841155.761629"
+         timestampString = "411923151.838602"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "730"
-         endingLineNumber = "730"
+         startingLineNumber = "745"
+         endingLineNumber = "745"
+         landmarkName = "-backaction"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/SettingViewController.m"
+         timestampString = "411923151.838602"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "712"
+         endingLineNumber = "712"
+         landmarkName = "-backaction"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/SettingViewController.m"
+         timestampString = "411922015.50662"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "368"
+         endingLineNumber = "368"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/SettingViewController.m"
+         timestampString = "411922015.50662"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "565"
+         endingLineNumber = "565"
+         landmarkName = "-getpetuserlistcallback:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/SettingViewController.m"
+         timestampString = "411919969.649761"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "227"
+         endingLineNumber = "227"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/SettingViewController.m"
+         timestampString = "411923151.838602"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "717"
+         endingLineNumber = "717"
          landmarkName = "-backaction"
          landmarkType = "5">
       </FileBreakpoint>

@@ -260,14 +260,16 @@
         if ([rowvalue isEqualToString:@"生日"]) {
             NSString *string;
             NSNumber *birthday = [petdatadic objectForKey:@"生日"];
-            NSNumber *month = [PetInfoUtil getAgeByBirthday:birthday];
             if ([birthday longLongValue] > 0) {
-                string = [month stringValue];
+                NSDate *birthDate = [NSDate dateWithTimeIntervalSince1970:[birthday longLongValue] / 1000];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+                string = [dateFormatter stringFromDate:birthDate];
             } else {
                 string = @"";
             }
-      
-            _petinfo.text = [NSString stringWithFormat:@"%@月", string];
+            
+            _petinfo.text = string;
         }else if ([rowvalue isEqualToString:@"身高"]) {
             NSMutableString *string;
             NSString *heightstr = [petdatadic objectForKey:@"身高"];
@@ -364,9 +366,11 @@
             whichback = false;
             
             if (petinfo && petinfo.petId) {
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 Enhttpmanager *http = [[Enhttpmanager alloc]init];
                 [http getpetdetail:self selector:@selector(getpetuserlistcallback:) petid:[petinfo.petId longValue]];
                 [http release];
+                
             } else {
                 // jump to detail directly cause there is no petinfo
                 [self jumpToPetInfoDetailView];
@@ -559,6 +563,7 @@
 //访问获取宠物详细信息接口，返回的结果
 -(void)getpetuserlistcallback:(NSArray*)args{
     NSLog(@"getpetuserlistcallback: %@", args);
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     if ([[args objectAtIndex:0]intValue] == PORTAL_RESULT_GET_PETDETAIL_SUCCESS) {
         NSDictionary *dict = [[NSDictionary alloc]initWithDictionary:[args objectAtIndex:2]];
@@ -670,9 +675,9 @@
     }
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
-    long petid = petInfo == nil ? -1 : [petInfo.petId longValue];
+    long petid = petInfo == nil ? 0 : [petInfo.petId longValue];
     Enhttpmanager *http = [[Enhttpmanager alloc]init];
-    [http uploadimage:self selector:@selector(logincallback:) username:user.name petid:petid imagepath:imagePath];
+    [http uploadimage:self selector:@selector(uploadImgCallback:) username:user.name petid:petid imagepath:imagePath];
     [http release];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -705,12 +710,19 @@
 - (void)backaction{
     if (whichback) {
          NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if (![[defaults objectForKey:@"whichsave"]isEqualToString:@"品种"]&&![[defaults objectForKey:@"whichsave"]isEqualToString:@"性别"]){
-            [_nameinput removeFromSuperview];
-            [_unitlabel removeFromSuperview];
+        if (![[defaults objectForKey:@"whichsave"]isEqualToString:@"品种"]&&![[defaults objectForKey:@"whichsave"]isEqualToString:@"性别"] &&
+            ![[defaults objectForKey:@"whichsave"] isEqualToString:@"生日"]){
+            if ([_nameinput superview]) {
+                [_nameinput removeFromSuperview];
+            }
+            if ([_unitlabel superview]) {
+                [_unitlabel removeFromSuperview];
+            }
         }else if ([[defaults objectForKey:@"whichsave"]isEqualToString:@"品种"]){
             [_Pettypelist removeFromSuperview];
-        }else{
+        } else if ([[defaults objectForKey:@"whichsave"] isEqualToString:@"生日"]) {
+            [_datePicker removeFromSuperview];
+        } else{
             [_sextype removeFromSuperview];
         }
         self.hidesBottomBarWhenPushed = YES;
@@ -719,6 +731,8 @@
         whichback = false;
     }else{
         //[self tabbarappear];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         self.navigationItem.title = @"设置";
         [self.navigationController popViewControllerAnimated:YES];
@@ -762,6 +776,10 @@
 -(void)modifycallback:(NSArray*)args{
     NSLog(@"modifycallback: %@", args);
     
+}
+
+- (void)uploadImgCallback:(NSArray *)args {
+    NSLog(@"upload image call back: %@", args);
 }
 
 //访问黑名单列表接口，返回的信息

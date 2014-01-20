@@ -864,7 +864,7 @@ typedef enum {
     NSMutableDictionary* post_dict = [[NSMutableDictionary alloc] init];
     
 	[post_dict setObject:username forKey:@"username"];
-    if (petid != -1) {
+    if (petid != 0) {
         [post_dict setObject:[NSNumber numberWithUnsignedLong:petid] forKey:@"petid"];
     }
     [post_dict setObject:imageData forKey:@"avatar_file"];

@@ -1210,22 +1210,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">todayTabBody</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="955339549"/>
-					</object>
-					<int key="connectionID">347</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">historyTabBody</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="11041450"/>
-					</object>
-					<int key="connectionID">348</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">piechart</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="270951128"/>
@@ -1247,6 +1231,30 @@
 						<reference key="destination" ref="855402186"/>
 					</object>
 					<int key="connectionID">352</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">historyTabBody</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="955339549"/>
+					</object>
+					<int key="connectionID">353</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">todayTabBody</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="11041450"/>
+					</object>
+					<int key="connectionID">354</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">usageCountLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1012510600"/>
+					</object>
+					<int key="connectionID">355</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1695,7 +1703,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">352</int>
+			<int key="maxID">355</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
