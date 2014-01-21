@@ -82,6 +82,7 @@ static NSString *TERMINAL_CONTROL = @"TERMINAL_CONTROL";
 
 
 // Archive Operation
+static NSString *ArchOperation = @"archive_operation";
 static NSString *TABLENAME = @"tablename";
 static NSString *TRACK_SDATE = @"track_sdate";
 
@@ -104,4 +105,5 @@ static NSString *DEVICEPWD = @"devicepwd";
 
 // Other
 static NSString *LIST = @"list";
+static NSString *SUCCESS = @"SUCCESS";
 #endif

@@ -41,6 +41,13 @@
 @synthesize sliceColors;
 @synthesize piechart;
 @synthesize barChart;
+@synthesize scoreLabel;
+@synthesize scoreProgressView;
+@synthesize restPercentLabel;
+@synthesize walkPercentLabel;
+@synthesize runSlightlyPercentLabel;
+@synthesize runHeavilyPercentLabel;
+@synthesize totalTimeLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,7 +77,11 @@
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = user.petInfo;
     [self fillPetInfo:petInfo];
+    
+    [self fillDeviceInfo:nil];
+    
     [self queryPetInfo];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -227,6 +238,13 @@
     [self setPiechart:nil];
     [_avatarView removeFromSuperview];
     [self setBarChart:nil];
+    [self setScoreProgressView:nil];
+    [self setScoreLabel:nil];
+    [self setRestPercentLabel:nil];
+    [self setWalkPercentLabel:nil];
+    [self setRunSlightlyPercentLabel:nil];
+    [self setRunHeavilyPercentLabel:nil];
+    [self setTotalTimeLabel:nil];
     [super viewDidUnload];
 }
 - (IBAction)selectTodayStat:(id)sender {
@@ -252,6 +270,30 @@
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
     return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
+}
+
+- (void)fillDeviceInfo:(NSDictionary *)data {
+    // set batter power progress
+    
+    long vitality = 169088050L;
+    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
+    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+    self.scoreLabel.text = [NSString stringWithFormat:@"%d", point];
+    [self.scoreProgressView setProgress:motionPercentage animated:YES];
+    
+    int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
+    int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
+    int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
+    int runHeavily = [PetInfoUtil parsePetRunHeavilyPercentage:vitality] * 100;
+    self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:rest], [NSNumber numberWithInt:walk], [NSNumber numberWithInt:runSlightly], [NSNumber numberWithInt:runHeavily], nil];
+    [self.piechart reloadData];
+    
+    self.restPercentLabel.text = [NSString stringWithFormat:@"%d%%", rest];
+    self.walkPercentLabel.text = [NSString stringWithFormat:@"%d%%", walk];
+    self.runSlightlyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runSlightly];
+    self.runHeavilyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runHeavily];
+
+
 }
 
 @end

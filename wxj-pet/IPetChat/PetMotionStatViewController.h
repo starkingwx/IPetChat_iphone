@@ -23,6 +23,13 @@
 @property (strong, nonatomic) IBOutlet UIView *historyTabBody;
 @property (strong, nonatomic) IBOutlet XYPieChart *piechart;
 @property (strong, nonatomic) IBOutlet BarChartView *barChart;
+@property (strong, nonatomic) IBOutlet UIProgressView *scoreProgressView;
+@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (strong, nonatomic) IBOutlet UILabel *restPercentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *walkPercentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *runSlightlyPercentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *runHeavilyPercentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
 
 - (IBAction)selectTodayStat:(id)sender;

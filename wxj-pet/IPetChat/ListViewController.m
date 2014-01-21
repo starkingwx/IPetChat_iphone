@@ -295,8 +295,10 @@
         label.text = [[self.contentArray1 objectAtIndex:[indexPath row]] objectForKey:@"nickname"];
         AsynImageView *imageview = (AsynImageView *)[cell viewWithTag:102];
         //[imageview setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[IMGPATH stringByAppendingString:[[self.contentArray1 objectAtIndex:[indexPath row]] objectForKey:@"avatar"]]]]]];
-        imageview.imageURL = [IMGPATH stringByAppendingString:[[self.contentArray1 objectAtIndex:[indexPath row]] objectForKey:@"avatar"]];
-        
+        NSString *avatar = [[self.contentArray1 objectAtIndex:[indexPath row]] objectForKey:@"avatar"];
+        if (avatar) {
+            imageview.imageURL = [IMGPATH stringByAppendingString:avatar];
+        }
         return cell;
     }
     else if (stylenum == 1) {

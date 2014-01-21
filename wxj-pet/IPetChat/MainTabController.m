@@ -34,6 +34,8 @@
         
         //    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
         //    tabBarController.viewControllers = [NSArray arrayWithObjects:nav3, nav4, nil];
+        UIViewController *tab0 = [[TestApiViewController alloc] initWithNibName:@"TestApiViewController" bundle:nil];
+        
         UIViewController *tab1 = [[MainPageViewController alloc] initWithNibName:@"MainPageViewController" bundle:nil];
         
         UIViewController *tab2 = [[PetMotionStatViewController alloc] initWithNibName:@"PetMotionStatViewController" bundle:nil];

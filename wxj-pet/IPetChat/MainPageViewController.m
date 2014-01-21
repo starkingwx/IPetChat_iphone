@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "PrintObject.h"
 #import "LocationMapViewController.h"
+#import "DeviceManager.h"
 
 @interface MainPageViewController () {
     AsynImageView *_avatarView;
@@ -56,7 +57,10 @@
     PetInfo *petInfo = user.petInfo;
     [self fillPetInfo:petInfo];
     
+    [self fillDeviceInfo:nil];
+    
     [self queryPetInfo];
+    [self queryLatestPetDeviceInfo];
 }
 
 - (void)fillPetInfo:(PetInfo *)petInfo {
@@ -192,4 +196,51 @@
     [_avatarView removeFromSuperview];
     [super viewDidUnload];
 }
+
+- (void)queryLatestPetDeviceInfo {
+     [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+}
+
+- (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onQueryFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                if ([SUCCESS isEqualToString:status]) {
+                    NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
+                    NSArray *trackSdata = [archOp objectForKey:TRACK_SDATE];
+                    if (trackSdata && [trackSdata count] > 0) {
+                        NSDictionary *data = [trackSdata objectAtIndex:0];
+                        [self fillDeviceInfo:data];
+                    }
+                }
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
+- (void)fillDeviceInfo:(NSDictionary *)data {
+    // set batter power progress
+    [self.powerProgressView setProgress:0.5 animated:YES];
+    
+    long vitality = 169088050L;
+    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
+    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+    self.motionScoreLabel.text = [NSString stringWithFormat:@"%d", point];
+    [self.motionScoreProgressView setProgress:motionPercentage animated:YES];
+}
+
 @end

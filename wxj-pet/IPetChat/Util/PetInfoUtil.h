@@ -17,4 +17,12 @@
  * Whether user has set pet info
  */
 + (BOOL)isPetInfoSet;
+
++ (float)parsePetRestPercentage:(long)vitality;
++ (float)parsePetWalkPercentage:(long)vitality;
++ (float)parsePetRunSlightlyPercentage:(long)vitality;
++ (float)parsePetRunHeavilyPercentage:(long)vitality;
+
++ (NSInteger)calculateMotionPoint:(long)vitality;
++ (float)calculateAvgMotionPercentage:(long)vitality;
 @end

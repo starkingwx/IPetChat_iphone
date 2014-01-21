@@ -271,7 +271,10 @@
 //显示关注宠物的详细信息
 - (void)showpetinfo {
     //[self.avatar setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[IMGPATH stringByAppendingString:[self.contentDic objectForKey:@"avatar"]]]]]];
-    self.avatar.imageURL = [IMGPATH stringByAppendingString:[self.contentDic objectForKey:@"avatar"]];
+    NSString *avatarurl = [self.contentDic objectForKey:@"avatar"];
+    if (avatarurl) {
+        self.avatar.imageURL = [IMGPATH stringByAppendingString:avatarurl];
+    }
     [self.nickname setText:[self.contentDic objectForKey:@"nickname"]];
     
     CGSize nicknameSize = [self.nickname.text sizeWithFont:[UIFont systemFontOfSize:20] constrainedToSize:CGSizeMake(MAXFLOAT, 20)];
