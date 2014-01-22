@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface RollCall : NSObject
-@property (nonatomic) NSInteger *cycle;
-@property (nonatomic) NSInteger *duration;
+@property (nonatomic) NSInteger cycle;
+@property (nonatomic) NSInteger duration;
 @end

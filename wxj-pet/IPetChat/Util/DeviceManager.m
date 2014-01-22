@@ -15,6 +15,7 @@
 #import "PrintObject.h"
 #import "WhereCond.h"
 #import "TerminalControl.h"
+#import "UserBean+Device.h"
 
 static DeviceManager *instance;
 
@@ -122,8 +123,16 @@ static DeviceManager *instance;
     NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, nil];
     
     arop.field = field;
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
+    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+        NSLog(@"Device is not binded!");
+        return;
+    }
+  
     
-    NSString *deviceno = @"10101010";
+    NSString *deviceno = petInfo.deviceno;
+    
     [self postToDeviceServerWithOp:operation andDeviceno:deviceno andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFinRespSel];
 }
 
@@ -153,7 +162,15 @@ static DeviceManager *instance;
     
     arop.wherecond = [NSArray arrayWithObjects:wherecond1, wherecond2, nil];
         
-    NSString *deviceno = @"10101010";
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
+    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+        NSLog(@"Device is not binded!");
+        return;
+    }
+
+    NSString *deviceno = petInfo.deviceno;
+    
     [self postToDeviceServerWithOp:operation andDeviceno:deviceno andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFinRespSel];
 }
 
@@ -165,7 +182,14 @@ static DeviceManager *instance;
     operation.terminal_control = termial;
     
     termial.cmdtype = ROLL_CALL;
-    NSString *deviceno = @"10101010";
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = [user petInfo];
+    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+        NSLog(@"Device is not binded!");
+        return;
+    }
+    
+    NSString *deviceno = petInfo.deviceno;
     termial.deviceno = deviceno;
     
     termial.roll_call = [[RollCall alloc] init];

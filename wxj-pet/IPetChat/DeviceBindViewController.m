@@ -39,7 +39,7 @@
     
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = user.petInfo;
-    if (petInfo == nil || petInfo.deviceno == nil || [petInfo.deviceno isEqualToString:@""]) {
+    if (petInfo == nil || petInfo.deviceno == nil) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"绑定" style:UIBarButtonItemStyleDone target:self action:@selector(bindDevice)];
     } else {
         self.deviceIdInput.text = petInfo.deviceno;
@@ -100,12 +100,12 @@
                 NSString *result = [jsonData objectForKey:RESULT];
                 if ([@"0" isEqualToString:result]) {
                     [[iToast makeText:@"设备绑定成功！"] show];
-                    NSString *deviceId = [jsonData objectForKey:@"device_id"];
+                    NSNumber *deviceId = [jsonData objectForKey:@"device_id"];
                     NSString *devicePwd = [jsonData objectForKey:@"device_password"];
                     UserBean *user = [[UserManager shareUserManager] userBean];
                     user.devicePassword = devicePwd;
                     PetInfo *petInfo = user.petInfo;
-                    petInfo.deviceno = deviceId;
+                    petInfo.deviceno = [deviceId stringValue];
                     
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     [userDefaults setObject:devicePwd forKey:DEVICEPWD];

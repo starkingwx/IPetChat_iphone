@@ -57,7 +57,7 @@
     PetInfo *petInfo = user.petInfo;
     [self fillPetInfo:petInfo];
     
-    [self fillDeviceInfo:nil];
+//    [self fillDeviceInfo:nil];
     
     [self queryPetInfo];
     [self queryLatestPetDeviceInfo];
@@ -235,10 +235,12 @@
 - (void)fillDeviceInfo:(NSDictionary *)data {
     // set batter power progress
     [self.powerProgressView setProgress:0.5 animated:YES];
+    self.powerLabel.text = @"50%";
     
-    long vitality = 169088050L;
-    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
-    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+    // set motion point progress
+    NSNumber *vitality = [data objectForKey:VITALITY];
+    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:[vitality longValue]];
+    NSInteger point = [PetInfoUtil calculateMotionPoint:[vitality longValue]];
     self.motionScoreLabel.text = [NSString stringWithFormat:@"%d", point];
     [self.motionScoreProgressView setProgress:motionPercentage animated:YES];
 }

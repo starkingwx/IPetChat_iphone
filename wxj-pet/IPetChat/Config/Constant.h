@@ -84,7 +84,7 @@ static NSString *TERMINAL_CONTROL = @"TERMINAL_CONTROL";
 // Archive Operation
 static NSString *ArchOperation = @"archive_operation";
 static NSString *TABLENAME = @"tablename";
-static NSString *TRACK_SDATE = @"track_sdate";
+static NSString *TRACK_SDATE = @"track_sdata";
 
 // Termial control
 static NSString *ROLL_CALL = @"ROLL_CALL";

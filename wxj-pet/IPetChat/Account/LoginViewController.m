@@ -52,9 +52,12 @@
     [super viewWillAppear:animated];
     
     if (![self needLogin]) {
-        [self queryPetInfo];
+        MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+        [hud setLabelText:@"登录中…"];
+        [hud showWhileExecuting:@selector(queryPetInfo) onTarget:self withObject:nil animated:YES];
+//        [self queryPetInfo];
         
-        [self jumpToMainPage];
+//        [self jumpToMainPage];
     }
     
 }
@@ -223,8 +226,8 @@
                  
                     [self queryPetInfo];
                     
-                    // jump to main view
-                    [self jumpToMainPage];
+//                    // jump to main view
+//                    [self jumpToMainPage];
                 } else {
                     goto login_error;
                 }
@@ -245,13 +248,13 @@ login_error:
 }
 
 - (void)jumpToMainPage {
-     [self.navigationController pushViewController:[[MainTabController alloc] init] animated:YES];
+     [self.navigationController pushViewController:[[MainTabController alloc] init] animated:NO];
 }
 
 - (void)queryPetInfo {
     UserBean *user = [[UserManager shareUserManager] userBean];
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
-    [HttpUtils postSignatureRequestWithUrl:GET_PET_LIST_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onGetPetInfoListFinished:) andFailedRespSelector:nil];
+    [HttpUtils postSignatureRequestWithUrl:GET_PET_LIST_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onGetPetInfoListFinished:) andFailedRespSelector:nil];
 }
 
 - (void)onGetPetInfoListFinished:(ASIHTTPRequest *)pRequest {
@@ -309,6 +312,10 @@ login_error:
             }
         }
     }
+    
+    // jump to main view
+    [self jumpToMainPage];
+
 }
 
 @end

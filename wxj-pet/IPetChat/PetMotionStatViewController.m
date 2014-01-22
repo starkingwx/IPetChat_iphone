@@ -12,6 +12,7 @@
 #import "PetInfoUtil.h"
 #import "Constant.h"
 #import "PrintObject.h"
+#import "DeviceManager.h"
 
 @interface PetMotionStatViewController () {
     AsynImageView *_avatarView;
@@ -64,7 +65,7 @@
                             ORANGE
                             ,nil];
         
-        self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:52], [NSNumber numberWithInt:35], [NSNumber numberWithInt:10], [NSNumber numberWithInt:3], nil];
+        self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
         
     }
     return self;
@@ -78,8 +79,7 @@
     PetInfo *petInfo = user.petInfo;
     [self fillPetInfo:petInfo];
     
-    [self fillDeviceInfo:nil];
-    
+    [self queryLatestPetDeviceInfo];
     [self queryPetInfo];
     
 }
@@ -271,16 +271,52 @@
 {
     return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
 }
+- (void)queryLatestPetDeviceInfo {
+    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+}
+
+- (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onQueryFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                if ([SUCCESS isEqualToString:status]) {
+                    NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
+                    NSArray *trackSdata = [archOp objectForKey:TRACK_SDATE];
+                    if (trackSdata && [trackSdata count] > 0) {
+                        NSDictionary *data = [trackSdata objectAtIndex:0];
+                        [self fillDeviceInfo:data];
+                    }
+                }
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
 
 - (void)fillDeviceInfo:(NSDictionary *)data {
-    // set batter power progress
-    
-    long vitality = 169088050L;
+    // set motion point progress
+    NSNumber *vita = [data objectForKey:VITALITY];
+    long vitality = [vita longValue];
     float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
     NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
     self.scoreLabel.text = [NSString stringWithFormat:@"%d", point];
     [self.scoreProgressView setProgress:motionPercentage animated:YES];
     
+    // init pie chart data
     int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
     int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
     int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
