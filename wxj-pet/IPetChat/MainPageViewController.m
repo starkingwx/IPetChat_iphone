@@ -157,7 +157,7 @@
         return;
     }
     
-    [self.navigationController pushViewController:[[LocationMapViewController alloc] initWithNibName:@"LocationMapViewController" bundle:nil] animated:YES];
+    [self.navigationController pushViewController:[[LocationMapViewController alloc] init] animated:YES];
     
 }
 

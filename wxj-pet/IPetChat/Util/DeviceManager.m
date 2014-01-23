@@ -107,7 +107,7 @@ static DeviceManager *instance;
     long long currentTime = (long long)([[NSDate date] timeIntervalSince1970] * 1000) + _timeDelta;
     NSString *time = [NSString stringWithFormat:@"%lld", currentTime];
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"MP", @"c", jsonOp, @"op", time, @"t", deviceno, @"d", @"1.0", @"v", nil];
-    [HttpUtils postDeviceServerSignatureRequestWithUrl:OPERATE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:synchronous andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];
+    [HttpUtils postDeviceServerSignatureRequestWithUrl:OPERATE_URL andPostFormat:urlEncoded andParameter:params andUserInfo:nil andRequestType:asynchronous andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];
 }
 
 - (void)queryLastestInfoWithProcessor:(id)pProcessor andFinishedRespSelector:(SEL)pFinRespSel andFailedRespSelector:(SEL)pFailRespSel {
