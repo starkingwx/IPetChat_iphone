@@ -27,7 +27,8 @@
 
 @implementation LoginViewController
 @synthesize weiboLoginButton;
-
+@synthesize usernameInput;
+@synthesize pwdInput;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,9 +56,6 @@
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
         [hud setLabelText:@"登录中…"];
         [hud showWhileExecuting:@selector(queryPetInfo) onTarget:self withObject:nil animated:YES];
-//        [self queryPetInfo];
-        
-//        [self jumpToMainPage];
     }
     
 }
@@ -76,6 +74,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self.usernameInput setPlaceholder:@"请输入赛果号"];
+    self.usernameInput.delegate = self;
+    [self.pwdInput setPlaceholder:@"请输入密码"];
+    [self.pwdInput setSecureTextEntry:YES];
+    self.pwdInput.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +91,8 @@
 
 - (void)viewDidUnload {
     [self setWeiboLoginButton:nil];
+    [self setUsernameInput:nil];
+    [self setPwdInput:nil];
     [super viewDidUnload];
 }
 
@@ -126,6 +133,72 @@
         }
         
     }
+
+}
+
+- (IBAction)doLoginWithSegoId:(id)sender {
+    NSString *username = [self.usernameInput.text trimWhitespaceAndNewline];
+    NSString *pwd = [self.pwdInput.text trimWhitespaceAndNewline];
+    
+    [self.usernameInput resignFirstResponder];
+    [self.pwdInput resignFirstResponder];
+    
+    if (!username || [username isEqualToString:@""]) {
+        [[[iToast makeText:@"请输入赛果号!"] setDuration:iToastDurationLong] show];
+        return;
+    }
+    
+    if (!pwd || [pwd isEqualToString:@""]) {
+        [[[iToast makeText:@"请输入密码!"] setDuration:iToastDurationLong] show];
+        return;
+    }
+    NSArray *account = [NSArray arrayWithObjects:username, pwd, nil];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithSuperView:self.view];
+    [hud showWhileExecuting:@selector(loginWithSegoIdAndPwd:) onTarget:self withObject:account animated:YES];
+    
+}
+
+- (void)loginWithSegoIdAndPwd:(NSArray*)account {
+    NSString *username = [account objectAtIndex:0];
+    NSString *pwd = [account objectAtIndex:1];
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:username, @"loginName", [pwd md5], @"loginPwd", nil];
+    [HttpUtils postRequestWithUrl:LOGIN_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:synchronous andProcessor:self andFinishedRespSelector:@selector(onLoginWithSegoIdFinished:) andFailedRespSelector:nil];
+}
+
+- (void)onLoginWithSegoIdFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onLoginWithSegoIdFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+        case 200: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"json data: %@", jsonData);
+            if (jsonData) {
+                NSString *result = [jsonData objectForKey:RESULT];
+                NSLog(@"result: %@", result);
+                
+                if([result isEqualToString:@"0"]) {
+                    // login successfully
+                    [self onLoginSuccess:jsonData];
+                } else {
+                    goto login_error;
+                }
+            } else {
+                goto login_error;
+            }
+            break;
+        }
+        default:
+            goto login_error;
+            break;
+    }
+    
+    return;
+    
+login_error:
+    [[[iToast makeText:@"登录失败，请稍后重试！"] setDuration:iToastDurationLong] show];
 
 }
 
@@ -208,26 +281,20 @@
                 
                 if([result isEqualToString:@"0"]) {
                     // login successfully
-                    NSString *userkey = [jsonData objectForKey:USERKEY];
-                    NSLog(@"userkey: %@", userkey);
-                    NSString *userName = [jsonData objectForKey:USERNAME];
-                    
-                    
-                    // save the account info
-                    UserBean *userBean = [[UserManager shareUserManager] userBean];
-                    userBean.userKey = userkey;
-                    userBean.name = userName;
-                    
-                    NSLog(@"userbean: %@", userBean.description);
-                    
-                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                    [userDefaults setObject:userBean.name forKey:USERNAME];
-                    [userDefaults setObject:userBean.userKey forKey:USERKEY];
-                 
-                    [self queryPetInfo];
-                    
-//                    // jump to main view
-//                    [self jumpToMainPage];
+                    NSString *password = [jsonData objectForKey:PASSWORD];
+                  
+                    if (password && ![@"" isEqualToString:password]) {
+                        NSString *msg = [NSString stringWithFormat:@"您的默认密码为%@, 登录后请及时修改!", password];
+                        RIButtonItem *okItem = [RIButtonItem item];
+                        okItem.label = @"好";
+                        okItem.action = ^{[self onLoginSuccess:jsonData];};
+
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"注册成功" message:msg cancelButtonItem:okItem otherButtonItems:nil, nil];
+                        [alert show];
+                    } else {
+                        [self onLoginSuccess:jsonData]; 
+                    }
+                
                 } else {
                     goto login_error;
                 }
@@ -245,6 +312,26 @@
     
 login_error:
     [[[iToast makeText:NSLocalizedString(@"Error in third login, please retry.", "")] setDuration:iToastDurationLong] show];
+}
+
+- (void)onLoginSuccess:(NSDictionary*)jsonData {
+    NSString *userkey = [jsonData objectForKey:USERKEY];
+    NSLog(@"userkey: %@", userkey);
+    NSString *userName = [jsonData objectForKey:USERNAME];
+    
+    
+    // save the account info
+    UserBean *userBean = [[UserManager shareUserManager] userBean];
+    userBean.userKey = userkey;
+    userBean.name = userName;
+    
+    NSLog(@"userbean: %@", userBean.description);
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:userBean.name forKey:USERNAME];
+    [userDefaults setObject:userBean.userKey forKey:USERKEY];
+    
+    [self queryPetInfo];
 }
 
 - (void)jumpToMainPage {
@@ -318,4 +405,34 @@ login_error:
 
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self animateTextField: textField up: YES];
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self animateTextField: textField up: NO];
+}
+
+- (void) animateTextField: (UITextField*) textField up: (BOOL) up
+{
+    const int movementDistance = 80; // tweak as needed
+    const float movementDuration = 0.3f; // tweak as needed
+    
+    int movement = (up ? -movementDistance : movementDistance);
+    
+    [UIView beginAnimations: @"anim" context: nil];
+    [UIView setAnimationBeginsFromCurrentState: YES];
+    [UIView setAnimationDuration: movementDuration];
+    self.view.frame = CGRectOffset(self.view.frame, 0, movement);
+    [UIView commitAnimations];
+}
 @end

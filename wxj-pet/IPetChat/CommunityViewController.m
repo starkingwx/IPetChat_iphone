@@ -7,6 +7,7 @@
 //
 
 #import "CommunityViewController.h"
+#import "UserBean+Device.h"
 
 @interface CommunityViewController ()
 
@@ -159,6 +160,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UserBean *user = [[UserManager shareUserManager] userBean];
+    PetInfo *petInfo = user.petInfo;
+    if (indexPath.section == 1) {
+        // query nearby pets
+        if (petInfo == nil || petInfo.deviceno == nil || [@"" isEqualToString:petInfo.deviceno]) {
+            [[iToast makeText:@"请先绑定宠物项圈设备号！"] show];
+            return;
+        }
+    }
+    
     [self makeTabBarHidden:YES];
     
     [self.listViewController setStylenum:[indexPath section]];

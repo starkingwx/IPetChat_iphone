@@ -155,7 +155,11 @@
     if (petInfo == nil || petInfo.petId == nil) {
         [[iToast makeText:@"请先设置宠物信息！"] show];
         return;
+    } else if (petInfo.deviceno == nil) {
+        [[iToast makeText:@"请先绑定项圈设备号！"] show];
+        return;
     }
+    
     
     [self.navigationController pushViewController:[[LocationMapViewController alloc] init] animated:YES];
     

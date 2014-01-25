@@ -23,6 +23,8 @@ const static NSString *MAMapAPIKey = @"88c4c1b8e85d0d7d0fb45175636f2dfd";
 //#define SERVER_ADDR                 @"http://127.0.0.1:8080/segopet"
 
 
+#define LOGIN_URL                   [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/login"]
+
 #define THIRD_LOGIN_URL             [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/user/thirdlogin"]
 #define GET_PET_LIST_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/getpets"]
 #define BIND_DEVICE_URL            [NSString stringWithFormat:@"%@%@", SERVER_ADDR, @"/petinfo/binddevice"]

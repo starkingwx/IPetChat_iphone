@@ -575,7 +575,7 @@ typedef enum {
     
 }
 
--(void)getnearbypets:(id)callback_object selector:(SEL)callback_selector longitude:(float)longitude latitude:(float)latitude
+-(void)getnearbypets:(id)callback_object selector:(SEL)callback_selector longitude:(float)longitude latitude:(float)latitude petId:(NSString*)petId
 {
     timeout_timer = [NSTimer scheduledTimerWithTimeInterval:40 target:self selector:@selector(handleTimeOut:) userInfo:nil repeats:NO];
     portal_result_callback_object = callback_object;
@@ -584,15 +584,15 @@ typedef enum {
         [self portalResult:PORTAL_RESULT_FAILED error:PORTAL_ERROR_NETWORK];
         return;
     }
-    current_command = PORTAL_COMMAND_GET_RECOMMENDPETS;
-    stage = PORTAL_STAGE_GET_RECOMMENDPETS;
+    current_command = PORTAL_COMMAND_GET_NEARBYPETS;
+    stage = PORTAL_STAGE_GET_NEARBYPETS;
     
     NSString *stringlongitude = [NSString stringWithFormat:@"%f",longitude];
     NSString *stringlatitude = [NSString stringWithFormat:@"%f",latitude];
-    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:stringlongitude ,@"longitude",stringlatitude,@"latitude", nil];
+    NSMutableDictionary *paramedict = [[NSMutableDictionary alloc]initWithObjectsAndKeys:stringlongitude ,@"longitude",stringlatitude,@"latitude", petId, @"petid", nil];
     NSString *sigstr = [self getsigstr:paramedict];
     
-    NSString *body = [NSString stringWithFormat:@"longitude=%f&latitude=%f&sig=%@",longitude,latitude,sigstr];
+    NSString *body = [NSString stringWithFormat:@"petid=%@&longitude=%f&latitude=%f&sig=%@",petId, longitude,latitude,sigstr];
     
     [self sendPostRequest:@"/community/getnearbypets" body:[body dataUsingEncoding:NSUTF8StringEncoding]];
     

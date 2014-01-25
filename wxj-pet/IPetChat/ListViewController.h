@@ -10,8 +10,9 @@
 #import "PetInfoViewController.h"
 #import "ConcernPetViewController.h"
 #import "LeaveMsgViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface ListViewController : UITableViewController <UISearchBarDelegate>
+@interface ListViewController : UITableViewController <UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (assign, nonatomic) NSInteger stylenum;
 @property (retain, nonatomic) IBOutlet PetInfoViewController *petInfoViewController;

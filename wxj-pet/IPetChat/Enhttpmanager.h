@@ -65,7 +65,7 @@ typedef enum {
 //获取推荐宠物
 -(void)getrecommendpets:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username;
 //获取推荐宠物
--(void)getnearbypets:(id)callback_object selector:(SEL)callback_selector longitude:(float)longitude latitude:(float)latitude;
+-(void)getnearbypets:(id)callback_object selector:(SEL)callback_selector longitude:(float)longitude latitude:(float)latitude petId:(NSString*)petId;
 //获取关注的宠物
 -(void)getconcernpets:(id)callback_object selector:(SEL)callback_selector username:(NSString *)username;
 //关注宠物

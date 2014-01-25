@@ -12,11 +12,16 @@
 #import "Enhttpmanager.h"
 #import "AsynImageView.h"
 #import "UserBean+Device.h"
+#import "Constant.h"
 
 #define IMGPATH @"http://www.segopet.com/segoimg/"
 
-@interface ListViewController ()
+@interface ListViewController () {
+    CLLocationManager *_locationManager;
+}
 
+- (void)startGpsService;
+- (void)stopGpsService;
 @end
 
 @implementation ListViewController
@@ -56,18 +61,22 @@
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
     Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
-    if (stylenum == 0) {
-      
-        [httpmanager getrecommendpets:self selector:@selector(getrecommendpetsCallback:) username:user.name];
-    }
-    else if (stylenum == 1) {
-      //[httpmanager getnearbypets:self selector:@selector(getnearbypetsCallback:) longitude:1.0f latitude:1.0f];
-    }
-    else if (stylenum == 2) {
-        [httpmanager getconcernpets:self selector:@selector(getconcernpetsCallback:) username:user.name];
-    }
-    else {
-        [httpmanager getleavemsg:self selector:@selector(getleavemsgCallback:) username:user.name petid:[petInfo.petId longValue]];
+    if (petInfo && petInfo.petId) {
+        if (stylenum == 0) {
+            
+            [httpmanager getrecommendpets:self selector:@selector(getrecommendpetsCallback:) username:user.name];
+        }
+        else if (stylenum == 1) {
+//            [httpmanager getnearbypets:self selector:@selector(getnearbypetsCallback:) longitude:1.0f latitude:1.0f petId:[petInfo.petId stringValue]];
+            
+            [self startGpsService];
+        }
+        else if (stylenum == 2) {
+            [httpmanager getconcernpets:self selector:@selector(getconcernpetsCallback:) username:user.name];
+        }
+        else {
+            [httpmanager getleavemsg:self selector:@selector(getleavemsgCallback:) username:user.name petid:[petInfo.petId longValue]];
+        }
     }
     [httpmanager release];
     
@@ -303,6 +312,7 @@
     }
     else if (stylenum == 1) {
         //[self.tableView setBackgroundColor:[UIColor colorWithWhite:202/255.0 alpha:1]];
+        NSDictionary *pet = [self.contentArray2 objectAtIndex:[indexPath row]];
         static NSString *CellIdentifier = @"Cell1";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -328,11 +338,11 @@
             [distance release];
         }
         UILabel *label1 = (UILabel *)[cell viewWithTag:1];
-        label1.text = [NSString stringWithFormat:@"%d",stylenum];
+        label1.text = [pet objectForKey:NICKNAME];
         AsynImageView *imageview = (AsynImageView *)[cell viewWithTag:2];
-        [imageview setImage:[UIImage imageNamed:@"image.png"]];
+        [imageview setImageURL:[NSString stringWithFormat:@"%@%@", IMGPATH, [pet objectForKey:AVATAR]]];
         UILabel *label2 = (UILabel *)[cell viewWithTag:3];
-        label2.text = [NSString stringWithFormat:@"距您的位置大约%d米",stylenum];
+        label2.text = [pet objectForKey:@"distance_desc"];
         
         return cell;
     }
@@ -566,6 +576,8 @@
 
 //访问附近宠物接口返回的信息
 - (void)getnearbypetsCallback:(NSArray*)args {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSLog(@"getnearbypetsCallback - %@", args);
     if ([[args objectAtIndex:0] integerValue] == PORTAL_RESULT_GET_NEARBYPETS_SUCCESS) {
         if ([[[args objectAtIndex:2] objectForKey:@"result"] integerValue] == 0) {
             self.contentArray2 = [[args objectAtIndex:2] objectForKey:@"list"];
@@ -634,5 +646,48 @@
     [_concernPetViewController release];
     [_leaveMsgViewController release];
     [super dealloc];
+}
+
+- (void)startGpsService {
+    if (nil == _locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+    }
+
+    _locationManager.delegate = self;
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
+
+- (void)stopGpsService {
+    if (_locationManager) {
+        [_locationManager stopMonitoringSignificantLocationChanges];
+        [_locationManager release];
+        _locationManager = nil;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    CLLocation* location = [locations lastObject];
+//    NSDate* eventDate = location.timestamp;
+//    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+//    if (abs(howRecent) < 15.0) {
+        // If the event is recent, do something with it.
+        NSLog(@"latitude %+.6f, longitude %+.6f\n",
+              location.coordinate.latitude,
+              location.coordinate.longitude);
+        // start query nearby pets
+        UserBean *user = [[UserManager shareUserManager] userBean];
+        PetInfo *petInfo = user.petInfo;
+        Enhttpmanager *httpmanager = [[Enhttpmanager alloc] init];
+        [httpmanager getnearbypets:self selector:@selector(getnearbypetsCallback:) longitude:location.coordinate.longitude latitude:location.coordinate.latitude petId:[petInfo.petId stringValue]];
+        [httpmanager release];
+//    }
+    [self stopGpsService];
+    
+}
+
+- (void)viewDidUnload {
+    [self stopGpsService];
 }
 @end

@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/Account/LoginViewController.m"
-         timestampString = "412186338.882805"
+         timestampString = "412338311.154681"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "268"
-         endingLineNumber = "268"
+         startingLineNumber = "355"
+         endingLineNumber = "355"
          landmarkName = "-onGetPetInfoListFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/Account/LoginViewController.m"
-         timestampString = "412099550.971256"
+         timestampString = "412337852.0089"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "-needLogin"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/MainPageViewController.m"
-         timestampString = "412097060.251133"
+         timestampString = "412348230.135063"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "221"
-         endingLineNumber = "221"
+         startingLineNumber = "225"
+         endingLineNumber = "225"
          landmarkName = "-onQueryFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/MainPageViewController.m"
-         timestampString = "412097067.443009"
+         timestampString = "412348230.135063"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "214"
-         endingLineNumber = "214"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
          landmarkName = "-onQueryFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/Account/LoginViewController.m"
-         timestampString = "412186338.882805"
+         timestampString = "412338311.154681"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "380"
+         endingLineNumber = "380"
          landmarkName = "-onGetPetInfoListFinished:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -443,6 +443,19 @@
          startingLineNumber = "196"
          endingLineNumber = "196"
          landmarkName = "-orderDeviceServerWithProcessor:andFinishedRespSelector:andFailedRespSelector:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/ListViewController.m"
+         timestampString = "412352994.923702"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "581"
+         endingLineNumber = "581"
+         landmarkName = "-getnearbypetsCallback:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
