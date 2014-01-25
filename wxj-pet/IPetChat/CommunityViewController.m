@@ -160,6 +160,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = user.petInfo;
     if (indexPath.section == 1) {
@@ -177,7 +179,7 @@
     self.listViewController.title = [[self.contentArray objectAtIndex:[indexPath section]] objectAtIndex:0];
     [self.navigationController pushViewController:self.listViewController animated:YES];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  
 }
 
 //隐藏tab

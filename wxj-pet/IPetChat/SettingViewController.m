@@ -673,6 +673,7 @@
         [[NSFileManager defaultManager] createFileAtPath:imagePath contents:data attributes:nil];
         
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
     long petid = petInfo == nil ? 0 : [petInfo.petId longValue];
@@ -780,6 +781,7 @@
 
 - (void)uploadImgCallback:(NSArray *)args {
     NSLog(@"upload image call back: %@", args);
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 //访问黑名单列表接口，返回的信息

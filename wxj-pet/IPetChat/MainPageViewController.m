@@ -73,7 +73,7 @@
         [self.breedLabel setText:[PetInfoUtil getBreedByType:petInfo.breed]];
         NSNumber *month = [PetInfoUtil getAgeByBirthday:petInfo.birthday];
         if ([petInfo.birthday longLongValue] > 0) {
-            NSString *birthdayText = [NSString stringWithFormat:@"%@月", month];
+            NSString *birthdayText = [NSString stringWithFormat:@"%@个月", month];
             [self.ageLabel setText:birthdayText];
         } else {
             [self.ageLabel setText:@""];

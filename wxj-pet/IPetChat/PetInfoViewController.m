@@ -11,6 +11,8 @@
 #import "QuartzCore/CALayer.h"
 #import "GalleryViewController.h"
 #import "UserBean+Device.h"
+#import "PetInfoUtil.h"
+#import "Constant.h"
 
 #define IMGPATH @"http://www.segopet.com/segoimg/"
 
@@ -289,7 +291,15 @@
     }
     
     NSArray *arr = [NSArray arrayWithObjects:@"黄金猎犬", @"哈士奇", @"贵宾（泰迪）", @"萨摩耶", @"博美", @"雪纳瑞", @"苏格兰牧羊犬", @"松狮", @"京巴", @"其它", nil];
-    self.detail.text = [NSString stringWithFormat:@"品种 ：%@\n年龄 ：%@个月\n身高 ：%@厘米\n体重 ：%@公斤\n城市 ：%@\n常去玩的地方 ：%@",[arr objectAtIndex:[[self.contentDic objectForKey:@"breed"] integerValue]],[self.contentDic objectForKey:@"age"],[self.contentDic objectForKey:@"height"],[self.contentDic objectForKey:@"weight"],[self.contentDic objectForKey:@"district"],[self.contentDic objectForKey:@"placeoftengo"]];
+    
+    NSNumber *birthday = [self.contentDic objectForKey:BIRTHDAY];
+    NSNumber *month = [PetInfoUtil getAgeByBirthday:birthday];
+    NSString *ageStr = @"";
+    if (birthday && [birthday longLongValue] > 0) {
+        ageStr = [NSString stringWithFormat:@"%@个月", month];
+    }
+    
+    self.detail.text = [NSString stringWithFormat:@"品种 ：%@\n年龄 ：%@\n身高 ：%@厘米\n体重 ：%@公斤\n城市 ：%@\n常去玩的地方 ：%@",[arr objectAtIndex:[[self.contentDic objectForKey:@"breed"] integerValue]],ageStr,[self.contentDic objectForKey:@"height"],[self.contentDic objectForKey:@"weight"],[self.contentDic objectForKey:@"district"],[self.contentDic objectForKey:@"placeoftengo"]];
     
     self.picsScrollView.contentSize = CGSizeMake(85*[[self.contentDic objectForKey:@"galleries"] count]+8, 120);
     for (int i = 0; i < [[self.contentDic objectForKey:@"galleries"] count]; i++) {

@@ -307,6 +307,8 @@
         NSString *avatar = [[self.contentArray1 objectAtIndex:[indexPath row]] objectForKey:@"avatar"];
         if (avatar) {
             imageview.imageURL = [IMGPATH stringByAppendingString:avatar];
+        } else {
+            imageview.imageURL = @"";
         }
         return cell;
     }
@@ -370,8 +372,12 @@
         label1.text = [infoDic objectForKey:@"nickname"];
         AsynImageView *imageview = (AsynImageView *)[cell viewWithTag:2];
         //[imageview setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[IMGPATH stringByAppendingString:[infoDic objectForKey:@"avatar"]]]]]];
-        imageview.imageURL = [IMGPATH stringByAppendingString:[infoDic objectForKey:@"avatar"]];
-        
+        NSString *avatar = [infoDic objectForKey:@"avatar"];
+        if (avatar) {
+            imageview.imageURL = [IMGPATH stringByAppendingString:avatar];
+        } else {
+            imageview.imageURL = @"";
+        }
         return cell;
     }
     else {

@@ -390,8 +390,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "807"
          endingLineNumber = "807"
-         landmarkName = "-getgallerylist:"
-         landmarkType = "5">
+         landmarkName = "@implementation SettingViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -450,11 +450,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/ListViewController.m"
-         timestampString = "412352994.923702"
+         timestampString = "412358701.12681"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
+         startingLineNumber = "587"
+         endingLineNumber = "587"
          landmarkName = "-getnearbypetsCallback:"
          landmarkType = "5">
       </FileBreakpoint>
