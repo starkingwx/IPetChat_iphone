@@ -9,6 +9,8 @@
 #import "TestApiViewController.h"
 #import "DeviceManager.h"
 #import "CommonToolkit/CommonToolkit.h"
+#import "PetInfoUtil.h"
+#import "Constant.h"
 
 @interface TestApiViewController ()
 
@@ -71,13 +73,18 @@
 - (void)testQueryMotionStatInfo:(id)sender {
     NSDate *today = [NSDate date];
     NSCalendar *calender = [NSCalendar currentCalendar];
-    NSDateComponents *dateCom = [calender components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:today];
-    [dateCom setHour:0];
-    [dateCom setMinute:0];
-    [dateCom setSecond:0];
-    NSDate *beginTime = [calender dateFromComponents:dateCom];
+//    NSDateComponents *dateCom = [calender components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:today];
+//    [dateCom setHour:0];
+//    [dateCom setMinute:0];
+//    [dateCom setSecond:0];
+    NSDateComponents *dateDiff = [[NSDateComponents alloc] init];
+    [dateDiff setDay:-6];
+    NSDate *sevenDaysAgo = [calender dateByAddingComponents:dateDiff toDate:today options:0];
     
-    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:beginTime andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:nil];
+    
+//    NSDate *beginTime = [calender dateFromComponents:dateCom];
+    
+    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:sevenDaysAgo andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:nil];
 }
 
 - (void)onFinishedQueryMotionStatInfo:(ASIHTTPRequest *)pRequest {
@@ -91,6 +98,31 @@
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             NSLog(@"response data: %@", jsonData);
             if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                if ([SUCCESS isEqualToString:status]) {
+                    NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
+                    NSArray *dailySummaryArray = [archOp objectForKey:@"daily_summary"];
+                    if (dailySummaryArray && [dailySummaryArray count] > 0) {
+                        NSDictionary *today = [dailySummaryArray objectAtIndex:[dailySummaryArray count] - 1];
+                        NSNumber *vitality20 = [today objectForKey:VITALITY20];
+                        NSNumber *vitality2N = [today objectForKey:VITALITY2N];
+                        NSNumber *vitality30 = [today objectForKey:VITALITY30];
+                        NSNumber *vitality3N = [today objectForKey:VITALITY3N];
+                        NSNumber *vitality40 = [today objectForKey:VITALITY40];
+                        NSNumber *vitality4N = [today objectForKey:VITALITY4N];
+                        
+                        unsigned long walkTime = [vitality2N unsignedLongValue] - [vitality20 unsignedLongValue];
+                        unsigned long runSlightlyTime = [vitality3N unsignedLongValue] - [vitality30 unsignedLongValue];
+                        unsigned long runHeavilyTime = [vitality4N unsignedLongValue] - [vitality40 unsignedLongValue];
+                        
+                        unsigned long vitality = [PetInfoUtil calculate4MotionPartPercentageByWalkTime:walkTime andRunSlightlyTime:runSlightlyTime andRunHeavily:runHeavilyTime];
+                        
+                        NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+                        NSLog(@"point: %d", point);
+                        
+                    }
+                }
+
                 
             } else {
             }

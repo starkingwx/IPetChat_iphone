@@ -9,6 +9,9 @@
 #import "PetInfoUtil.h"
 #import "UserBean+Device.h"
 
+static const long DaySeconds = 24 * 60 * 60;
+static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
+
 @implementation PetInfoUtil
 
 + (NSString *)getBreedByType:(NSNumber *)type {
@@ -42,23 +45,23 @@
     return YES;
 }
 
-+ (float)parsePetRestPercentage:(long)vitality {
-    return ((vitality & 0xFF000000) >> 24) * 1.0 / 100;
-}
-
-+ (float)parsePetWalkPercentage:(long)vitality {
-    return ((vitality & 0x00FF0000) >> 16) * 1.0f / 100;
-}
-
-+ (float)parsePetRunSlightlyPercentage:(long)vitality {
-    return ((vitality & 0x0000FF00) >> 8) * 1.0f / 100;
-}
-
-+ (float)parsePetRunHeavilyPercentage:(long)vitality {
++ (float)parsePetRestPercentage:(unsigned long)vitality {
     return (vitality & 0x000000FF) * 1.0f / 100;
 }
 
-+ (NSInteger)calculateMotionPoint:(long)vitality {
++ (float)parsePetWalkPercentage:(unsigned long)vitality {
+    return ((vitality & 0x0000FF00) >> 8) * 1.0f / 100;
+}
+
++ (float)parsePetRunSlightlyPercentage:(unsigned long)vitality {
+    return ((vitality & 0x00FF0000) >> 16) * 1.0f / 100;
+}
+
++ (float)parsePetRunHeavilyPercentage:(unsigned long)vitality {
+    return ((vitality & 0xFF000000) >> 24) * 1.0f / 100;
+}
+
++ (NSInteger)calculateMotionPoint:(unsigned long)vitality {
     float rest = [self parsePetRestPercentage:vitality];
     float walk = [self parsePetWalkPercentage:vitality];
     float runSlightly = [self parsePetRunSlightlyPercentage:vitality];
@@ -68,12 +71,23 @@
     return point;
 }
 
-+ (float)calculateAvgMotionPercentage:(long)vitality {
++ (float)calculateAvgMotionPercentage:(unsigned long)vitality {
     NSInteger point = [self calculateMotionPoint:vitality];
-    NSInteger total = (0.9 + 1.2 +1.6 + 1.8)*100*2;
-    float percentage = (point * 1.0f) / total;
-    NSLog(@"total: %d point: %d percentage: %f", total, point, percentage);
+    float percentage = (point * 1.0f) / TotalMotionIndex;
+    NSLog(@"total: %d point: %d percentage: %f", TotalMotionIndex, point, percentage);
     return percentage;
+}
+
++ (unsigned long)calculate4MotionPartPercentageByWalkTime:(unsigned long)walkTime andRunSlightlyTime:(unsigned long)runSlightlyTime andRunHeavily:(unsigned long)runHeavilyTime {
+    unsigned long walkPercent = (walkTime * 100 / DaySeconds);
+    unsigned long runSlightlyPercent = (runSlightlyTime * 100 / DaySeconds);
+    unsigned long runHeavilyPercent = (runHeavilyTime * 100 / DaySeconds);
+    unsigned long restPercent = 100 - walkPercent - runSlightlyPercent - runHeavilyPercent;
+    unsigned long vitality = restPercent | (walkPercent << 8) | (runSlightlyPercent << 16) | (runHeavilyPercent << 24);
+    NSLog(@"rest: %ld walk: %ld runslightly: %ld runheavily: %ld, vitality: %ld", restPercent, walkPercent, runSlightlyPercent, runHeavilyPercent, vitality);
+    return vitality;
+//    NSArray *ret = [NSArray arrayWithObjects:[NSNumber numberWithInt:restPercent], [NSNumber numberWithInt:walkPercent], [NSNumber numberWithInt:runSlightlyPercent], [NSNumber numberWithInt:runHeavilyPercent], nil];
+//    return ret;
 }
 
 @end
