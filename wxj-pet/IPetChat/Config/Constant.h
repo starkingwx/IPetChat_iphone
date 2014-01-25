@@ -27,7 +27,7 @@
 #define GREEN_VALUE         @"a6ce39"
 #define YELLOW_VALUE        @"fec20e"
 #define ORANGE_VALUE        @"f68820"
-
+#define WHITE_VALUE         @"ffffff"
 static NSString *RESULT = @"result";
 
 // Account CONSTANTS

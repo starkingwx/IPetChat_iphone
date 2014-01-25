@@ -14,13 +14,17 @@
 #import "PrintObject.h"
 #import "DeviceManager.h"
 
+static const int TOTAL_HISTORY_DAYS = 7;
+
 @interface PetMotionStatViewController () {
     AsynImageView *_avatarView;
     NSArray *_bcTitleArray;
     NSArray *_bcValueArray;
     NSArray *_bcColorArray;
     NSArray *_bcLabelColorArray;
-    NSArray *_barChartDataArray;
+    NSDateFormatter *_historyDateFormatter;
+    NSDateFormatter *_displayDateFormatter;
+    NSCalendar *_calendar;
 }
 @property (nonatomic) NSMutableArray *slices;
 @property (nonatomic) NSArray *sliceColors;
@@ -67,6 +71,22 @@
         
         self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
         
+        _bcColorArray = [NSArray arrayWithObjects:BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, nil];
+        _bcLabelColorArray = [NSArray arrayWithObjects:BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, nil];
+
+        _bcTitleArray = [NSArray arrayWithObjects:@" ", @" ", @" ", @" ", @" ", @" ", @" ", nil];
+        _bcValueArray = [NSArray arrayWithObjects:@"0", @"0", @"0", @"0", @"0", @"0", @"0", nil];
+        
+        _historyDateFormatter = [[NSDateFormatter alloc] init];
+        [_historyDateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSTimeZone *timezone = [NSTimeZone timeZoneForSecondsFromGMT:8];
+        [_historyDateFormatter setTimeZone:timezone];
+        
+        _displayDateFormatter = [[NSDateFormatter alloc] init];
+        [_displayDateFormatter setDateFormat:@"MM-dd"];
+        [_displayDateFormatter setTimeZone:timezone];
+        
+        _calendar = [NSCalendar currentCalendar];
     }
     return self;
 }
@@ -89,7 +109,7 @@
 }
 
 - (void)queryPetInfo {
-    UserBean *user = [[UserManager shareUserManager] userBean];
+//    UserBean *user = [[UserManager shareUserManager] userBean];
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
     [HttpUtils postSignatureRequestWithUrl:GET_PET_LIST_URL andPostFormat:urlEncoded andParameter:param andUserInfo:nil andRequestType:asynchronous andProcessor:self andFinishedRespSelector:@selector(onGetPetInfoListFinished:) andFailedRespSelector:nil];
 }
@@ -204,19 +224,6 @@
     //Set the Drop Shadow of the Bars (Light, Heavy, or None) - Light is default
     [self.barChart setupBarViewShadow:BarShadowNone];
     
-    _bcTitleArray = [NSArray arrayWithObjects:@"a", @"b", @"c", @"d", @"e", @"f", nil];
-    _bcValueArray = [NSArray arrayWithObjects:@"10", @"0", @"10", @"22", @"34", @"50", nil];
-    _bcColorArray = [NSArray arrayWithObjects:BLUE_VALUE, BLUE_VALUE, GREEN_VALUE, YELLOW_VALUE, ORANGE_VALUE, GREEN_VALUE, nil];
-    _bcLabelColorArray = [NSArray arrayWithObjects:@"FFFFFF",@"FFFFFF",@"FFFFFF", @"FFFFFF", @"FFFFFF", @"FFFFFF", nil];
-    _barChartDataArray = [barChart createChartDataWithTitles:_bcTitleArray values:_bcValueArray colors:_bcColorArray labelColors:_bcLabelColorArray];
-
-    
-    //Generate the bar chart using the formatted data
-    [self.barChart setDataWithArray:_barChartDataArray
-                      showAxis:DisplayOnlyYAxis
-                     withColor:[UIColor whiteColor]
-       shouldPlotVerticalLines:NO];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -255,6 +262,8 @@
 - (IBAction)selectHistoryStat:(id)sender {
     self.todayTabBody.hidden = YES;
     self.historyTabBody.hidden = NO;
+    
+    [self queryHistoryMotionStatInfo];
 }
 #pragma mark - datasource
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
@@ -292,7 +301,7 @@
                     NSArray *trackSdata = [archOp objectForKey:TRACK_SDATE];
                     if (trackSdata && [trackSdata count] > 0) {
                         NSDictionary *data = [trackSdata objectAtIndex:0];
-                        [self fillDeviceInfo:data];
+                        [self fillTodayInfo:data];
                     }
                 }
             } else {
@@ -307,7 +316,7 @@
 }
 
 
-- (void)fillDeviceInfo:(NSDictionary *)data {
+- (void)fillTodayInfo:(NSDictionary *)data {
     // set motion point progress
     NSNumber *vita = [data objectForKey:VITALITY];
     long vitality = [vita longValue];
@@ -329,6 +338,136 @@
     self.runSlightlyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runSlightly];
     self.runHeavilyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runHeavily];
 
+
+}
+
+- (void)queryHistoryMotionStatInfo {
+    NSDate *today = [NSDate date];
+    //    NSDateComponents *dateCom = [_calendar components:NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:today];
+    //    [dateCom setHour:0];
+    //    [dateCom setMinute:0];
+    //    [dateCom setSecond:0];
+    NSDateComponents *dateDiff = [[NSDateComponents alloc] init];
+    [dateDiff setDay:-6];
+    NSDate *sevenDaysAgo = [_calendar dateByAddingComponents:dateDiff toDate:today options:0];
+
+    //    NSDate *beginTime = [_calendar dateFromComponents:dateCom];
+    
+    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:sevenDaysAgo andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:nil];
+}
+
+- (void)onFinishedQueryMotionStatInfo:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onFinishedQueryMotionStatInfo - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            // create group and invite ok
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                if ([SUCCESS isEqualToString:status]) {
+                    NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
+                    NSArray *dailySummaryArray = [archOp objectForKey:@"daily_summary"];
+                    [self fillHistoryData:dailySummaryArray];
+                }
+                
+                
+            } else {
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
+
+- (void)fillHistoryData:(NSArray*)dailySummary {
+    if (dailySummary && [dailySummary count] > 0) {
+        NSDictionary *today = [dailySummary objectAtIndex:[dailySummary count] - 1];
+        NSNumber *vitality20 = [today objectForKey:VITALITY20];
+        NSNumber *vitality2N = [today objectForKey:VITALITY2N];
+        NSNumber *vitality30 = [today objectForKey:VITALITY30];
+        NSNumber *vitality3N = [today objectForKey:VITALITY3N];
+        NSNumber *vitality40 = [today objectForKey:VITALITY40];
+        NSNumber *vitality4N = [today objectForKey:VITALITY4N];
+        
+        unsigned long walkTime = [vitality2N unsignedLongValue] - [vitality20 unsignedLongValue];
+        unsigned long runSlightlyTime = [vitality3N unsignedLongValue] - [vitality30 unsignedLongValue];
+        unsigned long runHeavilyTime = [vitality4N unsignedLongValue] - [vitality40 unsignedLongValue];
+        
+        unsigned long vitality = [PetInfoUtil calculate4MotionPartPercentageByWalkTime:walkTime andRunSlightlyTime:runSlightlyTime andRunHeavily:runHeavilyTime];
+        
+        NSInteger todayPoint = [PetInfoUtil calculateMotionPoint:vitality];
+        NSLog(@"point: %d", todayPoint);
+        
+        NSMutableArray *historyPoints = [[NSMutableArray alloc] initWithCapacity:6];
+        NSMutableArray *historyDates = [[NSMutableArray alloc] initWithCapacity:6];
+        for (int i = 0; i < [dailySummary count] - 1; i++) {
+            NSDictionary *day = [dailySummary objectAtIndex:i];
+            NSDictionary *dayNext = [dailySummary objectAtIndex:i + 1];
+            
+            NSNumber *vitality20Day = [day objectForKey:VITALITY20];
+            NSNumber *vitality30Day = [day objectForKey:VITALITY30];
+            NSNumber *vitality40Day = [day objectForKey:VITALITY40];
+            
+            NSNumber *vitality20DayNext = [dayNext objectForKey:VITALITY20];
+            NSNumber *vitality30DayNext = [dayNext objectForKey:VITALITY30];
+            NSNumber *vitality40DayNext = [dayNext objectForKey:VITALITY40];
+            
+            walkTime = [vitality20DayNext unsignedLongValue] - [vitality20Day unsignedLongValue];
+            runSlightlyTime = [vitality30DayNext unsignedLongValue] - [vitality30Day unsignedLongValue];
+            runHeavilyTime = [vitality40DayNext unsignedLongValue] - [vitality40Day unsignedLongValue];
+            
+            vitality = [PetInfoUtil calculate4MotionPartPercentageByWalkTime:walkTime andRunSlightlyTime:runSlightlyTime andRunHeavily:runHeavilyTime];
+            NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+            [historyPoints addObject:[NSNumber numberWithInteger:point]];
+            
+            [historyDates addObject:[day objectForKey:DAYTIME]];
+        }
+        
+        [historyPoints addObject:[NSNumber numberWithInteger:todayPoint]];
+        [historyDates addObject:[today objectForKey:DAYTIME]];
+        
+        NSLog(@"history dates: %@", historyDates);
+        
+        int dayGap = TOTAL_HISTORY_DAYS - [historyPoints count];
+        if (dayGap > 0) {
+            // calcualte the date that is not returned 
+            NSString *firstDayTime = [historyDates objectAtIndex:0];
+            NSDate *firstDate = [_historyDateFormatter dateFromString:firstDayTime];
+            NSLog(@"firstDayTime : %@, first date: %@", firstDayTime, firstDate);
+            
+            for (int i = 0; i < dayGap; i++) {
+                NSDateComponents *dateDiff = [[NSDateComponents alloc] init];
+                [dateDiff setDay:i - dayGap];
+                NSDate *historyDay = [_calendar dateByAddingComponents:dateDiff toDate:firstDate options:0];
+                [historyDates insertObject:[_historyDateFormatter stringFromDate:historyDay] atIndex:i];
+                [historyPoints insertObject:[NSNumber numberWithInt:0] atIndex:i];
+            }
+        }
+        
+        NSMutableArray *titleArray = [[NSMutableArray alloc] initWithCapacity:historyDates.count];
+        NSMutableArray *valueArray = [[NSMutableArray alloc] initWithCapacity:historyPoints.count];
+        for (int i = 0; i < [historyDates count]; i++) {
+            [valueArray addObject:[[historyPoints objectAtIndex:i] stringValue]];
+            
+            NSString *dateTime = [historyDates objectAtIndex:i];
+            NSDate *date = [_historyDateFormatter dateFromString:dateTime];
+            [titleArray addObject:[_displayDateFormatter stringFromDate:date]];
+        }
+        
+        NSArray *barChartDataArray = [self.barChart createChartDataWithTitles:titleArray values:valueArray colors:_bcColorArray labelColors:_bcLabelColorArray];
+        
+        [self.barChart setDataWithArray:barChartDataArray
+                              showAxis:DisplayBothAxes
+                             withColor:[UIColor whiteColor]
+               shouldPlotVerticalLines:NO];
+    }
 
 }
 

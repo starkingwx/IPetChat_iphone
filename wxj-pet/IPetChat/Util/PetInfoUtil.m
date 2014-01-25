@@ -86,8 +86,6 @@ static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
     unsigned long vitality = restPercent | (walkPercent << 8) | (runSlightlyPercent << 16) | (runHeavilyPercent << 24);
     NSLog(@"rest: %ld walk: %ld runslightly: %ld runheavily: %ld, vitality: %ld", restPercent, walkPercent, runSlightlyPercent, runHeavilyPercent, vitality);
     return vitality;
-//    NSArray *ret = [NSArray arrayWithObjects:[NSNumber numberWithInt:restPercent], [NSNumber numberWithInt:walkPercent], [NSNumber numberWithInt:runSlightlyPercent], [NSNumber numberWithInt:runHeavilyPercent], nil];
-//    return ret;
 }
 
 @end

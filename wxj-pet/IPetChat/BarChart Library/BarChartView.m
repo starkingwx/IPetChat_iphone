@@ -110,6 +110,11 @@
 - (void)setUpChart {	
 	[self calculateFrames];
 	
+    for (int i = 0; i < [barLabels count]; i++) {
+        BarLabel *label = [barLabels objectAtIndex:i];
+        [label removeFromSuperview];
+    }
+    
 	NSUInteger _index = 0;
 	for (NSDictionary *barInfo in chartDataArray)  {
 		BarView *bar = [[BarView alloc] initWithFrame:CGRectMake((barFullWidth - barWidth)/2 + _index*(barFullWidth),  plotView.height - roundf([[barInfo objectForKey:@"value"] floatValue]*barHeightRatio), barWidth, roundf([[barInfo objectForKey:@"value"] floatValue]*barHeightRatio))];
