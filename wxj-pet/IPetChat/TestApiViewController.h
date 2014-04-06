@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TestApiViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)testQueryLatestPetInfo:(id)sender;
 

@@ -31,6 +31,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.scrollView.contentSize = CGSizeMake(320, 600);
+    [self.scrollView flashScrollIndicators];
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,5 +164,9 @@
             break;
     }
     
+}
+- (void)viewDidUnload {
+    [self setScrollView:nil];
+    [super viewDidUnload];
 }
 @end
