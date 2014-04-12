@@ -8,6 +8,8 @@
 
 #import "PetInfoUtil.h"
 #import "UserBean+Device.h"
+#import "Constant.h"
+#import "MotionStat.h"
 
 static const long DaySeconds = 24 * 60 * 60;
 static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
@@ -88,4 +90,90 @@ static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
     return vitality;
 }
 
+
++ (NSDictionary *)parse288bitsMotionData:(NSString *)motionData {
+    if (motionData == nil || motionData.length <= 0) {
+        return nil;
+    }
+    
+    NSMutableDictionary *totalDic = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableArray *partStatArray = [NSMutableArray arrayWithCapacity:10];
+    
+    MotionStat *offline = [[MotionStat alloc] init];
+    offline.type = MT_OFFLINE;
+    MotionStat *online = [[MotionStat alloc] init];
+    online.type = MT_ONLINE;
+    MotionStat *rest = [[MotionStat alloc] init];
+    rest.type = MT_REST;
+    MotionStat *walk = [[MotionStat alloc] init];
+    walk.type = MT_WALK;
+    MotionStat *play = [[MotionStat alloc] init];
+    play.type = MT_PLAY;
+    MotionStat *running = [[MotionStat alloc] init];
+    running.type = MT_RUNNING;
+    
+    [totalDic setObject:offline forKey:KEY_OFFLINE];
+    [totalDic setObject:online forKey:KEY_ONLINE];
+    [totalDic setObject:rest forKey:KEY_REST];
+    [totalDic setObject:walk forKey:KEY_WALK];
+    [totalDic setObject:play forKey:KEY_PLAY];
+    [totalDic setObject:running forKey:KEY_RUNNING];
+    
+    NSInteger previousType = -1;
+    NSInteger count = 0;
+    for (NSInteger i = 0; i < motionData.length; i++) {
+        unichar typeChar = [motionData characterAtIndex:i];
+        NSInteger type = typeChar - '0';
+        
+        // calcuate total statistics
+        switch (type) {
+            case MT_OFFLINE:
+                offline.count++;
+                break;
+            case MT_ONLINE:
+                online.count++;
+                break;
+            case MT_REST:
+                rest.count++;
+                break;
+            case MT_WALK:
+                walk.count++;
+                break;
+            case MT_PLAY:
+                play.count++;
+                break;
+            case MT_RUNNING:
+                running.count++;
+                break;
+            default:
+                break;
+        }
+        
+        // calculate part statistics
+        if (previousType == -1) {
+            count = 1;
+            previousType = type;
+        } else if (type == previousType) {
+            count++;
+        } else {
+            // save the previous type and count
+            MotionStat *motionStat = [[MotionStat alloc] init];
+            motionStat.type = previousType;
+            motionStat.count = count;
+            [partStatArray addObject:motionStat];
+            
+            // count new type
+            count = 1;
+            previousType = type;
+        }
+    }
+    MotionStat *motionStat = [[MotionStat alloc] init];
+    motionStat.type = previousType;
+    motionStat.count = count;
+    [partStatArray addObject:motionStat];
+    
+    NSDictionary *motionStatDataDic = [NSDictionary dictionaryWithObjectsAndKeys:totalDic, KEY_TOTAL_STAT, partStatArray, KEY_PART_STAT, nil];
+    
+    return motionStatDataDic;
+}
 @end

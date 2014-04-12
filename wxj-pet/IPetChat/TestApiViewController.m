@@ -18,6 +18,8 @@
 
 @implementation TestApiViewController
 
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,6 +46,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
+    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
+    NSArray *partStatArray = [motionDataDic objectForKey:KEY_PART_STAT];
+    self.motionCircleChart.motionStatArray = partStatArray;
+    [self.motionCircleChart setNeedsDisplay];
 }
 
 - (void)testQueryLatestPetInfo:(id)sender {
@@ -167,6 +175,7 @@
 }
 - (void)viewDidUnload {
     [self setScrollView:nil];
+    [self setMotionCircleChart:nil];
     [super viewDidUnload];
 }
 @end

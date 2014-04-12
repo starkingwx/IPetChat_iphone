@@ -35,4 +35,7 @@
 // 根据各部分运动量时间(秒)计算其百分比值
 + (unsigned long)calculate4MotionPartPercentageByWalkTime:(unsigned long)walkTime andRunSlightlyTime:(unsigned long)runSlightlyTime andRunHeavily:(unsigned long)runHeavilyTime;
 
+// 根据288位的字符串解析出相应的运行数据
++ (NSDictionary*)parse288bitsMotionData:(NSString*)motionData;
+
 @end

@@ -23,6 +23,14 @@
 #define YELLOW              [UIColor colorWithIntegerRed:254 integerGreen:194 integerBlue:14 alpha:1]
 #define ORANGE              [UIColor colorWithIntegerRed:246 integerGreen:136 integerBlue:32 alpha:1]
 
+#define COLOR_OFFLINE       [UIColor colorWithIntegerRed:217 integerGreen:217 integerBlue:217 alpha:1]
+#define COLOR_ONLINE        COLOR_OFFLINE
+#define COLOR_REST          [UIColor colorWithIntegerRed:142 integerGreen:181 integerBlue:226 alpha:1]  
+#define COLOR_WALK          [UIColor colorWithIntegerRed:146 integerGreen:208 integerBlue:80 alpha:1]
+#define COLOR_PLAY          [UIColor colorWithIntegerRed:255 integerGreen:255 integerBlue:6 alpha:1]
+#define COLOR_RUNNING       [UIColor colorWithIntegerRed:252 integerGreen:191 integerBlue:6 alpha:1]
+
+
 #define BLUE_VALUE          @"00abdf"
 #define GREEN_VALUE         @"a6ce39"
 #define YELLOW_VALUE        @"fec20e"
@@ -106,4 +114,23 @@ static NSString *DEVICEPWD = @"devicepwd";
 // Other
 static NSString *LIST = @"list";
 static NSString *SUCCESS = @"SUCCESS";
+
+static NSString *KEY_TOTAL_STAT = @"TOTAL_STAT";
+static NSString *KEY_PART_STAT = @"PART_STAT";
+
+static NSString *KEY_OFFLINE = @"OFFLINE";
+static NSString *KEY_ONLINE = @"ONLINE";
+static NSString *KEY_REST = @"REST";
+static NSString *KEY_WALK = @"WALK";
+static NSString *KEY_PLAY = @"PLAY";
+static NSString *KEY_RUNNING = @"RUNNING";
+
+enum MotionType {
+    MT_OFFLINE = 0,
+    MT_ONLINE = 1,
+    MT_REST   = 2,
+    MT_WALK   = 3,
+    MT_PLAY   = 4,
+    MT_RUNNING = 5
+    };
 #endif

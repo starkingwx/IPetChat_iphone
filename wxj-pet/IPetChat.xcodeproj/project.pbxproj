@@ -102,6 +102,7 @@
 		F84352A8185C094D006A7C4A /* Pinyin4jBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F84352A6185C094D006A7C4A /* Pinyin4jBundle.bundle */; };
 		F84352AA185C0999006A7C4A /* CommonToolkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F84352A9185C0999006A7C4A /* CommonToolkit.framework */; };
 		F84352AD185C0C08006A7C4A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F84352AF185C0C08006A7C4A /* Localizable.strings */; };
+		F847415F18F933910012AF41 /* MotionStat.m in Sources */ = {isa = PBXBuildFile; fileRef = F847415E18F933910012AF41 /* MotionStat.m */; };
 		F8606D0C1865C007001FF5B0 /* HttpUtils+DeviceServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D0B1865C007001FF5B0 /* HttpUtils+DeviceServer.m */; };
 		F8606D111865C9A9001FF5B0 /* TestApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8606D0F1865C9A9001FF5B0 /* TestApiViewController.m */; };
 		F8606D121865C9A9001FF5B0 /* TestApiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8606D101865C9A9001FF5B0 /* TestApiViewController.xib */; };
@@ -328,6 +329,8 @@
 		F84352A9185C0999006A7C4A /* CommonToolkit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonToolkit.framework; path = IPetChat/Frameworks/CommonToolkit.framework; sourceTree = "<group>"; };
 		F84352AE185C0C08006A7C4A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F84352B1185C0DAC006A7C4A /* UrlConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UrlConfig.h; path = Config/UrlConfig.h; sourceTree = "<group>"; };
+		F847415D18F933910012AF41 /* MotionStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionStat.h; path = Beans/MotionStat.h; sourceTree = "<group>"; };
+		F847415E18F933910012AF41 /* MotionStat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MotionStat.m; path = Beans/MotionStat.m; sourceTree = "<group>"; };
 		F8606D0A1865C007001FF5B0 /* HttpUtils+DeviceServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "HttpUtils+DeviceServer.h"; path = "Util/HttpUtils+DeviceServer.h"; sourceTree = "<group>"; };
 		F8606D0B1865C007001FF5B0 /* HttpUtils+DeviceServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "HttpUtils+DeviceServer.m"; path = "Util/HttpUtils+DeviceServer.m"; sourceTree = "<group>"; };
 		F8606D0E1865C9A9001FF5B0 /* TestApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestApiViewController.h; sourceTree = "<group>"; };
@@ -835,6 +838,8 @@
 				F8DB1B66186F101C0010B771 /* TerminalControl.m */,
 				F8DB1B68186F105E0010B771 /* RollCall.h */,
 				F8DB1B69186F105E0010B771 /* RollCall.m */,
+				F847415D18F933910012AF41 /* MotionStat.h */,
+				F847415E18F933910012AF41 /* MotionStat.m */,
 			);
 			name = Beans;
 			sourceTree = "<group>";
@@ -1160,6 +1165,7 @@
 				F8C98DEE188BDA6300D1E069 /* CustomCalloutView.m in Sources */,
 				F8C98DF4188C00F500D1E069 /* DeviceBindViewController.m in Sources */,
 				F8BF780818E8057A00413963 /* ClockChart.m in Sources */,
+				F847415F18F933910012AF41 /* MotionStat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

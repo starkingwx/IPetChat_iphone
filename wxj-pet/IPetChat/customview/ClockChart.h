@@ -10,4 +10,5 @@
 
 @interface ClockChart : UIView
 
+@property (nonatomic) NSArray *motionStatArray;
 @end
