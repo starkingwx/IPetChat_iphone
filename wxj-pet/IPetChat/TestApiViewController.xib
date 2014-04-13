@@ -36,6 +36,19 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIView" id="1001530415">
+						<reference key="NSNextResponder" ref="13347109"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{38, 480}, {65, 57}}</string>
+						<reference key="NSSuperview" ref="13347109"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAxIDAAA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
 					<object class="IBUIButton" id="903366216">
 						<reference key="NSNextResponder" ref="13347109"/>
 						<int key="NSvFlags">292</int>
@@ -124,10 +137,10 @@
 					<object class="IBUIView" id="307800123">
 						<reference key="NSNextResponder" ref="13347109"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{43, 322}, {235, 179}}</string>
+						<string key="NSFrame">{{65, 305}, {191, 148}}</string>
 						<reference key="NSSuperview" ref="13347109"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1001530415"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -231,17 +244,13 @@
 						<int key="objectID">11</int>
 						<reference key="object" ref="13347109"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="307800123"/>
 							<reference ref="100679495"/>
 							<reference ref="903366216"/>
 							<reference ref="732469640"/>
+							<reference ref="307800123"/>
+							<reference ref="1001530415"/>
 						</array>
 						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="307800123"/>
-						<reference key="parent" ref="13347109"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
@@ -258,6 +267,17 @@
 						<reference key="object" ref="732469640"/>
 						<reference key="parent" ref="13347109"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="1001530415"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="13347109"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="307800123"/>
+						<reference key="parent" ref="13347109"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -268,6 +288,21 @@
 				<string key="10.CustomClassName">ClockChart</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<object class="NSMutableDictionary" key="17.IBAttributePlaceholdersKey">
+					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<reference key="object" ref="1001530415"/>
+						<array key="userDefinedRuntimeAttributes">
+							<object class="IBUserDefinedRuntimeAttribute">
+								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+								<string key="keyPath">layer.cornerRadius</string>
+								<real value="30" key="value"/>
+							</object>
+						</array>
+					</object>
+				</object>
+				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<object class="NSMutableAttributedString" key="4.notes">
 					<object class="NSMutableString" key="NSString">
@@ -281,7 +316,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">17</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
