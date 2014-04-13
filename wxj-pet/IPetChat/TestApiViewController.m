@@ -17,7 +17,8 @@
 @end
 
 @implementation TestApiViewController
-
+@synthesize scrollView;
+@synthesize motionCircleChart;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,34 +52,45 @@
     NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
     NSArray *partStatArray = [motionDataDic objectForKey:KEY_PART_STAT];
     self.motionCircleChart.motionStatArray = partStatArray;
+    self.motionCircleChart.descText = @"当前活跃指数:";
+    self.motionCircleChart.point = 88;
     [self.motionCircleChart setNeedsDisplay];
 }
 
 - (void)testQueryLatestPetInfo:(id)sender {
-    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:@selector(onQueryFail:)];
 }
 
 - (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
     NSLog(@"onQueryFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     int statusCode = pRequest.responseStatusCode;
+    NSString *responseText = [[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"response text: %@", responseText);
     
-    switch (statusCode) {
-            
-        case 200: {
-            // create group and invite ok
-            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
-            NSLog(@"response data: %@", jsonData);
-            if (jsonData) {
-                
-            } else {
-            }
-            
-            break;
-        }
-        default:
-            break;
-    }
+//    switch (statusCode) {
+//            
+//        case 200: {
+//            // create group and invite ok
+//            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+//            NSLog(@"response data: %@", jsonData);
+//            if (jsonData) {
+//                
+//            } else {
+//            }
+//            
+//            break;
+//        }
+//        default:
+//            break;
+//    }
 
+}
+
+- (void)onQueryFail:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onQueryFail - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+    NSLog(@"response data: %@", jsonData);
+    
 }
 
 - (void)testQueryMotionStatInfo:(id)sender {

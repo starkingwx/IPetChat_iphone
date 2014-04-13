@@ -11,4 +11,7 @@
 @interface ClockChart : UIView
 
 @property (nonatomic) NSArray *motionStatArray;
+@property (nonatomic) NSString *descText;
+@property (nonatomic) NSInteger point;
+@property (nonatomic) NSInteger maxPoint;
 @end

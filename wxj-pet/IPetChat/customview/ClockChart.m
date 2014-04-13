@@ -16,38 +16,61 @@
 #define ANGLE_START     90
 #define ANGLE_END       450
 #define ANGLE_DIFF      1.25
-#define LARGE_ARC_RADIUS     50
+#define LARGE_ARC_RADIUS     60
 #define STROKE_WDITH       20
+
+#define GAP         1
+#define FONT_SIZE   12
+@interface ClockChart () {
+    UIFont *_font;
+}
+
+@end
 
 @implementation ClockChart
 
 @synthesize motionStatArray = _motionStatArray;
+@synthesize descText = _descText;
+@synthesize point = _point;
+@synthesize maxPoint = _maxPoint;
 
-- (id)initWithFrame:(CGRect)frame
-{
+
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self customInit];
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self customInit];
+    }
+    return self;
+}
+
+- (void)customInit {
+    _maxPoint = 100;
+    _point = 0;
+    _descText = @"";
+    _font = [UIFont fontWithName:CHINESE_FONT size:FONT_SIZE];
+}
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    // Drawing code
+    NSLog(@"origin - x: %f y: %f, width: %f height: %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    
+    CGFloat centerX = rect.size.width / 2;
+    CGFloat centerY = rect.size.height / 2;
+    CGPoint center = CGPointMake(centerX, centerY);
+
     if (_motionStatArray) {
-        // Drawing code
-        NSLog(@"origin - x: %f y: %f, width: %f height: %f", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-        
-        CGFloat centerX = rect.size.width / 2;
-        CGFloat centerY = rect.size.height / 2;
-        CGPoint center = CGPointMake(centerX, centerY);
-        
-        
-        //    [self drawClockWithStartAngle:ANGLE_START endAngle:(ANGLE_START + 10 * ANGLE_DIFF) color:[UIColor redColor] center:center];
-                
+                       
         CGFloat start = ANGLE_START;
         for (MotionStat *motionStat in _motionStatArray) {
             CGFloat angleStart = start;
@@ -81,7 +104,25 @@
             [self drawClockWithStartAngle:angleStart endAngle:angleEnd color:color center:center];
             start = angleEnd;
         }
+    } else {
+        [self drawClockWithStartAngle:ANGLE_START endAngle:ANGLE_END color:COLOR_OFFLINE center:center];
+
     }
+    
+    CGSize strSize = [self.descText sizeWithFont:_font];
+    CGFloat halfStrWidth = strSize.width / 2;
+    CGFloat tx1 = centerX - halfStrWidth;
+    CGFloat ty1 = centerY - GAP - strSize.height;
+    [[UIColor blackColor] set];
+    [self.descText drawAtPoint:CGPointMake(tx1, ty1) withFont:_font];
+    
+    NSString *pointText = [NSString stringWithFormat:@"%d/%d", _point, _maxPoint];
+    strSize = [pointText sizeWithFont:_font];
+    halfStrWidth = strSize.width / 2;
+    CGFloat tx2 = centerX - halfStrWidth;
+    CGFloat ty2 = centerY + GAP;
+    [pointText drawAtPoint:CGPointMake(tx2, ty2) withFont:_font];
+    
 }
 
 - (void)drawClockWithStartAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor*)color center:(CGPoint)center {

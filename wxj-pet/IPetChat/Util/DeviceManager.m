@@ -120,7 +120,7 @@ static DeviceManager *instance;
     
     operation.archive_operation = arop;
     
-    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, nil];
+    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, TICKACT, nil];
     
     arop.field = field;
     UserBean *user = [[UserManager shareUserManager] userBean];
@@ -146,7 +146,7 @@ static DeviceManager *instance;
 
     operation.archive_operation = arop;
     
-    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, DAYTIME, TYPE, ALARM_SIZE, CRITIC_ALARM, DISTANCE0, DISTANCEN, VITALITY10, VITALITY1N, VITALITY20, VITALITY2N, VITALITY30, VITALITY3N, VITALITY40, VITALITY4N, nil];
+    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, DAYTIME, TYPE, ALARM_SIZE, CRITIC_ALARM, DISTANCE0, DISTANCEN, VITALITY10, VITALITY1N, VITALITY20, VITALITY2N, VITALITY30, VITALITY3N, VITALITY40, VITALITY4N, TICKACT, nil];
     arop.field = field;
     
     WhereCond *wherecond1 = [[WhereCond alloc] init];
