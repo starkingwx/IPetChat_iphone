@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MotionStat.h"
 
 @interface PetInfoUtil : NSObject
 
@@ -37,5 +38,6 @@
 
 // 根据288位的字符串解析出相应的运行数据
 + (NSDictionary*)parse288bitsMotionData:(NSString*)motionData;
-
+// 根据MotionStat里的count计算时长，并转换为指定的时间字符串
++ (NSString*)generateTimeStringFromMotionStat:(MotionStat*)motionStat;
 @end

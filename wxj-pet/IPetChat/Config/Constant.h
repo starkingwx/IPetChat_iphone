@@ -23,12 +23,12 @@
 #define YELLOW              [UIColor colorWithIntegerRed:254 integerGreen:194 integerBlue:14 alpha:1]
 #define ORANGE              [UIColor colorWithIntegerRed:246 integerGreen:136 integerBlue:32 alpha:1]
 
-#define COLOR_OFFLINE       [UIColor colorWithIntegerRed:217 integerGreen:217 integerBlue:217 alpha:1]
+#define COLOR_OFFLINE       [UIColor colorWithIntegerRed:222 integerGreen:222 integerBlue:220 alpha:1]
 #define COLOR_ONLINE        COLOR_OFFLINE
-#define COLOR_REST          [UIColor colorWithIntegerRed:142 integerGreen:181 integerBlue:226 alpha:1]  
-#define COLOR_WALK          [UIColor colorWithIntegerRed:146 integerGreen:208 integerBlue:80 alpha:1]
-#define COLOR_PLAY          [UIColor colorWithIntegerRed:255 integerGreen:255 integerBlue:6 alpha:1]
-#define COLOR_RUNNING       [UIColor colorWithIntegerRed:252 integerGreen:191 integerBlue:6 alpha:1]
+#define COLOR_REST          [UIColor colorWithIntegerRed:141 integerGreen:179 integerBlue:228 alpha:1]  
+#define COLOR_WALK          [UIColor colorWithIntegerRed:169 integerGreen:241 integerBlue:221 alpha:1]
+#define COLOR_PLAY          [UIColor colorWithIntegerRed:254 integerGreen:251 integerBlue:110 alpha:1]
+#define COLOR_RUNNING       [UIColor colorWithIntegerRed:248 integerGreen:195 integerBlue:1 alpha:1]
 
 
 #define BLUE_VALUE          @"00abdf"

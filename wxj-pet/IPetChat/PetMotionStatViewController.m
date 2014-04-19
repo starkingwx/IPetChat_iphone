@@ -13,6 +13,7 @@
 #import "Constant.h"
 #import "PrintObject.h"
 #import "DeviceManager.h"
+#import "MotionStat.h"
 
 static const int TOTAL_HISTORY_DAYS = 7;
 
@@ -39,6 +40,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
 @synthesize weightLabel;
 @synthesize todayTabBody;
 @synthesize historyTabBody;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,6 +82,11 @@ static const int TOTAL_HISTORY_DAYS = 7;
     [self queryLatestPetDeviceInfo];
     [self queryPetInfo];
     
+    
+    // test
+    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
+    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
+    [self fillTodayInfo:motionDataDic];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -257,18 +264,34 @@ static const int TOTAL_HISTORY_DAYS = 7;
 
 - (void)fillTodayInfo:(NSDictionary *)data {
     // set motion point progress
-    NSNumber *vita = [data objectForKey:VITALITY];
-    long vitality = [vita longValue];
-    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
-    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+//    NSNumber *vita = [data objectForKey:VITALITY];
+//    long vitality = [vita longValue];
+//    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
+//    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
+//    
+//    // init pie chart data
+//    int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
+//    int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
+//    int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
+//    int runHeavily = [PetInfoUtil parsePetRunHeavilyPercentage:vitality] * 100;
     
-    // init pie chart data
-    int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
-    int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
-    int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
-    int runHeavily = [PetInfoUtil parsePetRunHeavilyPercentage:vitality] * 100;
-  
+    NSArray *partStatArray = [data objectForKey:KEY_PART_STAT];
+    self.clockChart.motionStatArray = partStatArray;
+    self.clockChart.descText = @"当前活跃指数:";
+    self.clockChart.point = 88;
+    [self.clockChart setNeedsDisplay];
     
+    NSDictionary *totalDic = [data objectForKey:KEY_TOTAL_STAT];
+    MotionStat *rest = [totalDic objectForKey:KEY_REST];
+    MotionStat *walk = [totalDic objectForKey:KEY_WALK];
+    MotionStat *play = [totalDic objectForKey:KEY_PLAY];
+    MotionStat *running = [totalDic objectForKey:KEY_RUNNING];
+    
+    self.restTimeLabel.text = [PetInfoUtil generateTimeStringFromMotionStat:rest];
+    self.walkTimeLabel.text = [PetInfoUtil generateTimeStringFromMotionStat:walk];
+    self.playTimeLabel.text = [PetInfoUtil generateTimeStringFromMotionStat:play];
+    self.runningTimeLabel.text = [PetInfoUtil generateTimeStringFromMotionStat:running];
+
 }
 
 - (void)queryHistoryMotionStatInfo {
