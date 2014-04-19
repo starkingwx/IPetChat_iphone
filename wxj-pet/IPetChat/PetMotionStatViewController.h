@@ -8,28 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "AsynImageView.h"
-#import "XYPieChart.h"
+#import "ClockChart.h"
 #import "BarChartView.h"
 
-@interface PetMotionStatViewController : UIViewController <XYPieChartDataSource>
+@interface PetMotionStatViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *avatarImageViewContainer;
 @property (strong, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *breedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *heightLabel;
 @property (strong, nonatomic) IBOutlet UILabel *weightLabel;
-@property (strong, nonatomic) IBOutlet UILabel *usageCountLabel;
+
 @property (strong, nonatomic) IBOutlet UIView *todayTabBody;
 @property (strong, nonatomic) IBOutlet UIView *historyTabBody;
-@property (strong, nonatomic) IBOutlet XYPieChart *piechart;
-@property (strong, nonatomic) IBOutlet BarChartView *barChart;
-@property (strong, nonatomic) IBOutlet UIProgressView *scoreProgressView;
-@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (strong, nonatomic) IBOutlet UILabel *restPercentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *walkPercentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *runSlightlyPercentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *runHeavilyPercentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *totalTimeLabel;
+
+
+@property (strong, nonatomic) IBOutlet UILabel *playTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *runningTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *walkTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *restTimeLabel;
+@property (strong, nonatomic) IBOutlet ClockChart *clockChart;
+
 
 
 - (IBAction)selectTodayStat:(id)sender;

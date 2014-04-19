@@ -23,7 +23,7 @@
 #define FONT_SIZE   10
 #define SIDE_MARGIN 20
 
-#define ZERO_AM     @"0am"
+#define ZERO_AM     @"12am"
 #define SIX_AM      @"6am"
 #define TWELVE_PM   @"12pm"
 #define SIX_PM      @"6pm"

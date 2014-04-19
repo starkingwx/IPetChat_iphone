@@ -26,8 +26,6 @@ static const int TOTAL_HISTORY_DAYS = 7;
     NSDateFormatter *_displayDateFormatter;
     NSCalendar *_calendar;
 }
-@property (nonatomic) NSMutableArray *slices;
-@property (nonatomic) NSArray *sliceColors;
 
 @end
 
@@ -35,24 +33,12 @@ static const int TOTAL_HISTORY_DAYS = 7;
 
 @synthesize avatarImageViewContainer;
 @synthesize nicknameLabel;
-@synthesize usageCountLabel;
 @synthesize breedLabel;
 @synthesize ageLabel;
 @synthesize heightLabel;
 @synthesize weightLabel;
 @synthesize todayTabBody;
 @synthesize historyTabBody;
-@synthesize slices;
-@synthesize sliceColors;
-@synthesize piechart;
-@synthesize barChart;
-@synthesize scoreLabel;
-@synthesize scoreProgressView;
-@synthesize restPercentLabel;
-@synthesize walkPercentLabel;
-@synthesize runSlightlyPercentLabel;
-@synthesize runHeavilyPercentLabel;
-@synthesize totalTimeLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,14 +49,6 @@ static const int TOTAL_HISTORY_DAYS = 7;
         
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Motion And Health", @"") image:[UIImage imageNamed:@"ic_motion"] tag:1];
 
-        self.sliceColors = [NSArray arrayWithObjects:BLUE,
-                            GREEN,
-                            YELLOW,
-                            ORANGE
-                            ,nil];
-        
-        self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], [NSNumber numberWithInt:0], nil];
-        
         _bcColorArray = [NSArray arrayWithObjects:BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, GREEN_VALUE, BLUE_VALUE, nil];
         _bcLabelColorArray = [NSArray arrayWithObjects:BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, WHITE_VALUE, BLUE_VALUE, nil];
 
@@ -105,7 +83,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.piechart reloadData];
+   
 }
 
 - (void)queryPetInfo {
@@ -202,28 +180,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
     [_avatarView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
     
     // pie chart
-    [self.piechart setDataSource:self];
-    [self.piechart setStartPieAngle:M_PI_2];
-    [self.piechart setAnimationSpeed:1.0];
-    [self.piechart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:12]];
-//    [self.piechart setLabelRadius:160];
-    [self.piechart setShowPercentage:NO];
-    [self.piechart setPieBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-//    [self.piechart setPieCenter:CGPointMake(240, 240)];
-    [self.piechart setUserInteractionEnabled:NO];
-    [self.piechart setLabelShadowColor:[UIColor blackColor]];
-    
-    
-    // bar chart
-    //Set the Shape of the Bars (Rounded or Squared) - Rounded is default
-    [self.barChart setupBarViewShape:BarShapeSquared];
-    
-    //Set the Style of the Bars (Glossy, Matte, or Flat) - Glossy is default
-    [self.barChart setupBarViewStyle:BarStyleFlat];
-    
-    //Set the Drop Shadow of the Bars (Light, Heavy, or None) - Light is default
-    [self.barChart setupBarViewShadow:BarShadowNone];
-    
+        
 }
 
 - (void)didReceiveMemoryWarning
@@ -239,19 +196,15 @@ static const int TOTAL_HISTORY_DAYS = 7;
     [self setAgeLabel:nil];
     [self setHeightLabel:nil];
     [self setWeightLabel:nil];
-    [self setUsageCountLabel:nil];
+   
     [self setTodayTabBody:nil];
     [self setHistoryTabBody:nil];
-    [self setPiechart:nil];
     [_avatarView removeFromSuperview];
-    [self setBarChart:nil];
-    [self setScoreProgressView:nil];
-    [self setScoreLabel:nil];
-    [self setRestPercentLabel:nil];
-    [self setWalkPercentLabel:nil];
-    [self setRunSlightlyPercentLabel:nil];
-    [self setRunHeavilyPercentLabel:nil];
-    [self setTotalTimeLabel:nil];
+    [self setPlayTimeLabel:nil];
+    [self setRunningTimeLabel:nil];
+    [self setWalkTimeLabel:nil];
+    [self setRestTimeLabel:nil];
+    [self setClockChart:nil];
     [super viewDidUnload];
 }
 - (IBAction)selectTodayStat:(id)sender {
@@ -265,21 +218,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
     
     [self queryHistoryMotionStatInfo];
 }
-#pragma mark - datasource
-- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
-{
-    return self.slices.count;
-}
 
-- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
-{
-    return [[self.slices objectAtIndex:index] intValue];
-}
-
-- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
-{
-    return [self.sliceColors objectAtIndex:(index % self.sliceColors.count)];
-}
 - (void)queryLatestPetDeviceInfo {
     [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
 }
@@ -322,23 +261,14 @@ static const int TOTAL_HISTORY_DAYS = 7;
     long vitality = [vita longValue];
     float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
     NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
-    self.scoreLabel.text = [NSString stringWithFormat:@"%d", point];
-    [self.scoreProgressView setProgress:motionPercentage animated:YES];
     
     // init pie chart data
     int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
     int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
     int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
     int runHeavily = [PetInfoUtil parsePetRunHeavilyPercentage:vitality] * 100;
-    self.slices = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:rest], [NSNumber numberWithInt:walk], [NSNumber numberWithInt:runSlightly], [NSNumber numberWithInt:runHeavily], nil];
-    [self.piechart reloadData];
+  
     
-    self.restPercentLabel.text = [NSString stringWithFormat:@"%d%%", rest];
-    self.walkPercentLabel.text = [NSString stringWithFormat:@"%d%%", walk];
-    self.runSlightlyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runSlightly];
-    self.runHeavilyPercentLabel.text = [NSString stringWithFormat:@"%d%%", runHeavily];
-
-
 }
 
 - (void)queryHistoryMotionStatInfo {
@@ -461,12 +391,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
             [titleArray addObject:[_displayDateFormatter stringFromDate:date]];
         }
         
-        NSArray *barChartDataArray = [self.barChart createChartDataWithTitles:titleArray values:valueArray colors:_bcColorArray labelColors:_bcLabelColorArray];
-        
-        [self.barChart setDataWithArray:barChartDataArray
-                              showAxis:DisplayBothAxes
-                             withColor:[UIColor whiteColor]
-               shouldPlotVerticalLines:NO];
+     
     }
 
 }

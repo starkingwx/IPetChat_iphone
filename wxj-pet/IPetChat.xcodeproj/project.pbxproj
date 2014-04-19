@@ -94,6 +94,8 @@
 		F8090C3A185C3B580098939B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8090C38185C3B580098939B /* LoginViewController.xib */; };
 		F8090C3E185C53690098939B /* dog.png in Resources */ = {isa = PBXBuildFile; fileRef = F8090C3D185C53690098939B /* dog.png */; };
 		F8090C40185C58700098939B /* weibo_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8090C3F185C58700098939B /* weibo_logo.png */; };
+		F83AD590190281B1005F7A2E /* bg_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = F83AD58F190281B1005F7A2E /* bg_clock.png */; };
+		F83AD592190281BD005F7A2E /* bg_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F83AD591190281BD005F7A2E /* bg_clock@2x.png */; };
 		F842F3421867155D00982B7A /* UserBean+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F3411867155D00982B7A /* UserBean+Device.m */; };
 		F842F345186725F200982B7A /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F344186725F200982B7A /* DeviceManager.m */; };
 		F84352A0185C0821006A7C4A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F843529F185C0821006A7C4A /* AddressBook.framework */; };
@@ -318,6 +320,8 @@
 		F8090C38185C3B580098939B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Account/LoginViewController.xib; sourceTree = "<group>"; };
 		F8090C3D185C53690098939B /* dog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dog.png; path = Pictures/dog.png; sourceTree = "<group>"; };
 		F8090C3F185C58700098939B /* weibo_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weibo_logo.png; path = Pictures/weibo_logo.png; sourceTree = "<group>"; };
+		F83AD58F190281B1005F7A2E /* bg_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_clock.png; path = Pictures/bg_clock.png; sourceTree = "<group>"; };
+		F83AD591190281BD005F7A2E /* bg_clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_clock@2x.png"; path = "Pictures/bg_clock@2x.png"; sourceTree = "<group>"; };
 		F842F3401867155D00982B7A /* UserBean+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+Device.h"; path = "Account/UserBean+Device.h"; sourceTree = "<group>"; };
 		F842F3411867155D00982B7A /* UserBean+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+Device.m"; path = "Account/UserBean+Device.m"; sourceTree = "<group>"; };
 		F842F343186725F200982B7A /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceManager.h; path = Util/DeviceManager.h; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 		B71A9CE418373FE300B68D10 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				F83AD591190281BD005F7A2E /* bg_clock@2x.png */,
+				F83AD58F190281B1005F7A2E /* bg_clock.png */,
 				F8C98DEF188BF98000D1E069 /* ic_dog_annotation.png */,
 				F8CAE6FC18793C5600EA9F66 /* bg_locate_bt.png */,
 				F8CAE6FD18793C5600EA9F66 /* bg_locate_bt@2x.png */,
@@ -1088,6 +1094,8 @@
 				F8F32460188BA8F000B82A97 /* AMap.bundle in Resources */,
 				F8C98DF0188BF98000D1E069 /* ic_dog_annotation.png in Resources */,
 				F8C98DF5188C00F500D1E069 /* DeviceBindViewController.xib in Resources */,
+				F83AD590190281B1005F7A2E /* bg_clock.png in Resources */,
+				F83AD592190281BD005F7A2E /* bg_clock@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
