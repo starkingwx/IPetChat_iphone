@@ -11,6 +11,6 @@
 @interface MotionStat : NSObject
 @property (nonatomic) NSInteger type;
 @property (nonatomic) NSInteger count;
-
+@property (nonatomic) NSString *timeStr;
 
 @end

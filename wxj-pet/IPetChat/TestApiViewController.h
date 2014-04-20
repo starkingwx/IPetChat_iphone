@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ClockChart.h"
+#import "LineBarChart.h"
 
 @interface TestApiViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet ClockChart *motionCircleChart;
+@property (strong, nonatomic) IBOutlet LineBarChart *barChart;
 
 - (IBAction)testQueryLatestPetInfo:(id)sender;
 

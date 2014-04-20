@@ -12,6 +12,7 @@
 
 @synthesize type;
 @synthesize count;
+@synthesize timeStr;
 
 - (id)init {
     self = [super init];

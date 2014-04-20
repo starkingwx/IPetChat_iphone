@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.scrollView.contentSize = CGSizeMake(320, 600);
+    self.scrollView.contentSize = CGSizeMake(320, 800);
     [self.scrollView flashScrollIndicators];
 }
 
@@ -55,6 +55,28 @@
     self.motionCircleChart.descText = @"当前活跃指数:";
     self.motionCircleChart.point = 88;
     [self.motionCircleChart setNeedsDisplay];
+    
+    
+    //
+    NSDictionary *totalDic = [motionDataDic objectForKey:KEY_TOTAL_STAT];
+    NSMutableDictionary *firstDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [firstDayDic setObject:@"4月20日" forKey:KEY_DAY];
+    NSMutableDictionary *secondDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [secondDayDic setObject:@"4月21日" forKey:KEY_DAY];
+    NSMutableDictionary *thirdDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [thirdDayDic setObject:@"4月22日" forKey:KEY_DAY];
+    NSMutableDictionary *fourthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [fourthDayDic setObject:@"4月23日" forKey:KEY_DAY];
+    NSMutableDictionary *fifthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [fifthDayDic setObject:@"4月24日" forKey:KEY_DAY];
+    NSMutableDictionary *sixthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [sixthDayDic setObject:@"4月25日" forKey:KEY_DAY];
+    NSMutableDictionary *seventhDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [seventhDayDic setObject:@"4月26日" forKey:KEY_DAY];
+    
+    NSArray *dataArray = [NSArray arrayWithObjects:firstDayDic, secondDayDic, thirdDayDic, fourthDayDic, fifthDayDic, sixthDayDic, seventhDayDic, nil];
+    self.barChart.dataArray = dataArray;
+    [self.barChart setNeedsDisplay];
 }
 
 - (void)testQueryLatestPetInfo:(id)sender {
@@ -188,6 +210,7 @@
 - (void)viewDidUnload {
     [self setScrollView:nil];
     [self setMotionCircleChart:nil];
+    [self setBarChart:nil];
     [super viewDidUnload];
 }
 @end

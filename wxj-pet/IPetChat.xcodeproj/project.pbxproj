@@ -96,6 +96,7 @@
 		F8090C40185C58700098939B /* weibo_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F8090C3F185C58700098939B /* weibo_logo.png */; };
 		F83AD590190281B1005F7A2E /* bg_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = F83AD58F190281B1005F7A2E /* bg_clock.png */; };
 		F83AD592190281BD005F7A2E /* bg_clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F83AD591190281BD005F7A2E /* bg_clock@2x.png */; };
+		F83AD5951902C6E0005F7A2E /* LineBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5941902C6E0005F7A2E /* LineBarChart.m */; };
 		F842F3421867155D00982B7A /* UserBean+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F3411867155D00982B7A /* UserBean+Device.m */; };
 		F842F345186725F200982B7A /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F842F344186725F200982B7A /* DeviceManager.m */; };
 		F84352A0185C0821006A7C4A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F843529F185C0821006A7C4A /* AddressBook.framework */; };
@@ -322,6 +323,8 @@
 		F8090C3F185C58700098939B /* weibo_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weibo_logo.png; path = Pictures/weibo_logo.png; sourceTree = "<group>"; };
 		F83AD58F190281B1005F7A2E /* bg_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_clock.png; path = Pictures/bg_clock.png; sourceTree = "<group>"; };
 		F83AD591190281BD005F7A2E /* bg_clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_clock@2x.png"; path = "Pictures/bg_clock@2x.png"; sourceTree = "<group>"; };
+		F83AD5931902C6E0005F7A2E /* LineBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineBarChart.h; sourceTree = "<group>"; };
+		F83AD5941902C6E0005F7A2E /* LineBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineBarChart.m; sourceTree = "<group>"; };
 		F842F3401867155D00982B7A /* UserBean+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UserBean+Device.h"; path = "Account/UserBean+Device.h"; sourceTree = "<group>"; };
 		F842F3411867155D00982B7A /* UserBean+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UserBean+Device.m"; path = "Account/UserBean+Device.m"; sourceTree = "<group>"; };
 		F842F343186725F200982B7A /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceManager.h; path = Util/DeviceManager.h; sourceTree = "<group>"; };
@@ -859,6 +862,8 @@
 				F8C98DEA188BD9BD00D1E069 /* CustomAnnotationView.m */,
 				F8BF780618E8057A00413963 /* ClockChart.h */,
 				F8BF780718E8057A00413963 /* ClockChart.m */,
+				F83AD5931902C6E0005F7A2E /* LineBarChart.h */,
+				F83AD5941902C6E0005F7A2E /* LineBarChart.m */,
 			);
 			path = customview;
 			sourceTree = "<group>";
@@ -1174,6 +1179,7 @@
 				F8C98DF4188C00F500D1E069 /* DeviceBindViewController.m in Sources */,
 				F8BF780818E8057A00413963 /* ClockChart.m in Sources */,
 				F847415F18F933910012AF41 /* MotionStat.m in Sources */,
+				F83AD5951902C6E0005F7A2E /* LineBarChart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

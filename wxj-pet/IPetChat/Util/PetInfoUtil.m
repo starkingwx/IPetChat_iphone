@@ -172,6 +172,12 @@ static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
     motionStat.count = count;
     [partStatArray addObject:motionStat];
     
+    
+    rest.timeStr = [self generateTimeStringFromMotionStat:rest];
+    walk.timeStr = [self generateTimeStringFromMotionStat:walk];
+    play.timeStr = [self generateTimeStringFromMotionStat:play];
+    running.timeStr = [self generateTimeStringFromMotionStat:running];
+    
     NSDictionary *motionStatDataDic = [NSDictionary dictionaryWithObjectsAndKeys:totalDic, KEY_TOTAL_STAT, partStatArray, KEY_PART_STAT, nil];
     
     return motionStatDataDic;

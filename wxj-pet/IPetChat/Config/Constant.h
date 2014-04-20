@@ -10,6 +10,7 @@
 #define IPetChat_Constant_h
 
 #import <Foundation/Foundation.h>
+#import "CommonToolkit/CommonToolkit.h"
 
 #define CHINESE_FONT            @"ArialMT"
 #define CHINESE_BOLD_FONT       @"Arial-BoldMT"
@@ -125,6 +126,9 @@ static NSString *KEY_REST = @"REST";
 static NSString *KEY_WALK = @"WALK";
 static NSString *KEY_PLAY = @"PLAY";
 static NSString *KEY_RUNNING = @"RUNNING";
+
+static NSString *KEY_DAY = @"DAY";
+
 
 enum MotionType {
     MT_OFFLINE = 0,

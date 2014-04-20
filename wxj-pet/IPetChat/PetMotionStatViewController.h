@@ -10,6 +10,7 @@
 #import "AsynImageView.h"
 #import "ClockChart.h"
 #import "BarChartView.h"
+#import "LineBarChart.h"
 
 @interface PetMotionStatViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *avatarImageViewContainer;
