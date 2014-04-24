@@ -11,4 +11,6 @@
 @interface WhereCond : NSObject
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *value;
+@property (nonatomic, strong) NSString *operator;
+@property (nonatomic, strong) NSString *type;
 @end

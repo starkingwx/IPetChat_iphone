@@ -11,4 +11,6 @@
 @implementation WhereCond
 @synthesize name;
 @synthesize value;
+@synthesize operator;
+@synthesize type;
 @end

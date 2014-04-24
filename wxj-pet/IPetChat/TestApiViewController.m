@@ -129,19 +129,20 @@
     
 //    NSDate *beginTime = [calender dateFromComponents:dateCom];
     
-    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:sevenDaysAgo andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:nil];
+    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:sevenDaysAgo andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onFinishedQueryMotionStatInfo:) andFailedRespSelector:@selector(onQueryFail:)];
 }
 
 - (void)onFinishedQueryMotionStatInfo:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedQueryMotionStatInfo - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     int statusCode = pRequest.responseStatusCode;
     
+    NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+    NSLog(@"response data: %@", jsonData);
+    
     switch (statusCode) {
             
         case 200: {
             // create group and invite ok
-            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
-            NSLog(@"response data: %@", jsonData);
             if (jsonData) {
                 NSString *status = [jsonData objectForKey:STATUS];
                 if ([SUCCESS isEqualToString:status]) {
@@ -181,20 +182,20 @@
 }
 
 - (void)testOrderDeviceServer:(id)sender {
-    [[DeviceManager shareDeviceManager] orderDeviceServerWithProcessor:self andFinishedRespSelector:@selector(onFinishedOrderDeviceServer:) andFailedRespSelector:nil];
+    [[DeviceManager shareDeviceManager] orderDeviceServerWithProcessor:self andFinishedRespSelector:@selector(onFinishedOrderDeviceServer:) andFailedRespSelector:@selector(onQueryFail:)];
 }
 
 
 - (void)onFinishedOrderDeviceServer:(ASIHTTPRequest *)pRequest {
     NSLog(@"onFinishedOrderDeviceServer - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
     int statusCode = pRequest.responseStatusCode;
+    NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+    NSLog(@"response data: %@", jsonData);
     
     switch (statusCode) {
             
         case 200: {
             // create group and invite ok
-            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
-            NSLog(@"response data: %@", jsonData);
             if (jsonData) {
                 
             } else {

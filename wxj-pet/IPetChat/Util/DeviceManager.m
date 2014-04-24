@@ -120,7 +120,7 @@ static DeviceManager *instance;
     
     operation.archive_operation = arop;
     
-    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, TICKACT, nil];
+    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, nil];
     
     arop.field = field;
     UserBean *user = [[UserManager shareUserManager] userBean];
@@ -148,16 +148,22 @@ static DeviceManager *instance;
     
     NSArray *field = [NSArray arrayWithObjects:ID, TERMID, DAYTIME, TYPE, ALARM_SIZE, CRITIC_ALARM, DISTANCE0, DISTANCEN, VITALITY10, VITALITY1N, VITALITY20, VITALITY2N, VITALITY30, VITALITY3N, VITALITY40, VITALITY4N, TICKACT, nil];
     arop.field = field;
+   
     
-    WhereCond *wherecond1 = [[WhereCond alloc] init];
-    wherecond1.name = @"begintime";
     NSDateFormatter *formater = [[NSDateFormatter alloc] init];
-    [formater setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [formater setDateFormat:@"yyyy-MM-dd"];
+
+    WhereCond *wherecond1 = [[WhereCond alloc] init];
+    wherecond1.name = @"daytime";
+    wherecond1.operator = @"GREAT_EQUAL";
+    wherecond1.type = @"DATETIME";
     NSString *btime = [formater stringFromDate:beginTime];
     wherecond1.value = btime;
     
     WhereCond *wherecond2 = [[WhereCond alloc] init];
-    wherecond2.name = @"endtime";
+    wherecond2.name = @"daytime";
+    wherecond2.operator = @"LESS_THAN";
+    wherecond2.type = @"DATETIME";
     wherecond2.value = [formater stringFromDate:endTime];
     
     arop.wherecond = [NSArray arrayWithObjects:wherecond1, wherecond2, nil];

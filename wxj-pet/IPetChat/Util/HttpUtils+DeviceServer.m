@@ -33,11 +33,6 @@
     NSMutableArray *_sortedParameterDataArray = [[NSMutableArray alloc] initWithArray:[_parameterDataArray sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)]];
     NSLog(@"sorted post body data array = %@", _sortedParameterDataArray);
     
-    // append userKey to sort parameter data array
-    if([[[UserManager shareUserManager] userBean] userKey]){
-        [_sortedParameterDataArray addObject:[[[UserManager shareUserManager] userBean] userKey]];
-    }
-    
     // add cipher key
 
     NSMutableArray *paramArray = [[NSMutableArray alloc] init];
