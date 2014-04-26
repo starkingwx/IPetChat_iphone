@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "AsynImageView.h"
 #import "ClockChart.h"
-#import "BarChartView.h"
 #import "LineBarChart.h"
 
 @interface PetMotionStatViewController : UIViewController
@@ -29,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *walkTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *restTimeLabel;
 @property (strong, nonatomic) IBOutlet ClockChart *clockChart;
+@property (strong, nonatomic) IBOutlet LineBarChart *lineBarChart;
 
 
 

@@ -84,9 +84,29 @@ static const int TOTAL_HISTORY_DAYS = 7;
     
 //    
 //    // test
-//    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
-//    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
-//    [self fillTodayInfo:motionDataDic];
+    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
+    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
+    [self fillTodayInfo:motionDataDic];
+    
+    
+    NSDictionary *totalDic = [motionDataDic objectForKey:KEY_TOTAL_STAT];
+    NSMutableDictionary *firstDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [firstDayDic setObject:@"4月20日" forKey:KEY_DAY];
+    NSMutableDictionary *secondDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [secondDayDic setObject:@"4月21日" forKey:KEY_DAY];
+    NSMutableDictionary *thirdDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [thirdDayDic setObject:@"4月22日" forKey:KEY_DAY];
+    NSMutableDictionary *fourthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [fourthDayDic setObject:@"4月23日" forKey:KEY_DAY];
+    NSMutableDictionary *fifthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [fifthDayDic setObject:@"4月24日" forKey:KEY_DAY];
+    NSMutableDictionary *sixthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [sixthDayDic setObject:@"4月25日" forKey:KEY_DAY];
+    NSMutableDictionary *seventhDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+    [seventhDayDic setObject:@"4月26日" forKey:KEY_DAY];
+    
+    NSArray *dataArray = [NSArray arrayWithObjects:firstDayDic, secondDayDic, thirdDayDic, fourthDayDic, fifthDayDic, sixthDayDic, seventhDayDic, nil];
+    [self renderHistoryData:dataArray];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -212,6 +232,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
     [self setWalkTimeLabel:nil];
     [self setRestTimeLabel:nil];
     [self setClockChart:nil];
+    [self setLineBarChart:nil];
     [super viewDidUnload];
 }
 - (IBAction)selectTodayStat:(id)sender {
@@ -220,9 +241,9 @@ static const int TOTAL_HISTORY_DAYS = 7;
 
     
     // test
-    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
-    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
-    [self fillTodayInfo:motionDataDic];
+//    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
+//    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
+//    [self fillTodayInfo:motionDataDic];
 
 }
 
@@ -423,6 +444,12 @@ static const int TOTAL_HISTORY_DAYS = 7;
         
      
     }
+
+}
+
+- (void)renderHistoryData:(NSArray *)dataArray {
+    self.lineBarChart.dataArray = dataArray;
+    [self.lineBarChart setNeedsDisplay];
 
 }
 

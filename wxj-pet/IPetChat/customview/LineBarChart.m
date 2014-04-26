@@ -10,7 +10,9 @@
 #import "Constant.h"
 #import "MotionStat.h"
 
-#define FONT_SIZE   9
+#define FONT_SMALL_SIZE     8
+#define FONT_SIZE           9
+#define FONT_LARGE_SIZE     12  
 #define BAR_WIDTH           15.0
 #define BOTTOM_GAP_SIZE     40.0
 #define DATE_TEXT_GAP       4
@@ -22,13 +24,19 @@
 #define RIGHT_SIDE_GAP      10.0
 
 #define TOP_POINT_GAP       6
+#define DIAMOND_RADIUS      3
+
+#define TARGET_LINE_COLOR   [UIColor colorWithIntegerRed:0 integerGreen:146 integerBlue:216 alpha:1]
+
+static NSString *TARGET = @"目标";
 
 
 @interface LineBarChart () {
     CGFloat _unit;
     CGFloat _halfBarWidth;
     UIFont *_font;
-
+    UIFont *_largeFont;
+    UIFont *_smallFont;
 }
 
 @end
@@ -60,6 +68,8 @@
     _unit = TARGET_BAR_HEIGHT / FULL_TIME_COUNT;
     _halfBarWidth = BAR_WIDTH / 2;
     _font = [UIFont fontWithName:CHINESE_FONT size:FONT_SIZE];
+    _largeFont = [UIFont fontWithName:CHINESE_FONT size:FONT_LARGE_SIZE];
+    _smallFont = [UIFont fontWithName:CHINESE_FONT size:FONT_SMALL_SIZE];
 }
 
 
@@ -77,8 +87,19 @@
     CGFloat whiteGap = (width - BAR_WIDTH * _dataArray.count) / (_dataArray.count - 1);
     
     CGFloat baseLineY = rect.origin.y + rect.size.height - BOTTOM_GAP_SIZE;
+       
+    // draw target line
+    // draw text
+    [[UIColor blackColor] set];
+    CGFloat targetLineY = baseLineY - TARGET_BAR_HEIGHT - TOP_POINT_GAP;
+    CGSize strSize = [TARGET sizeWithFont:_largeFont];
+    [TARGET drawAtPoint:CGPointMake(rect.origin.x + 2, targetLineY - strSize.height / 2) withFont:_largeFont];
+    // draw line
+    UIBezierPath *targetLine = [UIBezierPath bezierPath];
+    [targetLine moveToPoint:CGPointMake(rect.origin.x + LEFT_SIDE_GAP, targetLineY)];
     
     CGPoint startPoint = CGPointMake(rect.origin.x + LEFT_SIDE_GAP + _halfBarWidth, baseLineY);
+
     CGFloat previousTopY = -1;
     UIBezierPath *linePath = [UIBezierPath bezierPath];
     linePath.lineWidth = 1;
@@ -89,19 +110,51 @@
         }
         CGFloat topPointY = [self drawBarWithStartPoint:startPoint barData:data];
         
+        // draw line on the top of bar
+        CGPoint point = CGPointMake(startPoint.x, topPointY);
         if (previousTopY < 0) {
             previousTopY = topPointY;
-            [linePath moveToPoint:CGPointMake(startPoint.x, topPointY)];
+            [linePath moveToPoint:point];
         } else {
-            [linePath addLineToPoint:CGPointMake(startPoint.x, topPointY)];
+            [linePath addLineToPoint:point];
         }
+        [self drawDiamondPoint:point color:[UIColor blackColor]];
         
     }
+    
+    [targetLine addLineToPoint:CGPointMake(rect.origin.x + rect.size.width - RIGHT_SIDE_GAP, targetLineY)];
+    targetLine.lineWidth = 1;
+    [TARGET_LINE_COLOR setStroke];
+    [targetLine stroke];
+    
     
     [[UIColor blackColor] setStroke];
     [linePath stroke];
 }
 
+- (void)drawDiamondPoint:(CGPoint)point color:(UIColor *)color {
+    UIBezierPath *diamond = [UIBezierPath bezierPath];
+    CGPoint startPoint = CGPointMake(point.x - DIAMOND_RADIUS, point.y);
+    [diamond moveToPoint:startPoint];
+    [diamond addLineToPoint:CGPointMake(point.x, point.y - DIAMOND_RADIUS)];
+    [diamond addLineToPoint:CGPointMake(point.x + DIAMOND_RADIUS, point.y)];
+    [diamond addLineToPoint:CGPointMake(point.x, point.y + DIAMOND_RADIUS)];
+    [diamond closePath];
+    
+    CGContextRef aRef = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(aRef);
+    
+    [color setFill];
+    [diamond fill];
+    CGContextRestoreGState(aRef);
+    
+}
+
+/**
+ * draw bar
+ * @param startPoint - base point for drawing bar
+ * @param data - data to render bar
+ */
 - (CGFloat)drawBarWithStartPoint:(CGPoint)startPoint barData:(NSDictionary *)data {
     if (data == nil || [data count] <= 0) {
         return startPoint.y - TOP_POINT_GAP;
@@ -159,6 +212,13 @@
     
     barSecPath.lineWidth = BAR_WIDTH;
     [barSecPath stroke];
+    
+    // draw text in the middle of bar
+    CGSize strSize = [text sizeWithFont:_smallFont];
+    if (strSize.height <= abs((startPoint.y - endPoint.y))) {
+        CGPoint textPoint = CGPointMake(startPoint.x, (startPoint.y + endPoint.y - strSize.height) / 2);
+        [text drawAtPoint:textPoint withFont:_smallFont];
+    }
     
     CGContextRestoreGState(aRef);
 }
