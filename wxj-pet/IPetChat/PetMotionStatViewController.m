@@ -255,7 +255,8 @@ static const int TOTAL_HISTORY_DAYS = 7;
 }
 
 - (void)queryLatestPetDeviceInfo {
-    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+    NSDate *today = [NSDate date];
+    [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:today andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
 }
 
 - (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
@@ -265,17 +266,21 @@ static const int TOTAL_HISTORY_DAYS = 7;
     switch (statusCode) {
             
         case 200: {
-            // create group and invite ok
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             NSLog(@"response data: %@", jsonData);
             if (jsonData) {
                 NSString *status = [jsonData objectForKey:STATUS];
                 if ([SUCCESS isEqualToString:status]) {
                     NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
-                    NSArray *trackSdata = [archOp objectForKey:TRACK_SDATE];
-                    if (trackSdata && [trackSdata count] > 0) {
-                        NSDictionary *data = [trackSdata objectAtIndex:0];
-                        [self fillTodayInfo:data];
+                    
+                    NSArray *dailySummary = [archOp objectForKey:DAILY_SUMMARY];
+                    if (dailySummary && [dailySummary count] > 0) {
+                        NSDictionary *today = [dailySummary objectAtIndex:[dailySummary count] - 1];
+                        NSString *tickact = [today objectForKey:TICKACT];
+                        if (tickact) {
+                            NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:tickact];
+                            [self fillTodayInfo:motionDataDic];
+                        }
                     }
                 }
             } else {
@@ -291,17 +296,6 @@ static const int TOTAL_HISTORY_DAYS = 7;
 
 
 - (void)fillTodayInfo:(NSDictionary *)data {
-    // set motion point progress
-//    NSNumber *vita = [data objectForKey:VITALITY];
-//    long vitality = [vita longValue];
-//    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:vitality];
-//    NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
-//    
-//    // init pie chart data
-//    int rest = [PetInfoUtil parsePetRestPercentage:vitality] * 100;
-//    int walk = [PetInfoUtil parsePetWalkPercentage:vitality] * 100;
-//    int runSlightly = [PetInfoUtil parsePetRunSlightlyPercentage:vitality] * 100;
-//    int runHeavily = [PetInfoUtil parsePetRunHeavilyPercentage:vitality] * 100;
     
     NSArray *partStatArray = [data objectForKey:KEY_PART_STAT];
     self.clockChart.motionStatArray = partStatArray;
@@ -369,50 +363,19 @@ static const int TOTAL_HISTORY_DAYS = 7;
 
 - (void)fillHistoryData:(NSArray*)dailySummary {
     if (dailySummary && [dailySummary count] > 0) {
-        NSDictionary *today = [dailySummary objectAtIndex:[dailySummary count] - 1];
-        NSNumber *vitality20 = [today objectForKey:VITALITY20];
-        NSNumber *vitality2N = [today objectForKey:VITALITY2N];
-        NSNumber *vitality30 = [today objectForKey:VITALITY30];
-        NSNumber *vitality3N = [today objectForKey:VITALITY3N];
-        NSNumber *vitality40 = [today objectForKey:VITALITY40];
-        NSNumber *vitality4N = [today objectForKey:VITALITY4N];
-        
-        unsigned long walkTime = [vitality2N unsignedLongValue] - [vitality20 unsignedLongValue];
-        unsigned long runSlightlyTime = [vitality3N unsignedLongValue] - [vitality30 unsignedLongValue];
-        unsigned long runHeavilyTime = [vitality4N unsignedLongValue] - [vitality40 unsignedLongValue];
-        
-        unsigned long vitality = [PetInfoUtil calculate4MotionPartPercentageByWalkTime:walkTime andRunSlightlyTime:runSlightlyTime andRunHeavily:runHeavilyTime];
-        
-        NSInteger todayPoint = [PetInfoUtil calculateMotionPoint:vitality];
-        NSLog(@"point: %d", todayPoint);
         
         NSMutableArray *historyPoints = [[NSMutableArray alloc] initWithCapacity:6];
         NSMutableArray *historyDates = [[NSMutableArray alloc] initWithCapacity:6];
-        for (int i = 0; i < [dailySummary count] - 1; i++) {
+        for (int i = 0; i < [dailySummary count]; i++) {
             NSDictionary *day = [dailySummary objectAtIndex:i];
-            NSDictionary *dayNext = [dailySummary objectAtIndex:i + 1];
-            
-            NSNumber *vitality20Day = [day objectForKey:VITALITY20];
-            NSNumber *vitality30Day = [day objectForKey:VITALITY30];
-            NSNumber *vitality40Day = [day objectForKey:VITALITY40];
-            
-            NSNumber *vitality20DayNext = [dayNext objectForKey:VITALITY20];
-            NSNumber *vitality30DayNext = [dayNext objectForKey:VITALITY30];
-            NSNumber *vitality40DayNext = [dayNext objectForKey:VITALITY40];
-            
-            walkTime = [vitality20DayNext unsignedLongValue] - [vitality20Day unsignedLongValue];
-            runSlightlyTime = [vitality30DayNext unsignedLongValue] - [vitality30Day unsignedLongValue];
-            runHeavilyTime = [vitality40DayNext unsignedLongValue] - [vitality40Day unsignedLongValue];
-            
-            vitality = [PetInfoUtil calculate4MotionPartPercentageByWalkTime:walkTime andRunSlightlyTime:runSlightlyTime andRunHeavily:runHeavilyTime];
-            NSInteger point = [PetInfoUtil calculateMotionPoint:vitality];
-            [historyPoints addObject:[NSNumber numberWithInteger:point]];
-            
+            NSString *tickact = [day objectForKey:TICKACT];
+            NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:tickact];
+            NSDictionary *totalDic = [motionDataDic objectForKey:KEY_TOTAL_STAT];
+            NSMutableDictionary *dayDataDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+
+            [historyPoints addObject:dayDataDic];
             [historyDates addObject:[day objectForKey:DAYTIME]];
         }
-        
-        [historyPoints addObject:[NSNumber numberWithInteger:todayPoint]];
-        [historyDates addObject:[today objectForKey:DAYTIME]];
         
         NSLog(@"history dates: %@", historyDates);
         
@@ -428,20 +391,20 @@ static const int TOTAL_HISTORY_DAYS = 7;
                 [dateDiff setDay:i - dayGap];
                 NSDate *historyDay = [_calendar dateByAddingComponents:dateDiff toDate:firstDate options:0];
                 [historyDates insertObject:[_historyDateFormatter stringFromDate:historyDay] atIndex:i];
-                [historyPoints insertObject:[NSNumber numberWithInt:0] atIndex:i];
+                NSMutableDictionary *dayDataDic = [NSMutableDictionary dictionaryWithCapacity:1];
+                [historyPoints insertObject:dayDataDic atIndex:i];
             }
         }
         
-        NSMutableArray *titleArray = [[NSMutableArray alloc] initWithCapacity:historyDates.count];
-        NSMutableArray *valueArray = [[NSMutableArray alloc] initWithCapacity:historyPoints.count];
         for (int i = 0; i < [historyDates count]; i++) {
-            [valueArray addObject:[[historyPoints objectAtIndex:i] stringValue]];
-            
             NSString *dateTime = [historyDates objectAtIndex:i];
             NSDate *date = [_historyDateFormatter dateFromString:dateTime];
-            [titleArray addObject:[_displayDateFormatter stringFromDate:date]];
+            
+            NSMutableDictionary *dayDataDic = [historyPoints objectAtIndex:i];
+            [dayDataDic setObject:[_displayDateFormatter stringFromDate:date] forKey:KEY_DAY];
         }
-        
+    
+        [self renderHistoryData:historyPoints];
      
     }
 
