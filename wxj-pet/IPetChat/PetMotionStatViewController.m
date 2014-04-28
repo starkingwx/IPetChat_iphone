@@ -24,6 +24,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
     NSArray *_bcColorArray;
     NSArray *_bcLabelColorArray;
     NSDateFormatter *_historyDateFormatter;
+    NSDateFormatter *_historyDateFormatter2;
     NSDateFormatter *_displayDateFormatter;
     NSCalendar *_calendar;
 }
@@ -62,6 +63,10 @@ static const int TOTAL_HISTORY_DAYS = 7;
         NSTimeZone *timezone = [NSTimeZone timeZoneForSecondsFromGMT:8];
         [_historyDateFormatter setTimeZone:timezone];
         
+        _historyDateFormatter2 = [[NSDateFormatter alloc] init];
+        [_historyDateFormatter2 setDateFormat:@"yyyy-MM-dd HH:mm:ss.s"];
+        [_historyDateFormatter2 setTimeZone:timezone];
+        
         _displayDateFormatter = [[NSDateFormatter alloc] init];
         [_displayDateFormatter setDateFormat:@"MM-dd"];
         [_displayDateFormatter setTimeZone:timezone];
@@ -84,29 +89,29 @@ static const int TOTAL_HISTORY_DAYS = 7;
     
 //    
 //    // test
-    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
-    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
-    [self fillTodayInfo:motionDataDic];
-    
-    
-    NSDictionary *totalDic = [motionDataDic objectForKey:KEY_TOTAL_STAT];
-    NSMutableDictionary *firstDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [firstDayDic setObject:@"4月20日" forKey:KEY_DAY];
-    NSMutableDictionary *secondDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [secondDayDic setObject:@"4月21日" forKey:KEY_DAY];
-    NSMutableDictionary *thirdDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [thirdDayDic setObject:@"4月22日" forKey:KEY_DAY];
-    NSMutableDictionary *fourthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [fourthDayDic setObject:@"4月23日" forKey:KEY_DAY];
-    NSMutableDictionary *fifthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [fifthDayDic setObject:@"4月24日" forKey:KEY_DAY];
-    NSMutableDictionary *sixthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [sixthDayDic setObject:@"4月25日" forKey:KEY_DAY];
-    NSMutableDictionary *seventhDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
-    [seventhDayDic setObject:@"4月26日" forKey:KEY_DAY];
-    
-    NSArray *dataArray = [NSArray arrayWithObjects:firstDayDic, secondDayDic, thirdDayDic, fourthDayDic, fifthDayDic, sixthDayDic, seventhDayDic, nil];
-    [self renderHistoryData:dataArray];
+//    NSString *fakeData = @"000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022222222222222222222222222222222222222222222222222200000000000055550000000000000000000011111100000000000000333333333333333333334444444444440000000000000002222222222222222222222333333333333330000000000000000000000";
+//    NSDictionary *motionDataDic = [PetInfoUtil parse288bitsMotionData:fakeData];
+//    [self fillTodayInfo:motionDataDic];
+//    
+//    
+//    NSDictionary *totalDic = [motionDataDic objectForKey:KEY_TOTAL_STAT];
+//    NSMutableDictionary *firstDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [firstDayDic setObject:@"4月20日" forKey:KEY_DAY];
+//    NSMutableDictionary *secondDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [secondDayDic setObject:@"4月21日" forKey:KEY_DAY];
+//    NSMutableDictionary *thirdDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [thirdDayDic setObject:@"4月22日" forKey:KEY_DAY];
+//    NSMutableDictionary *fourthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [fourthDayDic setObject:@"4月23日" forKey:KEY_DAY];
+//    NSMutableDictionary *fifthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [fifthDayDic setObject:@"4月24日" forKey:KEY_DAY];
+//    NSMutableDictionary *sixthDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [sixthDayDic setObject:@"4月25日" forKey:KEY_DAY];
+//    NSMutableDictionary *seventhDayDic = [NSMutableDictionary dictionaryWithDictionary:totalDic];
+//    [seventhDayDic setObject:@"4月26日" forKey:KEY_DAY];
+//    
+//    NSArray *dataArray = [NSArray arrayWithObjects:firstDayDic, secondDayDic, thirdDayDic, fourthDayDic, fifthDayDic, sixthDayDic, seventhDayDic, nil];
+//    [self renderHistoryData:dataArray];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -257,6 +262,8 @@ static const int TOTAL_HISTORY_DAYS = 7;
 - (void)queryLatestPetDeviceInfo {
     NSDate *today = [NSDate date];
     [[DeviceManager shareDeviceManager] queryPetExerciseStatInfoWithBeginTime:today andEndTime:today andProcessor:self andFinishedRespSelector:@selector(onQueryFinished:) andFailedRespSelector:nil];
+    
+    [[DeviceManager shareDeviceManager] queryLastestInfoWithProcessor:self andFinishedRespSelector:@selector(onLatestDataQueryFinished:) andFailedRespSelector:nil];
 }
 
 - (void)onQueryFinished:(ASIHTTPRequest *)pRequest {
@@ -294,13 +301,42 @@ static const int TOTAL_HISTORY_DAYS = 7;
     
 }
 
+- (void)onLatestDataQueryFinished:(ASIHTTPRequest *)pRequest {
+    NSLog(@"onLatestDataQueryFinished - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    int statusCode = pRequest.responseStatusCode;
+    
+    switch (statusCode) {
+            
+        case 200: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                if ([SUCCESS isEqualToString:status]) {
+                    NSDictionary *archOp = [jsonData objectForKey:ArchOperation];
+                    NSArray *trackSdata = [archOp objectForKey:TRACK_SDATE];
+                    if (trackSdata && [trackSdata count] > 0) {
+                        NSDictionary *data = [trackSdata objectAtIndex:0];
+                        NSNumber *vitality = [data objectForKey:VITALITY];
+                        [self setMotionIndexPoint:vitality];
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+- (void)setMotionIndexPoint:(NSNumber*)pointIndex {
+    self.clockChart.descText = @"当前活跃指数:";
+    self.clockChart.point = [pointIndex integerValue];
+    [self.clockChart setNeedsDisplay];
+}
 
 - (void)fillTodayInfo:(NSDictionary *)data {
     
     NSArray *partStatArray = [data objectForKey:KEY_PART_STAT];
     self.clockChart.motionStatArray = partStatArray;
-    self.clockChart.descText = @"当前活跃指数:";
-    self.clockChart.point = 88;
     [self.clockChart setNeedsDisplay];
     
     NSDictionary *totalDic = [data objectForKey:KEY_TOTAL_STAT];
@@ -384,7 +420,14 @@ static const int TOTAL_HISTORY_DAYS = 7;
             // calcualte the date that is not returned 
             NSString *firstDayTime = [historyDates objectAtIndex:0];
             NSDate *firstDate = [_historyDateFormatter dateFromString:firstDayTime];
+            if (!firstDate) {
+                firstDate = [_historyDateFormatter2 dateFromString:firstDayTime];
+            }
             NSLog(@"firstDayTime : %@, first date: %@", firstDayTime, firstDate);
+            
+            if (!firstDate) {
+                return;
+            }
             
             for (int i = 0; i < dayGap; i++) {
                 NSDateComponents *dateDiff = [[NSDateComponents alloc] init];
@@ -399,9 +442,13 @@ static const int TOTAL_HISTORY_DAYS = 7;
         for (int i = 0; i < [historyDates count]; i++) {
             NSString *dateTime = [historyDates objectAtIndex:i];
             NSDate *date = [_historyDateFormatter dateFromString:dateTime];
-            
-            NSMutableDictionary *dayDataDic = [historyPoints objectAtIndex:i];
-            [dayDataDic setObject:[_displayDateFormatter stringFromDate:date] forKey:KEY_DAY];
+            if (!date) {
+                date = [_historyDateFormatter2 dateFromString:dateTime];
+            }
+            if (date) {
+                NSMutableDictionary *dayDataDic = [historyPoints objectAtIndex:i];
+                [dayDataDic setObject:[_displayDateFormatter stringFromDate:date] forKey:KEY_DAY];
+            }
         }
     
         [self renderHistoryData:historyPoints];

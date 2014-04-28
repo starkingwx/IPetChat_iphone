@@ -238,13 +238,13 @@
 
 - (void)fillDeviceInfo:(NSDictionary *)data {
     // set batter power progress
-    [self.powerProgressView setProgress:0.5 animated:YES];
-    self.powerLabel.text = @"50%";
+    [self.powerProgressView setProgress:0.9 animated:YES];
+    self.powerLabel.text = @"90%";
     
     // set motion point progress
     NSNumber *vitality = [data objectForKey:VITALITY];
-    float motionPercentage = [PetInfoUtil calculateAvgMotionPercentage:[vitality longValue]];
-    NSInteger point = [PetInfoUtil calculateMotionPoint:[vitality longValue]];
+    float motionPercentage = [vitality floatValue] * 1.0f / 100;
+    NSInteger point = [vitality integerValue];
     self.motionScoreLabel.text = [NSString stringWithFormat:@"%d", point];
     [self.motionScoreProgressView setProgress:motionPercentage animated:YES];
 }

@@ -116,6 +116,9 @@ static NSString *DEVICEPWD = @"devicepwd";
 // Other
 static NSString *LIST = @"list";
 static NSString *SUCCESS = @"SUCCESS";
+static NSString *FAILED = @"FAILED";
+static NSString *ERROR_MESSAGE = @"ERROR_MESSAGE";
+static NSString *CMD_TYPE = @"cmdtype";
 
 static NSString *KEY_TOTAL_STAT = @"TOTAL_STAT";
 static NSString *KEY_PART_STAT = @"PART_STAT";

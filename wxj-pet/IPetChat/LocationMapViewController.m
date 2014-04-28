@@ -164,6 +164,27 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
             
             break;
         }
+        case 404: {
+            NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+            NSLog(@"response data: %@", jsonData);
+            if (jsonData) {
+                NSString *status = [jsonData objectForKey:STATUS];
+                NSString *cmdType = [jsonData objectForKey:CMD_TYPE];
+                if ([FAILED isEqualToString:status] && [ERROR_MESSAGE isEqualToString:cmdType]) {
+                    // order failed
+                    NSDictionary *errorMsg = [jsonData objectForKey:@"error_message"];
+                    if (errorMsg) {
+                        NSString *desc = [errorMsg objectForKey:@"description"];
+                        if ([@"terminal is offline" isEqualToString:desc]) {
+                            [[iToast makeText:@"设备不在线"] show];
+                        }
+                      
+                    }
+                }
+                
+            }
+        }
+            break;
         default:
             break;
     }
