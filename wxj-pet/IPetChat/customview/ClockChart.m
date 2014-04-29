@@ -16,10 +16,10 @@
 #define ANGLE_START     90
 #define ANGLE_END       450
 #define ANGLE_DIFF      1.25
-#define LARGE_ARC_RADIUS     60
-#define STROKE_WDITH       20
+#define LARGE_ARC_RADIUS     68
+#define STROKE_WDITH       30
 
-#define GAP         1
+#define GAP         8
 #define FONT_SIZE   10
 #define SIDE_MARGIN 20
 
@@ -79,9 +79,11 @@
 
     CGFloat halfLineWidth = STROKE_WDITH / 2;
     
-    CGFloat radius = rect.size.width < rect.size.height ? rect.size.width : rect.size.height;
-    radius /= 2;
-    radius -= (SIDE_MARGIN + GAP + halfLineWidth);
+//    CGFloat radius = rect.size.width < rect.size.height ? rect.size.width : rect.size.height;
+//    radius /= 2;
+//    radius -= (SIDE_MARGIN + GAP + halfLineWidth);
+    
+    CGFloat radius = LARGE_ARC_RADIUS;
     
     if (_motionStatArray) {
                        
@@ -128,7 +130,7 @@
     CGSize strSize = [self.descText sizeWithFont:_font];
     CGFloat halfStrWidth = strSize.width / 2;
     CGFloat tx1 = centerX - halfStrWidth;
-    CGFloat ty1 = centerY - GAP - strSize.height;
+    CGFloat ty1 = centerY - strSize.height;
     [self.descText drawAtPoint:CGPointMake(tx1, ty1) withFont:_font];
     
     // draw point text
@@ -136,7 +138,7 @@
     strSize = [pointText sizeWithFont:_font];
     halfStrWidth = strSize.width / 2;
     CGFloat tx2 = centerX - halfStrWidth;
-    CGFloat ty2 = centerY + GAP;
+    CGFloat ty2 = centerY;
     [pointText drawAtPoint:CGPointMake(tx2, ty2) withFont:_font];
     
     // draw time text
