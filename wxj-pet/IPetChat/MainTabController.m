@@ -44,10 +44,10 @@
         UIViewController *tab4 = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
         
         
-        self.viewControllers = [NSArray arrayWithObjects:tab1, tab2, tab3, tab4, nil];
+        self.viewControllers = [NSArray arrayWithObjects:tab0, tab1, tab2, tab3, tab4, nil];
         self.selectedViewController = tab1;
                 
-        self.delegate = self;
+//        self.delegate = self;
   
     }
     return self;
@@ -65,21 +65,21 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (BOOL)mh_tabBarController:(MHTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
-{
-	NSLog(@"mh_tabBarController %@ shouldSelectViewController %@ at index %u", tabBarController, viewController, index);
-    
-	// Uncomment this to prevent "Tab 3" from being selected.
-	//return (index != 2);
-    
-	return YES;
-}
-
-- (void)mh_tabBarController:(MHTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
-{
-	NSLog(@"mh_tabBarController %@ didSelectViewController %@ at index %u", tabBarController, viewController, index);
-}
+//
+//- (BOOL)mh_tabBarController:(MHTabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+//{
+//	NSLog(@"mh_tabBarController %@ shouldSelectViewController %@ at index %u", tabBarController, viewController, index);
+//    
+//	// Uncomment this to prevent "Tab 3" from being selected.
+//	//return (index != 2);
+//    
+//	return YES;
+//}
+//
+//- (void)mh_tabBarController:(MHTabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController atIndex:(NSUInteger)index
+//{
+//	NSLog(@"mh_tabBarController %@ didSelectViewController %@ at index %u", tabBarController, viewController, index);
+//}
 
 
 

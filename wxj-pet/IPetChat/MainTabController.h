@@ -10,6 +10,5 @@
 #import "MHTabBarController.h"
 
 
-@interface MainTabController : MHTabBarController <MHTabBarControllerDelegate>
-
+@interface MainTabController : UITabBarController 
 @end
