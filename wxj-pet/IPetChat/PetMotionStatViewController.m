@@ -209,7 +209,7 @@ static const int TOTAL_HISTORY_DAYS = 7;
     CGRect frame = self.avatarImageViewContainer.frame;
     _avatarView = [[AsynImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
     [self.avatarImageViewContainer addSubview:_avatarView];
-    [_avatarView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
+//    [_avatarView setPlaceholderImage:[UIImage imageNamed:@"img_petstar"]];
     
     // pie chart
         

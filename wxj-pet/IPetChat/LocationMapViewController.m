@@ -76,8 +76,8 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
     [self.mapView setZoomLevel:16 animated:NO];
 //    [self centerPetLocation];
     
-    _retryCount = 0;
-    [self orderDeviceServer];
+    [self startQueryLocationTimer];
+    [self refreshLocation];
 }
 
 - (void)viewDidLoad
@@ -175,8 +175,16 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
                     NSDictionary *errorMsg = [jsonData objectForKey:@"error_message"];
                     if (errorMsg) {
                         NSString *desc = [errorMsg objectForKey:@"description"];
+                        NSString *errtype = [errorMsg objectForKey:@"errtype"];
                         if ([@"terminal is offline" isEqualToString:desc]) {
                             [[iToast makeText:@"设备不在线"] show];
+                        } else if ([@"TIMEOUT" isEqualToString: errtype]) {
+                            _retryCount++;
+                            if (_retryCount < TOTAL) {
+                                [self orderDeviceServer];
+                            } else {
+                                [[iToast makeText:@"服务器连接失败！"]show];
+                            }
                         }
                       
                     }
@@ -193,6 +201,8 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
 
 - (void)onOrderFailed:(ASIHTTPRequest *)pRequest {
     NSLog(@"onOrderFailed - request url = %@, responseStatusCode = %d, responseStatusMsg = %@", pRequest.url, [pRequest responseStatusCode], [pRequest responseStatusMessage]);
+    NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
+    NSLog(@"response data: %@", jsonData);
     _retryCount++;
     if (_retryCount < TOTAL) {
         [self orderDeviceServer];

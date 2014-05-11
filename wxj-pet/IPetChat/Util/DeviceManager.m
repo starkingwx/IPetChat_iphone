@@ -17,6 +17,8 @@
 #import "TerminalControl.h"
 #import "UserBean+Device.h"
 
+#define TIME_SYNC_INTERVAL      (24 * 60 * 60)
+
 static DeviceManager *instance;
 
 @interface DeviceManager () {
@@ -89,7 +91,7 @@ static DeviceManager *instance;
 
 - (void)startTimeSync {
     [self syncTime];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(syncTime) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:TIME_SYNC_INTERVAL target:self selector:@selector(syncTime) userInfo:nil repeats:YES];
 }
 
 - (void)stopTimeSync {
@@ -120,7 +122,7 @@ static DeviceManager *instance;
     
     operation.archive_operation = arop;
     
-    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, ADDRESS, nil];
+    NSArray *field = [NSArray arrayWithObjects:ID, TERMID, X, Y, POSID, SPEED, HEIGHT, DIRECTION, TERMTIME, SERVTIME, IOPORT, STATUS, ALARM, FENCE, FENCEID, MAINVOLTAGE, CELLVOLTAGE, TERMPERATURE, DISTANCE, VITALITY, nil];
     
     arop.field = field;
     UserBean *user = [[UserManager shareUserManager] userBean];
