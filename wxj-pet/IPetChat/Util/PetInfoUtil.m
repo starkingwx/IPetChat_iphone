@@ -186,7 +186,7 @@ static const NSInteger TotalMotionIndex = (0.9 + 1.2 +1.6 + 1.8)*100*2;
 + (NSString *)generateTimeStringFromMotionStat:(MotionStat *)motionStat {
     long time = motionStat.count * 5; // minutes
     NSString *timeStr = nil;
-    timeStr = [NSString stringWithFormat:@"%ld分", time];
+    timeStr = [NSString stringWithFormat:@"%ld分钟", time];
     return timeStr;
 }
 @end

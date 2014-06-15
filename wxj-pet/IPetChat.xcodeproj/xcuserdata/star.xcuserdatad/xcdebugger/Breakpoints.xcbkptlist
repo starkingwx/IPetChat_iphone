@@ -476,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/Util/HttpUtils+DeviceServer.m"
-         timestampString = "420040773.538076"
+         timestampString = "424530424.824704"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "+postDeviceServerSignatureRequestWithUrl:andPostFormat:andParameter:andUserInfo:andRequestType:andProcessor:andFinishedRespSelector:andFailedRespSelector:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -554,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/LocationMapViewController.m"
-         timestampString = "421513092.392456"
+         timestampString = "424506075.197735"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "206"
-         endingLineNumber = "206"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
          landmarkName = "-onOrderFailed:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -567,11 +567,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/LocationMapViewController.m"
-         timestampString = "421513092.392456"
+         timestampString = "424506075.197735"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
+         landmarkName = "-onFinishedOrderDeviceServer:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/LocationMapViewController.m"
+         timestampString = "424529924.158442"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "174"
+         endingLineNumber = "174"
+         landmarkName = "-onFinishedOrderDeviceServer:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/LocationMapViewController.m"
+         timestampString = "424529939.494715"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
          landmarkName = "-onFinishedOrderDeviceServer:"
          landmarkType = "5">
       </FileBreakpoint>

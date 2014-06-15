@@ -44,7 +44,7 @@
         UIViewController *tab4 = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
         
         
-        self.viewControllers = [NSArray arrayWithObjects: tab1, tab2, tab3, tab4, nil];
+        self.viewControllers = [NSArray arrayWithObjects: tab0, tab1, tab2, tab3, tab4, nil];
         self.selectedViewController = tab1;
                 
 //        self.delegate = self;

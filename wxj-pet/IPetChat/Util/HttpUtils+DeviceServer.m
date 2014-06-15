@@ -57,7 +57,11 @@
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     
     // add signature to get request url
-    [_signatureGetRequestParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:[[userBean devicePassword] md5]] forKey:SIGNATURE_PARAMETER_KEY];
+    NSString *cipherKey = @"";
+    if ([userBean devicePassword] != nil && ![@"" isEqualToString:userBean.devicePassword]) {
+        cipherKey = [userBean.devicePassword md5];
+    }
+    [_signatureGetRequestParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:cipherKey] forKey:SIGNATURE_PARAMETER_KEY];
     
     // send get request
     [self getRequestWithUrl:pUrl andParameter:_signatureGetRequestParameter andUserInfo:pUserInfo andRequestType:pType andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];
@@ -71,7 +75,11 @@
     UserBean *userBean = [[UserManager shareUserManager] userBean];
     
     // add signature to post parameter
-    [pParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:[[userBean devicePassword] md5]] forKey:SIGNATURE_PARAMETER_KEY];
+    NSString *cipherKey = @"";
+    if ([userBean devicePassword] != nil && ![@"" isEqualToString:userBean.devicePassword]) {
+        cipherKey = [userBean.devicePassword md5];
+    }
+    [pParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:cipherKey] forKey:SIGNATURE_PARAMETER_KEY];
     
     // send post request
     [self postRequestWithUrl:pUrl andPostFormat:pPostFormat andParameter:pParameter andUserInfo:pUserInfo andRequestType:pType andProcessor:pProcessor andFinishedRespSelector:pFinRespSel andFailedRespSelector:pFailRespSel];

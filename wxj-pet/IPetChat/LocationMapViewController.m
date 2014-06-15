@@ -149,7 +149,6 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
     switch (statusCode) {
             
         case 200: {
-            // create group and invite ok
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             NSLog(@"response data: %@", jsonData);
             if (jsonData) {
@@ -164,7 +163,7 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
             
             break;
         }
-        case 404: {
+        default: {
             NSDictionary *jsonData = [[[NSString alloc] initWithData:pRequest.responseData encoding:NSUTF8StringEncoding] objectFromJSONString];
             NSLog(@"response data: %@", jsonData);
             if (jsonData) {
@@ -193,8 +192,7 @@ static long long COORDINATE_TRANSFORM_RATE = 1000000;
             }
         }
             break;
-        default:
-            break;
+    
     }
     
 }

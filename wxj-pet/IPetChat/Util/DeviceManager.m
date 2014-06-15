@@ -127,7 +127,7 @@ static DeviceManager *instance;
     arop.field = field;
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
-    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+    if (petInfo == nil || petInfo.deviceno == nil) {
         NSLog(@"Device is not binded!");
         return;
     }
@@ -172,7 +172,7 @@ static DeviceManager *instance;
         
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
-    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+    if (petInfo == nil || petInfo.deviceno == nil) {
         NSLog(@"Device is not binded!");
         return;
     }
@@ -192,7 +192,7 @@ static DeviceManager *instance;
     termial.cmdtype = ROLL_CALL;
     UserBean *user = [[UserManager shareUserManager] userBean];
     PetInfo *petInfo = [user petInfo];
-    if (user.devicePassword == nil || [@"" isEqualToString:user.devicePassword] || petInfo == nil || petInfo.deviceno == nil) {
+    if (petInfo == nil || petInfo.deviceno == nil) {
         NSLog(@"Device is not binded!");
         return;
     }
