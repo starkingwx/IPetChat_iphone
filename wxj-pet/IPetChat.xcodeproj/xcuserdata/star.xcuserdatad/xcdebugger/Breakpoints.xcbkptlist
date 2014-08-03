@@ -476,11 +476,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "IPetChat/Util/HttpUtils+DeviceServer.m"
-         timestampString = "424530424.824704"
+         timestampString = "428729706.214709"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "82"
-         endingLineNumber = "82"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "+postDeviceServerSignatureRequestWithUrl:andPostFormat:andParameter:andUserInfo:andRequestType:andProcessor:andFinishedRespSelector:andFailedRespSelector:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -599,6 +599,19 @@
          startingLineNumber = "175"
          endingLineNumber = "175"
          landmarkName = "-onFinishedOrderDeviceServer:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "IPetChat/Util/HttpUtils+DeviceServer.m"
+         timestampString = "428729949.824434"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "+postDeviceServerSignatureRequestWithUrl:andPostFormat:andParameter:andUserInfo:andRequestType:andProcessor:andFinishedRespSelector:andFailedRespSelector:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

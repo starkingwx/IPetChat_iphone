@@ -14,8 +14,8 @@
 const static NSString *MAMapAPIKey = @"88c4c1b8e85d0d7d0fb45175636f2dfd";
 
 
-#define DEVICE_SERVER_ADDR          @"http://61.190.30.170:8023"
-//#define DEVICE_SERVER_ADDR          @"http://61.190.34.40:3392"
+//#define DEVICE_SERVER_ADDR          @"http://61.190.30.170:8023"
+#define DEVICE_SERVER_ADDR          @"http://180.97.81.148:8023"
 
 #define GET_TIME_URL                [NSString stringWithFormat:@"%@%@", DEVICE_SERVER_ADDR, @"/rest/time"]
 #define OPERATE_URL                 [NSString stringWithFormat:@"%@%@", DEVICE_SERVER_ADDR, @"/rest/operate"]

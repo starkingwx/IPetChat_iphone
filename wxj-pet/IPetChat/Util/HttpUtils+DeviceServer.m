@@ -77,7 +77,8 @@
     // add signature to post parameter
     NSString *cipherKey = @"";
     if ([userBean devicePassword] != nil && ![@"" isEqualToString:userBean.devicePassword]) {
-        cipherKey = [userBean.devicePassword md5];
+//        cipherKey = [userBean.devicePassword md5];
+        cipherKey = userBean.devicePassword;
     }
     [pParameter setObject:[self generateSignatureWithParameter:pParameter andCipherKey:cipherKey] forKey:SIGNATURE_PARAMETER_KEY];
     
